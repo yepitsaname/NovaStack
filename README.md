@@ -23,6 +23,7 @@ Organizations struggle with siloed tools and rigid dashboards that limit real-ti
 
 ## Color Palettes
 #### Light Mode
+![light mode theme](/light_mode.png)
 - Catskill White - `#F1F5F9`
 - Lochmara - `#0284C7`
 - Slate Gray - `#64748B`
@@ -31,6 +32,7 @@ Organizations struggle with siloed tools and rigid dashboards that limit real-ti
 - Froly - `#F87171`
 
 #### Dark Mode
+![dark mode theme](/dark_mode.png)
 - Ebony - `#0F172A`
 - Dodger Blue - `#4C9FFF`
 - Cadet Blue - `#A0AEC0`
