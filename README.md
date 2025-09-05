@@ -19,7 +19,7 @@ Problem Statement
 Organizations struggle with siloed tools and rigid dashboards that limit real-time visibility, operational agility, and data-driven decision-making.  Critical functions like task management, event logging, accountability tracking, and system health monitoring are often spread across multiple disconnected platforms. 
 
 ## Color Palettes
-#### ight Mode
+#### Light Mode
 Catskill White - #F1F5F9
 Lochmara - #0284C7
 Slate Gray - #64748B
