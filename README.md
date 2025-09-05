@@ -4,9 +4,7 @@ NovaStack is a customizable operations and productivity platform that puts every
 At the system level, NovaStack lets teams define and monitor OPSCAPs for each system, while automatically rolling them up into higher-level SYSCAPs for leadership visibility and reporting.
 At the user level, NovaStack keeps accountability sharp with task assignments, deadlines, and status tracking, enhanced with stoplight charts and real-time logs of events, alerts, and alarms.
 
-
-
-###Key Features:
+## Key Features:
 🛠 Custom Dashboards – personalize with sub-components for exactly what matters.
 📊 System Ops Tracking – OPSCAPs & SYSCAPs built in for operational clarity.
 ✅ Task Management – assign, track, and close tasks with accountability built-in.
@@ -20,8 +18,8 @@ NovaStack isn’t just another tool — it’s your team’s mission dashboard.
 Problem Statement
 Organizations struggle with siloed tools and rigid dashboards that limit real-time visibility, operational agility, and data-driven decision-making.  Critical functions like task management, event logging, accountability tracking, and system health monitoring are often spread across multiple disconnected platforms. 
 
-##Color Palettes
-####Light Mode
+## Color Palettes
+#### ight Mode
 Catskill White - #F1F5F9
 Lochmara - #0284C7
 Slate Gray - #64748B
@@ -29,7 +27,7 @@ Electric Violet - #9333EA
 Mountain Meadow - #22C55E
 Froly - #F87171
 
-####Dark Mode
+#### Dark Mode
 Ebony - #0F172A
 Dodger Blue - #4C9FFF
 Cadet Blue - #A0AEC0
