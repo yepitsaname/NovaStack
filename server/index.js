@@ -15,8 +15,8 @@ app.use(express.json());
       console.log('Setting up DB');
       await knex.migrate.latest();
 
-      // console.log('Seeding initial data');
-      // await knex.seed.run();
+      console.log('Seeding initial data');
+      await knex.seed.run();
     } else {
       console.log('Database exists')
     }
