@@ -12,6 +12,11 @@ services:
       - DB_USER=postgres
       - DB_PASSWORD=postgres
       - DB_NAME=novaDB
+    volumes:
+      - type: bind
+        source: ./server
+        target: /app
+      - /server/node_modules
 
   app:
     build: app/
@@ -19,6 +24,11 @@ services:
       - "5173:5173"
     depends_on:
       - server
+    volumes:
+      - type: bind
+        source: ./app
+        target: /app
+      - /app/node_modules
 
   database:
     image: postgres:latest
