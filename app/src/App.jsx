@@ -1,5 +1,3 @@
-import './App.css'
-
 function App() {
 
   return (
@@ -15,6 +13,13 @@ function App() {
         </div>
         <button>button</button>
         <a>myLink</a>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet magnam maxime ut facere qui atque rerum porro id aliquid provident, animi illo ab accusamus aut ea deserunt temporibus. Vitae, labore!</p>
+        <form className="form component">
+          <textarea placeholder="Hello World" />
+          <input type= 'text' placeholder="Place text here"/>
+          <button>button</button>
+          <a>myLink</a>
+        </form>
       </div>
     </>
   )
