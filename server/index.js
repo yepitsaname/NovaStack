@@ -34,7 +34,7 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.status(200).send("Application up and running");
 });
-
+//TODO remove password
 app.get("/user/:id", (req, res) => {
   knex("users")
     .select("*")
@@ -111,3 +111,5 @@ app.get("/roles/:id", (req, res) => {
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
+
+module.exports = app
