@@ -5,6 +5,8 @@ exports.up = function (knex, Promise) {
     table.increments("role_id");
     table.integer("user");
     table.foreign("user").references("users.user_id");
+    table.integer('role');
+    table.foreign('role').references('role_name.role_name_id');
   });
 };
 
