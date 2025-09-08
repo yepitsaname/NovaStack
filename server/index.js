@@ -83,10 +83,32 @@ app.get("/mission/:id/tasks", (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-app.get("/mission/:id/systems", (req, res) => {
-  knex("system_status")
+// app.get("/mission/:id/systems", (req, res) => { **FIX THIS LATER**
+//   knex("mission")
+//     .select("*")
+//     .where("system_id", req.params.id)
+//     .then((data) => res.status(200).json(data))
+//     .catch((err) => res.status(400).json(err));
+// });
+
+app.get("/history", (req, res) => {
+  knex("history")
     .select("*")
-    .where("mission_id", req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+});
+
+app.get("/history", (req, res) => {
+  knex("history")
+    .select("*")
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+});
+
+app.get("/roles/:id", (req, res) => {
+  knex("role_list")
+    .select("*")
+    .where("role", req.params.id)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
