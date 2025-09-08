@@ -21,6 +21,9 @@ Organizations struggle with siloed tools and rigid dashboards that limit real-ti
 - 📧 Smart Intake – emails to org boxes auto-convert into task items.
 - 🔒 Accountability Logging – user log-ins, log-outs, and timestamp trails.
 
+## ERD:
+![database ERD](/erd.png)
+
 ## Color Palettes
 #### Light Mode
 ![light mode theme](/light_mode.png)
