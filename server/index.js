@@ -35,6 +35,7 @@ app.get("/", (req, res) => {
   res.status(200).send("Application up and running");
 });
 
+//TODO: remove password
 app.get("/user/:id", (req, res) => {
   knex("users")
     .select("*")
