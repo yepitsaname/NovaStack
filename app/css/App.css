@@ -1,0 +1,18 @@
+nav {
+ grid-area: nav;
+}
+
+main {
+  grid-area: main;
+  display: flex;
+}
+
+aside {
+  grid-area: side;
+  
+}
+
+footer {
+  grid-area: foot;
+  margin: 0;
+}

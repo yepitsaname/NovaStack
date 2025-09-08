@@ -1,3 +1,5 @@
+
+
 :root{
   --error-color: rgb(195, 14, 14);
   --error-bg-color: rgb(193, 147, 147);
@@ -80,16 +82,18 @@
 
 body{
   margin: 0;
+
 }
 
 #root{
-  display: flex;
+  display: grid;
+  grid-template: 
+  "nav nav nav nav nav nav nav nav nav nav nav nav" 6vh
+  "side side main main main main main main main main main main" 90vh
+  "foot foot foot foot foot foot foot foot foot foot foot foot" 4vh
+  / auto;
   width: 100%;
-  min-height: 100vh;
-}
-
-.inventory{
-  width: 100%;
+  max-height: 100vh;
 }
 
 .component{
