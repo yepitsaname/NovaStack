@@ -1,9 +1,15 @@
 'use strict';
 
-exports.up = function(knex, Promise) {
-  
+exports.up = function (knex, Promise) {
+  return knex.schema.createTable('history', table => {
+    table.increments('history_id');
+    table.foreign('task').references('tasks.task_id');
+    table.foreign('operation').references('operations.operation_id');
+    table.foreign('user').references('users.user_id');
+    table.dateTime('date_time');
+  });
 };
 
-exports.down = function(knex, Promise) {
-  
+exports.down = function (knex, Promise) {
+  return knex.schema.dropTableIfExists('history');
 };
