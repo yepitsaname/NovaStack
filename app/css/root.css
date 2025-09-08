@@ -88,10 +88,10 @@ body{
 #root{
   display: grid;
   grid-template: 
-  "nav nav nav nav nav nav nav nav nav nav nav nav" 6vh
-  "side side main main main main main main main main main main" 90vh
-  "foot foot foot foot foot foot foot foot foot foot foot foot" 4vh
-  / auto;
+  "nav nav" 6vh
+  "side  main" 90vh
+  "foot foot" 4vh
+  / 20vw 80vw ;
   width: 100%;
   max-height: 100vh;
 }
