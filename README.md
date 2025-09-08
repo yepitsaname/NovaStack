@@ -21,6 +21,12 @@ Organizations struggle with siloed tools and rigid dashboards that limit real-ti
 - 📧 Smart Intake – emails to org boxes auto-convert into task items.
 - 🔒 Accountability Logging – user log-ins, log-outs, and timestamp trails.
 
+## MVPs
+1. As an organization member, I want to create a task list with the ability to assign tasks to specific users, so that responsibilities are clearly distributed.
+2. As Mission Crew Command (MCC) / Chain of Command (CoC), I want a stoplight chart visualization of task/project health (green/yellow/red), so that I can quickly assess overall progress.
+3. As a user, I want to securely log in and log out, so that I can access my personalized tasks and data safely.
+4. As a user, I want to update the status of my task (e.g., not started, in progress, completed), so that team members know my progress.
+
 ## ERD:
 ![database ERD](/erd.png)
 
