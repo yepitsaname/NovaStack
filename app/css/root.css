@@ -1,3 +1,5 @@
+
+
 :root{
   --error-color: rgb(195, 14, 14);
   --error-bg-color: rgb(193, 147, 147);
@@ -6,40 +8,41 @@
 
   @media (prefers-color-scheme: light){
     /* Light Mode Colors */
-    --main-bg: rgb(249, 249, 226);
+    --main-bg: rgb(241, 245, 249);
     --main-comp-mask: rgba(26, 52, 26, 0.3);
-    --sub-mask: rgba(130, 138, 85, 0.2);
+    --sub-mask: rgba(100, 116, 139, 0.2);
     --button-mask: rgba(40, 71, 30, 0.1);
-    --hover-mask: rgba(40,71,30,0.5);
-    --click-mask: rgba(90, 114, 83, 0.5);
-    --text: rgb(20,40,20);
-    --text-bg: rgba(210, 218, 165,0.7);
-    --link: rgb(30,60,30);
-    --heading-one: rgb(75, 99, 39);
-    --heading-two: rgb(99, 120, 68);
-    --heading-three: rgb(104, 122, 77);
-    --heading-four: rgb(101, 122, 70);
-    --heading-five: rgb(31, 34, 27);
-    --heading-six: rgb(30, 31, 28);
+    --hover-mask: rgba(30,40,71,0.5);
+    --click-mask: rgba(83, 90, 114, 0.5);
+    --text: rgb(30,30,60);
+    --text-bg: rgba(2, 132, 199, 0.1);
+    --link: rgb(69, 210, 121);
+    --heading-one: rgb(44, 116, 203);
+    --heading-two: rgb(35, 115, 174);
+    --heading-three: rgb(24, 114, 186);
+    --heading-four: rgb(16, 102, 169);
+    --heading-five: rgb(04, 90, 157);
+    --heading-six: rgb(15, 86, 137);
+    
   }
 
   @media (prefers-color-scheme: dark){
     /* Dark Mode Colors */
-    --main-bg: rgb(20,20,20);
-    --main-comp-mask: rgba(255,255,255,0.3);
-    --sub-mask: rgba(255,255,255,0.1);
+    --main-bg: rgb(15, 23, 42);
+    --main-comp-mask: rgba(76, 159, 255, 0.302);
+    --sub-mask: rgba(160, 174, 192, 0.176);
     --button-mask: rgba(255,255,255,0.1);
-    --hover-mask: rgba(90, 114, 83, 0.5);
-    --click-mask: rgba(40,71,30,0.5);
-    --text: rgb(212, 212, 161);
-    --text-bg: rgba(190, 214, 193,0.7);
+    --hover-mask: rgba(120, 110, 151, 0.1);
+    --click-mask: rgba(90, 80, 121, 0.5);
+    --text: rgb(161, 212,212 );
+    --text-bg: rgba(208, 255, 164, 0.125);
     --link: rgb(208, 255, 164);
-    --heading-one: rgb(140, 186, 72);
-    --heading-two: rgb(149, 187, 93);
-    --heading-three: rgb(139, 171, 92);
-    --heading-four: rgb(133, 165, 85);
-    --heading-five: rgb(172, 214, 108);
-    --heading-six: rgb(182, 222, 123);
+    --heading-one: rgb(54, 134, 226);
+    --heading-two: rgb(46, 122, 209);
+    --heading-three: rgb(34, 110, 197);
+    --heading-four: rgb(45, 106, 177);
+    --heading-five: rgb(65, 135, 214);
+    --heading-six: rgb(109, 162, 223);
   }
 
   background-color: var(--main-bg);
@@ -52,7 +55,7 @@
   h6{ color: var(--heading-six); }
 
 
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: Oswald, Lato, 'Crimson Text','Times New Roman', Times, serif;
   justify-content: center;
   text-align: center;
 
@@ -79,16 +82,18 @@
 
 body{
   margin: 0;
+
 }
 
 #root{
-  display: flex;
+  display: grid;
+  grid-template: 
+  "nav nav" 6vh
+  "side  main" 90vh
+  "foot foot" 4vh
+  / 20vw 80vw ;
   width: 100%;
-  min-height: 100vh;
-}
-
-.inventory{
-  width: 100%;
+  max-height: 100vh;
 }
 
 .component{
