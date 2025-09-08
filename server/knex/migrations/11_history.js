@@ -9,7 +9,7 @@ exports.up = function (knex, Promise) {
     table.foreign('operation').references('operations.operation_id');
     table.integer('user');
     table.foreign('user').references('users.user_id');
-    table.dateTime('date_time');
+    table.dateTime('date_time').defaultTo(knex.fn.now());
   });
 };
 
