@@ -200,7 +200,7 @@ app.get("/roles/:id", verifyToken, (req, res) => {
 
 
 app.post("/tasks/add", verifyToken, async (req, res) => {
-  const data = req.body;
+  const data = req.param;
   try {
     await knex('tasks').insert(data);
     res.status(200).json({message:"item saved"})
@@ -234,7 +234,40 @@ app.post("/history/add", verifyToken, async (req, res) => {
     }
 });
 
+app.delete('/tasks/:id/delete', async (req, res) => {
+  const id = req.params.id;
+  try {
+    await knex('tasks').where('task_id', id).del();
+    console.log('Item deleted');
+    res.status(200).json({ message: 'Item deleted' });
+  } catch (err) {
+    console.error('ERROR ', err);
+    res.status(500).json({ error: 'Item failed to delete' });
+  }
+})
 
+app.delete('/mission/:id/delete', async (req, res) => {
+  const id = req.params.id;
+  try {
+    await knex('mission').where('mission_id', id).del();
+    console.log('Item deleted');
+    res.status(200).json({ message: 'Item deleted' });
+  } catch (err) {
+    console.error('ERROR ', err);
+    res.status(500).json({ error: 'Item failed to delete' });
+  }
+})
 
+app.delete('/history/:id/delete', async (req, res) => {
+  const id = req.params.id;
+  try {
+    await knex('history').where('history_id', id).del();
+    console.log('Item deleted');
+    res.status(200).json({ message: 'Item deleted' });
+  } catch (err) {
+    console.error('ERROR ', err);
+    res.status(500).json({ error: 'Item failed to delete' });
+  }
+})
 
 module.exports = app
