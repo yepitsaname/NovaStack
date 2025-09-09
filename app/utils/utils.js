@@ -241,7 +241,7 @@ export async function DeleteTask(token, taskID) {
  * @param {token} token Context token provided upon login
  * @param {integer} missionID ID of task being deleted
  */
-export async function DeleteTask(token, missionID) {
+export async function DeleteMission(token, missionID) {
   return fetch(`${backend}/mission/${missionID}/delete`, {
     method: "DELETE",
     headers: { Authorization: token }
