@@ -234,39 +234,75 @@ app.post("/history/add", verifyToken, async (req, res) => {
     }
 });
 
-app.delete('/tasks/:id/delete', async (req, res) => {
+app.delete('/tasks/:id/delete', verifyToken, async (req, res) => {
   const id = req.params.id;
   try {
     await knex('tasks').where('task_id', id).del();
-    console.log('Item deleted');
-    res.status(200).json({ message: 'Item deleted' });
+    console.log('task deleted');
+    res.status(200).json({ message: 'task deleted' });
   } catch (err) {
     console.error('ERROR ', err);
-    res.status(500).json({ error: 'Item failed to delete' });
+    res.status(500).json({ error: 'task failed to delete' });
   }
 })
 
-app.delete('/mission/:id/delete', async (req, res) => {
+app.delete('/mission/:id/delete', verifyToken, async (req, res) => {
   const id = req.params.id;
   try {
     await knex('mission').where('mission_id', id).del();
-    console.log('Item deleted');
-    res.status(200).json({ message: 'Item deleted' });
+    console.log('mission deleted');
+    res.status(200).json({ message: 'mission deleted' });
   } catch (err) {
     console.error('ERROR ', err);
-    res.status(500).json({ error: 'Item failed to delete' });
+    res.status(500).json({ error: 'mission failed to delete' });
   }
 })
 
-app.delete('/history/:id/delete', async (req, res) => {
+app.delete('/history/:id/delete', verifyToken, async (req, res) => {
   const id = req.params.id;
   try {
     await knex('history').where('history_id', id).del();
-    console.log('Item deleted');
-    res.status(200).json({ message: 'Item deleted' });
+    console.log('history deleted');
+    res.status(200).json({ message: 'history deleted' });
   } catch (err) {
     console.error('ERROR ', err);
-    res.status(500).json({ error: 'Item failed to delete' });
+    res.status(500).json({ error: 'history failed to delete' });
+  }
+})
+
+app.patch('/tasks/:id/patch', verifyToken, async (req, res) => {
+  const id = req.params.id;
+  const data = req.body;
+  try {
+    await knex('tasks').where('task_id', id).update(data);
+    res.status(200).json({ message: 'task updated' });
+  } catch (err) {
+    console.error('ERROR ', err);
+    res.status(500).json({ error: 'Failed to update task' });
+  }
+})
+
+app.patch('/mission/:id/patch', verifyToken, async (req, res) => {
+  const id = req.params.id;
+  const data = req.body;
+  try {
+    await knex('mission').where('mission_id', id).update(data);
+    res.status(200).json({ message: 'mission updated' });
+  } catch (err) {
+    console.error('ERROR ', err);
+    res.status(500).json({ error: 'Failed to update mission' });
+  }
+})
+
+app.patch('/history/:id/patch', verifyToken, async (req, res) => {
+  const id = req.params.id;
+  const data = req.body;
+  try {
+    await knex('history').where('history_id', id).update(data);
+    res.status(200).json({ message: 'history updated' });
+  } catch (err) {
+    console.error('ERROR ', err);
+    res.status(500).json({ error: 'Failed to update history' });
   }
 })
 
