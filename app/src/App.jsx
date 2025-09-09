@@ -7,6 +7,7 @@ import SideBar from "./component/SideBar";
 import Footer from "./component/Footer";
 import Homepage from "./pages/Homepage";
 import "../css/App.css";
+import Login from "./component/Login";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -18,8 +19,8 @@ export default function App() {
       <Footer />
 
       <Routes>
-        <Route />
-        <Route />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" />
         <Route />
         <Route />
         <Route />

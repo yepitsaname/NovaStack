@@ -18,7 +18,7 @@ export default function NavBar() {
         </>
       ) : (
         <>
-          <Link>login</Link>
+          <Link to="/Login">Login</Link>
         </>
       )}
     </nav>
