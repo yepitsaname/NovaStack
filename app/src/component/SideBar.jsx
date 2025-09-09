@@ -7,7 +7,7 @@ export default function SideBar() {
       <Link to="/system">System</Link>
       <Link to="/tasks">Tasks</Link>
       <Link to="/reports">Reports</Link>
-      <Link to="/settings">Settings</Link>
+      <Link to="/configuration">Configuration</Link>
     </aside>
   );
 }
