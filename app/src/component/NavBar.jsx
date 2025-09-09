@@ -4,7 +4,12 @@ import { Link } from "react-router";
 import AppContext from "../AppContext";
 
 export default function NavBar() {
-  const { user } = useContext(AppContext);
+  const { user, setUser, setToken } = useContext(AppContext);
+
+  const logout = () => {
+    setUser(null);
+    setToken(null);
+  }
 
   return (
     <nav>
@@ -14,7 +19,7 @@ export default function NavBar() {
         <>
           <p>🔔</p>
           <Link>{user}</Link>
-          <Link>Logout</Link>
+          <Link onClick={()=>{logout()}}>Logout</Link>
         </>
       ) : (
         <>

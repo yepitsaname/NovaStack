@@ -11,9 +11,10 @@ import Login from "./component/Login";
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   return (
-    <AppContext.Provider value={{ user: user, setUser: setUser }}>
+    <AppContext.Provider value={{ user: user, setUser: setUser, token: token, setToken: setToken }}>
       <NavBar />
       <SideBar />
       <Footer />
@@ -21,7 +22,7 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" />
-        <Route />
+        <Route path="/dashboard" />
         <Route />
         <Route />
       </Routes>
