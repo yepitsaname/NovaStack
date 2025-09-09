@@ -199,6 +199,40 @@ app.get("/roles/:id", verifyToken, (req, res) => {
 
 
 
+app.post("/tasks/add", verifyToken, async (req, res) => {
+  const data = req.body;
+  try {
+    await knex('tasks').insert(data);
+    res.status(200).json({message:"item saved"})
+  } catch (err){
+    console.error("ERROR", err);
+    res.status(500).json({error: "Failed to save item"});
+    }
+});
+
+
+app.post("/mission/add", verifyToken, async (req, res) => {
+  const data = req.body;
+  try {
+    await knex('mission').insert(data);
+    res.status(200).json({message:"item saved"})
+  } catch (err){
+    console.error("ERROR", err);
+    res.status(500).json({error: "Failed to save item"});
+    }
+});
+
+
+app.post("/history/add", verifyToken, async (req, res) => {
+  const data = req.body;
+  try {
+    await knex('history').insert(data);
+    res.status(200).json({message:"item saved"})
+  } catch (err){
+    console.error("ERROR", err);
+    res.status(500).json({error: "Failed to save item"});
+    }
+});
 
 
 
