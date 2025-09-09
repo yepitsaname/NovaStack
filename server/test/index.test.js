@@ -1,6 +1,7 @@
 const request = require('supertest');
 const index = require('../index.js');
 
+let testToken;
 // request(index)
 //   .get("/")
 //   .expect('Content-Type', /json/)
