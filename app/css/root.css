@@ -1,40 +1,43 @@
-
-
-:root{
+:root {
   --error-color: rgb(195, 14, 14);
   --error-bg-color: rgb(193, 147, 147);
   --valid-color: rgb(14, 194, 14);
   --valid-bg-color: rgb(147, 193, 147);
 
-  @media (prefers-color-scheme: light){
+  @media (prefers-color-scheme: light) {
     /* Light Mode Colors */
     --main-bg: rgb(241, 245, 249);
+    --head-foot-bg: rgb(222, 234, 255);
+    --aside-bg: rgb(227, 232, 240);
     --main-comp-mask: rgba(26, 52, 26, 0.3);
     --sub-mask: rgba(100, 116, 139, 0.2);
     --button-mask: rgba(40, 71, 30, 0.1);
-    --hover-mask: rgba(30,40,71,0.5);
+    --hover-mask: rgba(30, 40, 71, 0.5);
     --click-mask: rgba(83, 90, 114, 0.5);
-    --text: rgb(30,30,60);
+    --text: rgb(30, 30, 60);
     --text-bg: rgba(2, 132, 199, 0.1);
-    --link: rgb(69, 210, 121);
+    --link: rgb(39, 180, 91);
     --heading-one: rgb(44, 116, 203);
     --heading-two: rgb(35, 115, 174);
     --heading-three: rgb(24, 114, 186);
     --heading-four: rgb(16, 102, 169);
     --heading-five: rgb(04, 90, 157);
     --heading-six: rgb(15, 86, 137);
-    
+
   }
 
-  @media (prefers-color-scheme: dark){
+  @media (prefers-color-scheme: dark) {
     /* Dark Mode Colors */
-    --main-bg: rgb(15, 23, 42);
+    --main-bg: rgb(00, 08, 20);
+    --head-foot-bg: rgb(10, 15, 35);
+    --aside-bg: rgb(15, 25, 50);
+    --form-bg: rgb(10, 15, 35);
     --main-comp-mask: rgba(76, 159, 255, 0.302);
     --sub-mask: rgba(160, 174, 192, 0.176);
-    --button-mask: rgba(255,255,255,0.1);
+    --button-mask: rgba(255, 255, 255, 0.1);
     --hover-mask: rgba(120, 110, 151, 0.1);
     --click-mask: rgba(90, 80, 121, 0.5);
-    --text: rgb(161, 212,212 );
+    --text: rgb(161, 212, 212);
     --text-bg: rgba(208, 255, 164, 0.125);
     --link: rgb(208, 255, 164);
     --heading-one: rgb(54, 134, 226);
@@ -47,20 +50,44 @@
 
   background-color: var(--main-bg);
   color: var(--text);
-  h1{ color: var(--heading-one); }
-  h2{ color: var(--heading-two); }
-  h3{ color: var(--heading-three); }
-  h4{ color: var(--heading-four); }
-  h5{ color: var(--heading-five); }
-  h6{ color: var(--heading-six); }
+
+  h1 {
+    color: var(--heading-one);
+  }
+
+  h2 {
+    color: var(--heading-two);
+  }
+
+  h3 {
+    color: var(--heading-three);
+  }
+
+  h4 {
+    color: var(--heading-four);
+  }
+
+  h5 {
+    color: var(--heading-five);
+  }
+
+  h6 {
+    color: var(--heading-six);
+  }
 
 
-  font-family: Oswald, Lato, 'Crimson Text','Times New Roman', Times, serif;
+  font-family: Oswald,
+  Lato,
+  'Crimson Text',
+  'Times New Roman',
+  Times,
+  serif;
   justify-content: center;
   text-align: center;
 
 
-  a, button{
+  a,
+  button {
     min-width: 10ch;
     padding: 0.5em;
     margin: 0.5em;
@@ -69,150 +96,59 @@
     text-decoration: none;
     color: var(--link)
   }
-  a:hover, button:hover{
+
+  a:hover,
+  button:hover {
     background-color: var(--hover-mask);
   }
-  a:active, button:active{
+
+  a:active,
+  button:active {
     background-color: var(--click-mask);
   }
-  a:visited, button:visited{
+
+  a:visited,
+  button:visited {
     color: var(--link);
   }
 }
 
-body{
+body {
   margin: 0;
 
 }
 
-#root{
+#root {
   display: grid;
-  grid-template: 
-  "nav nav" 6vh
-  "side  main" 90vh
-  "foot foot" 4vh
-  / 20vw 80vw ;
-  width: 100%;
-  max-height: 100vh;
-}
-
-.component{
-  background-color: var(--sub-mask);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  .header{
+  grid-template:
+    "nav nav" 6vh
+    "side  main" 90vh
+    "foot foot" 4vh
+    / 10vw 90vw;
     width: 100%;
-    text-transform: capitalize;
+    max-height: 100vh;
   }
-
-  button{
-    border-color: unset;
-    border-style: unset;
-    margin-top: 2em;
-    padding: 0.75em;
-    width: 20ch;
-    font-weight: 600;
-    text-transform: uppercase;
+  @media screen and (max-width: 1920px){
+    #root {
+      grid-template:
+        "nav nav" 6vh
+        "side  main" 90vh
+        "foot foot" 4vh
+        / 20vw 80vw;
+      
   }
-}
-
-.form.component{
-  flex-direction: column;
-  min-width: 400px;
-  max-width: 600px;
-
-  margin-block: 1em;
-  margin-inline: auto;
-  padding: 1em;
-  border-radius: 1em;
-
-  max-height: min-content;
-  justify-self: center;
-  align-self: center;
-
-  justify-content: center;
-  align-items: center;
-
-  input, textarea{
-    width: 80%;
-    border-radius: 1ch;
-    padding: 1ch;
-    background-color: var(--text-bg);
-    resize: none;
-    border-style: unset;
-    border: 1px solid black;
-  }
-
-  input::-webkit-outer-spin-button, input::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type="number"]{
-    text-align: center;
-    -moz-appearance: textfield;
-    appearance: textfield;
-  }
-
-  input::placeholder{
-    text-align: left;
-  }
-
-  textarea{
-    field-sizing: content;
-  }
-
-  label{
-    width: 80%;
-    position: relative;
-    text-align: left;
-  }
-
-  .tooltip {
-    position: absolute;
-    text-align: right;
-    right: 0;
-    font-style: italic;
-    opacity: 0.8;
-  }
-
-  .tooltip-text {
-    visibility: hidden;
-    position: absolute;
-    text-align: left;
-    width: auto;
-    top: 2ch;
-    left: 0;
-    z-index: 1;
-    font-style: italic;
-    opacity: 0.6;
-  }
-
-  .tooltip:hover ~ .tooltip-text{
-    visibility: visible;
-  }
-}
-
-.error{
-  background-color: var(--error-bg-color) !important;
-  border-color: var(--error-color) !important;
-}
-
-.valid{
-  background-color: var(--valid-bg-color) !important;
-  border-color: var(--valid-color) !important;
 }
 
 @media screen and (max-width: 700px) {
-  #root{
+  #root {
     display: unset;
   }
 
-  :root{
+  :root {
     font-size: smaller;
-    a, button{
+
+    a,
+    button {
       width: 40ch;
       align-self: center;
       padding: 0.75em;
@@ -220,32 +156,33 @@ body{
       font-size: small;
     }
 
-    button{
+    button {
       font-size: smaller;
       font-weight: 700;
       margin: 0.75em;
     }
 
-    .form.component{
+    .form.component {
       min-width: unset;
       max-width: 360px;
     }
   }
 }
 
-@media screen and (max-width: 400px){
-  :root{
-    .form.component{
+@media screen and (max-width: 400px) {
+  :root {
+    .form.component {
       min-width: unset;
       max-width: 320px;
     }
   }
 }
 
-@media screen and (max-width: 360px){
-  :root{
+@media screen and (max-width: 360px) {
+  :root {
     font-size: small;
-    .form.component{
+
+    .form.component {
       min-width: unset;
       max-width: 300px;
     }

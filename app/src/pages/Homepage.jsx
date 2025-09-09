@@ -1,7 +1,7 @@
 export default function Homepage() {
   return (
     <main>
-      <h1>text</h1>
+      <h1>WELCOME TO NOVASTACK</h1>
     </main>
   );
 }

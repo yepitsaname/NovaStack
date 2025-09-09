@@ -1,0 +1,46 @@
+nav {
+  grid-area: nav;
+  display: flex;
+  width: 100%;
+background-color: var(--head-foot-bg);
+  a {
+    justify-self: flex-end;
+  }
+
+  h1 {
+    flex-grow: 2;
+    text-align: left;
+  }
+
+}
+
+main {
+  grid-area: main;
+  display: flex;
+}
+
+aside {
+  grid-area: side;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--aside-bg);
+
+  a {
+    justify-self: flex-end;
+  }
+}
+
+footer {
+  grid-area: foot;
+  background-color: var(--head-foot-bg);
+  display: flex;
+  justify-content: end;
+
+  .date-time {
+    margin-right: 0.5em;
+  }
+
+  p {
+    margin-block: auto;
+  }
+}
