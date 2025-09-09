@@ -45,8 +45,8 @@ app.get("/", (req, res) => {
 app.post("/login", async (req, res) => {
 
   try {
-    const { username, password } = req.body;
-    const user = await knex("users").select("*").where("username", username).then((data) => res.json(data));
+    const { userName, password } = req.body;
+    const user = await knex("users").select("*").where("username", userName).first();
 
     if (!user) {
       return res.status(401).json({ error: "Authentication failed" });
