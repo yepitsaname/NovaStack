@@ -8,7 +8,7 @@ export default function Login() {
       <input type="text" placeholder="Username" /> <br />
       <label>Password</label>
       <input type="text" placeholder="Password" /> <br />
-      <div>
+      <div className="remember-me">
         <input type="checkbox" />
         <label>Remember Me</label>
       </div>

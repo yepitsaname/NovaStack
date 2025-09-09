@@ -1,9 +1,18 @@
 form {
     background-color: var(--form-bg);
     position: relative;
+
     a.hyperlink {
         background-color: unset;
         border: unset;
+    }
+
+    div.remember-me {
+        align-self: start;
+        width: 45%;
+        input[type="checkbox"] {
+            width: unset;
+        }
     }
 }
 
