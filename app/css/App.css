@@ -2,8 +2,7 @@ nav {
   grid-area: nav;
   display: flex;
   width: 100%;
-  background-color: var(--main-comp-mask);
-
+background-color: var(--head-foot-bg);
   a {
     justify-self: flex-end;
   }
@@ -24,7 +23,7 @@ aside {
   grid-area: side;
   display: flex;
   flex-direction: column;
-  background-color: var(--sub-mask);
+  background-color: var(--aside-bg);
 
   a {
     justify-self: flex-end;
@@ -33,7 +32,7 @@ aside {
 
 footer {
   grid-area: foot;
-  background-color: var(--main-comp-mask);
+  background-color: var(--head-foot-bg);
   display: flex;
   justify-content: end;
 
