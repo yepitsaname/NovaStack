@@ -1,14 +1,17 @@
 nav {
- grid-area: nav;
- display: flex;
- width: 100%;
- a {
-  justify-self: flex-end;
- }
- h1 {
-  flex-grow: 2;
-  text-align: left;
- }
+  grid-area: nav;
+  display: flex;
+  width: 100%;
+  background-color: var(--main-comp-mask);
+
+  a {
+    justify-self: flex-end;
+  }
+
+  h1 {
+    flex-grow: 2;
+    text-align: left;
+  }
 
 }
 
@@ -19,13 +22,26 @@ main {
 
 aside {
   grid-area: side;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--sub-mask);
 
+  a {
+    justify-self: flex-end;
+  }
 }
 
 footer {
   grid-area: foot;
+  background-color: var(--main-comp-mask);
+  display: flex;
+  justify-content: end;
+
+  .date-time {
+    margin-right: 0.5em;
+  }
+
   p {
-    margin-block: auto ;
+    margin-block: auto;
   }
 }
-
