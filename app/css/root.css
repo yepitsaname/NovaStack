@@ -124,11 +124,20 @@ body {
     "nav nav" 6vh
     "side  main" 90vh
     "foot foot" 4vh
-    / 20vw 80vw;
-  width: 100%;
-  max-height: 100vh;
+    / 10vw 90vw;
+    width: 100%;
+    max-height: 100vh;
+  }
+  @media screen and (max-width: 1920px){
+    #root {
+      grid-template:
+        "nav nav" 6vh
+        "side  main" 90vh
+        "foot foot" 4vh
+        / 20vw 80vw;
+      
+  }
 }
-
 
 @media screen and (max-width: 700px) {
   #root {
