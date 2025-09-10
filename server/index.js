@@ -143,7 +143,7 @@ app.get("/tasks", verifyToken, (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-app.get("/user/tasks", verifyToken, (req, res) => {
+app.get("/user/:id/tasks", verifyToken, (req, res) => {
   knex("tasks")
     .select("*")
     .from("tasks")
