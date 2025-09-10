@@ -1,5 +1,24 @@
-.task-widget {
+.dashboard-grid {
   display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
 }
 
-/* select-none h-[200px] w-[300px] rounded-lg overflow-hidden flex flex-col justify-center items-center */
+.task-widget {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  min-height: 250px;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.task-widget:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}

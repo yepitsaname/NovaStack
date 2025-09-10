@@ -1,17 +1,10 @@
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
+import "../../css/card.css"; // keep this path for your tree
 
 export default function TaskWidget() {
   return (
-    <Link to={"/tasks"}>
-      <div className="task-widget">
-        <div
-          className={`w-full flex-1`}
-          style={{
-            backgroundSize: `cover`,
-            backgroundPosition: `bottom center`,
-          }}
-        ></div>
-      </div>
+    <Link to="/tasks" style={{ display: "block" }}>
+      <div className="task-widget">Recent Tasks</div>
     </Link>
   );
 }
