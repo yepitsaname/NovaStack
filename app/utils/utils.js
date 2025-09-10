@@ -55,6 +55,12 @@ export async function UserSignup(userName, password, firstName, lastName, email)
     .then((res) => res.json());
 }
 
+export async function CheckUsername(username) {
+  const nameExists = await fetch(`${backend}/username/${username}`).then((res) => res.json());
+  console.log(nameExists);
+  let check = nameExists.length > 0 ? false : true;
+  return check;
+}
 /**
  *
  * @param {token} token Context token provided upon login
@@ -241,7 +247,7 @@ export async function DeleteTask(token, taskID) {
  * @param {token} token Context token provided upon login
  * @param {integer} missionID ID of task being deleted
  */
-export async function DeleteTask(token, missionID) {
+export async function DeleteMission(token, missionID) {
   return fetch(`${backend}/mission/${missionID}/delete`, {
     method: "DELETE",
     headers: { Authorization: token }
