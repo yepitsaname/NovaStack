@@ -5,5 +5,9 @@
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex("status").del();
-  await knex("status").insert([{ status: "status" }]);
+  await knex("status").insert([
+    { status: "pending" },
+    { status: "current" },
+    { status: "" }
+  ]);
 };
