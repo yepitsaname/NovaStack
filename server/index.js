@@ -143,6 +143,15 @@ app.get("/tasks", verifyToken, (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+app.get("/user/tasks", verifyToken, (req, res) => {
+  knex("tasks")
+    .select("*")
+    .from("tasks")
+    .where("assignee", req.body.uid)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err))
+})
+
 app.get("/tasks/:id", verifyToken, (req, res) => {
   knex("tasks")
     .select("*")

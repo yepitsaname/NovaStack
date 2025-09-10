@@ -8,6 +8,7 @@ exports.up = function (knex, Promise) {
     table.text('password');
     table.string('first_name');
     table.string('last_name');
+    table.jsonb('preferences').defaultTo('{}');
   })
 };
 
