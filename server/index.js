@@ -197,17 +197,24 @@ app.get("/roles/:id", verifyToken, (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+app.get('/system/status', verifyToken, (req, res) => {
+  knex("system_status")
+  .select("*")
+  .then((data) => res.status(200).json(data))
+  .catch((err) => res.status(400).json(err));
+})
+
 
 
 app.post("/tasks/add", verifyToken, async (req, res) => {
   const data = req.param;
   try {
     await knex('tasks').insert(data);
-    res.status(200).json({message:"item saved"})
-  } catch (err){
+    res.status(200).json({ message: "item saved" })
+  } catch (err) {
     console.error("ERROR", err);
-    res.status(500).json({error: "Failed to save item"});
-    }
+    res.status(500).json({ error: "Failed to save item" });
+  }
 });
 
 
@@ -215,11 +222,11 @@ app.post("/mission/add", verifyToken, async (req, res) => {
   const data = req.body;
   try {
     await knex('mission').insert(data);
-    res.status(200).json({message:"item saved"})
-  } catch (err){
+    res.status(200).json({ message: "item saved" })
+  } catch (err) {
     console.error("ERROR", err);
-    res.status(500).json({error: "Failed to save item"});
-    }
+    res.status(500).json({ error: "Failed to save item" });
+  }
 });
 
 
@@ -227,11 +234,11 @@ app.post("/history/add", verifyToken, async (req, res) => {
   const data = req.body;
   try {
     await knex('history').insert(data);
-    res.status(200).json({message:"item saved"})
-  } catch (err){
+    res.status(200).json({ message: "item saved" })
+  } catch (err) {
     console.error("ERROR", err);
-    res.status(500).json({error: "Failed to save item"});
-    }
+    res.status(500).json({ error: "Failed to save item" });
+  }
 });
 
 app.delete('/tasks/:id/delete', verifyToken, async (req, res) => {
@@ -305,5 +312,6 @@ app.patch('/history/:id/patch', verifyToken, async (req, res) => {
     res.status(500).json({ error: 'Failed to update history' });
   }
 })
+
 
 module.exports = app
