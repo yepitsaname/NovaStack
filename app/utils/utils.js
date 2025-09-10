@@ -111,6 +111,13 @@ export async function GetAllMissions(token) {
   }).then((res) => res.json());
 };
 
+export async function GetTaskByUser(token) {
+  return fetch(`${backend}/user/tasks`, {
+    method: "GET",
+    headers: { Authorization: token }
+  }).then((res) => res.json());
+
+}
 /**
  *
  * @param {integer} id ID of mission being queried
