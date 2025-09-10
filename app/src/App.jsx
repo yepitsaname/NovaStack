@@ -30,20 +30,20 @@ export default function App() {
       <NavBar />
       <SideBar />
       <Footer />
-
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/system" element={<System />} />
-        <Route path="/tasks" element={<Tasks />} />
-        <Route path="/reports" element={<Reports />} />
-
-        <Route path="/configuration" element={<Configuration />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/" element={<Homepage />} />
-        <Route />
-      </Routes>
+      <div className="main-content">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Signup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/system" element={<System />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/configuration" element={<Configuration />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={<Homepage />} />
+          <Route />
+        </Routes>
+      </div>
     </AppContext.Provider>
   );
 }
