@@ -7,6 +7,7 @@ exports.up = function (knex, Promise) {
     table.foreign("user").references("users.user_id");
     table.integer('role');
     table.foreign('role').references('role_name.role_name_id');
+    table.jsonb("default_layout").defaultTo("{}")
   });
 };
 
