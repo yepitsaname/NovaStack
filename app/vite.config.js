@@ -5,16 +5,19 @@ import { coverageConfigDefaults } from 'vitest/config'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    include: ["@mui/material", "@emotion/react", "@emotion/styled"]
+  },
   server: {
     post: 5173,
     host: true,
   },
   test: {
-        coverage: {
-            exclude: [...coverageConfigDefaults.exclude, "src/main.jsx"],
-        },
-        environment: 'jsdom',
-        globals: true,
-        setupFiles: "./test-setup.js"
-    }
+    coverage: {
+      exclude: [...coverageConfigDefaults.exclude, "src/main.jsx"],
+    },
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: "./test-setup.js"
+  }
 })

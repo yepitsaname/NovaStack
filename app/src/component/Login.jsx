@@ -17,19 +17,21 @@ export default function Login() {
       navigation("/");
     }
   }, [user]);
-    async function login(formData){
-      let username = formData.get("username")
-      let password = formData.get("password")
-      const res = await UserLogin(username, password)
-      if (res.token) {
-        setUser(username)
-        setToken(res)
-      }
+
+  async function login(formData) {
+    let username = formData.get("username")
+    let password = formData.get("password")
+    const res = await UserLogin(username, password)
+    if (res.token) {
+      setUser(username)
+      setToken(res)
     }
+  }
+
   return (
     <form className="form-component"
-    action={login}>
-    
+      action={login}>
+
       <label htmlFor="username">Username</label>
       <input name="username" type="text" placeholder="Username" /> <br />
       <label htmlFor="password">Password</label>

@@ -8,6 +8,7 @@ import System from "./pages/System";
 import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
 import Reports from "./pages/Reports";
+import Signup from "./pages/Signup";
 
 import NavBar from "./component/NavBar";
 import SideBar from "./component/SideBar";
@@ -32,7 +33,7 @@ export default function App() {
 
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/register" />
+        <Route path="/register" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/system" element={<System />} />
         <Route path="/tasks" element={<Tasks />} />
