@@ -7,7 +7,6 @@ exports.seed = async function (knex) {
   await knex("system_status").del();
   await knex("system_status").insert([
     { system_name: "system_name", system_status: "healthy", capabilities_available: 76 }
-  
   ]);
 
 };
