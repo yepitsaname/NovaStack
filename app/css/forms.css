@@ -128,3 +128,7 @@ form {
     background-color: var(--valid-bg-color) !important;
     border-color: var(--valid-color) !important;
 }
+
+
+#toggle-form.collapsible{ display: none;}
+#toggle-form:checked ~ .collapsible{ display: block;}
