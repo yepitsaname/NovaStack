@@ -37,8 +37,9 @@ export default function App() {
         <Route path="/system" element={<System />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/reports" element={<Reports />} />
+
         <Route path="/configuration" element={<Configuration />} />
-        <Route path="/profile:user" element={<Profile />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Homepage />} />
         <Route />
       </Routes>
