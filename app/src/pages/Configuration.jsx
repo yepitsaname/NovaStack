@@ -76,7 +76,7 @@ export default function Configuration() {
       <form onSubmit={handleSubmit} className="dashboard">
         <label htmlFor="widgets">Dashboard Config:</label>
         <br />
-        <label for="toggle-form">Show/Hide Form</label>
+        <label htmlFor="toggle-form">Show/Hide Form</label>
         <div className="collapsible">
           <fieldset>
             <legend>Choose your widgets</legend>
