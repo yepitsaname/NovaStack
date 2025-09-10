@@ -1,5 +1,15 @@
-import { useState } from "react";
-import "../../css/forms.css";
+import React, { useState } from "react";
+import {
+  Box,
+  FormControl,
+  FormGroup,
+  FormControlLabel,
+  FormLabel,
+  Checkbox,
+  Button,
+  Typography,
+  Divider,
+} from "@mui/material";
 
 const dashboardWidgets = [
   "systemHealth",
@@ -12,169 +22,123 @@ const dashboardWidgets = [
   "taskCompletionAnalytics",
 ];
 
-const systemWidgets = [
-  "systemHealth",
-  "pendingTasks",
-  "currentTasks",
-  "recentActivity",
-  "realTimeEvents",
-  "sycapsTrends",
-  "systemAvailability",
-  "taskCompletionAnalytics",
-];
+const systemWidgets = [...dashboardWidgets];
+const tasksWidgets = [...dashboardWidgets];
+const reportsWidgets = [...dashboardWidgets];
 
-const tasksWidgets = [
-  "systemHealth",
-  "pendingTasks",
-  "currentTasks",
-  "recentActivity",
-  "realTimeEvents",
-  "sycapsTrends",
-  "systemAvailability",
-  "taskCompletionAnalytics",
-];
+function WidgetForm({ label, widgetList, setWidgetList }) {
+  const [selected, setSelected] = useState([]);
+  const [submitted, setSubmitted] = useState([]);
 
-const reportsWidgets = [
-  "systemHealth",
-  "pendingTasks",
-  "currentTasks",
-  "recentActivity",
-  "realTimeEvents",
-  "sycapsTrends",
-  "systemAvailability",
-  "taskCompletionAnalytics",
-];
-
-export default function Configuration() {
-  const [selectedWidget, setSelectedWidget] = useState("");
-  const [widgetList, setWidgetList] = useState([]);
-
-  const handleCheckbox = (e) => {
-    const value = e.target.value;
-    setSelectedWidget((prev) =>
-      e.target.checked ? [...prev, value] : prev.filter((w) => w !== value)
+  const handleChange = (event) => {
+    const { value, checked } = event.target;
+    setSelected((prev) =>
+      checked ? [...prev, value] : prev.filter((w) => w !== value)
     );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (selectedWidget && !widgetList.includes(selectedWidget)) {
-      setWidgetList([...widgetList, selectedWidget]);
-    }
+    setSubmitted(selected);
+    setWidgetList(selected);
   };
 
   const handleClear = () => {
-    setWidgetList([]);
+    setSelected([]);
+    setSubmitted([]);
+    setWidgetList(selected);
   };
 
-  console.log(widgetList.join());
+  return (
+    <Box mb={2} p={2} border={0.5} borderRadius={5} borderColor="#2c74cb">
+      <form onSubmit={handleSubmit}>
+        <FormControl component="fieldset" fullWidth>
+          <FormLabel component="legend" sx={{ mb: 1, color: "#a1d4d4" }}>
+            {label}
+          </FormLabel>
+
+          <FormGroup row>
+            {widgetList.map((widget) => (
+              <FormControlLabel
+                key={widget}
+                control={
+                  <Checkbox
+                    checked={selected.includes(widget)}
+                    onChange={handleChange}
+                    value={widget}
+                    color="primary"
+                  />
+                }
+                label={widget}
+              />
+            ))}
+          </FormGroup>
+
+          <Box sx={{ mt: 2 }}>
+            <Button
+              type="submit"
+              variant="outlined"
+              color="primary"
+              sx={{ mr: 1 }}
+            >
+              Submit
+            </Button>
+
+            <Button variant="outlined" onClick={handleClear}>
+              Clear
+            </Button>
+          </Box>
+        </FormControl>
+      </form>
+
+      {submitted.length > 0 && (
+        <Box mt={2}>
+          <Typography variant="body2">
+            <b>Submitted:</b> {submitted.join(", ")}
+          </Typography>
+        </Box>
+      )}
+    </Box>
+  );
+}
+export default function Configuration() {
+  const [dashboardList, setDashboardList] = useState([]);
+  const [systemList, setSystemList] = useState([]);
+  const [tasksList, setTasksList] = useState([]);
+  const [reportList, setReportList] = useState([]);
+
+  console.log(dashboardList, systemList, tasksList, reportList);
 
   return (
-    <div className="">
-      <h1>Configuration</h1>
+    <Box sx={{ maxWidth: 800, mx: "auto", mt: 4, p: 0 }}>
+      <Typography variant="h4" gutterBottom>
+        Configuration
+      </Typography>
+      <Divider />
 
-      <form onSubmit={handleSubmit} className="dashboard">
-        <label htmlFor="widgets">Dashboard Config:</label>
-        <br />
-        <label for="toggle-form">Show/Hide Form</label>
-        <div className="collapsible">
-          <fieldset>
-            <legend>Choose your widgets</legend>
-            {dashboardWidgets.map((widget) => (
-              <div key={widget}>
-                <input
-                  type="checkbox"
-                  id={widget}
-                  name="interest"
-                  value={widget}
-                  checked={selectedWidget.includes(widget)}
-                  onChange={handleCheckbox}
-                />
-                <label htmlFor={widget}>{widget}</label>
-              </div>
-            ))}
-            <button type="submit">Add Widgets</button>
-            <button type="button" onClick={handleClear}>
-              Clear All
-            </button>
-          </fieldset>
-        </div>
-      </form>
+      <WidgetForm
+        label="Dashboard Config"
+        widgetList={dashboardWidgets}
+        setWidgetList={setDashboardList}
+      />
 
-      <form onSubmit={handleSubmit} className="dashboard">
-        <label htmlFor="widgets">System Config:</label>
-        <fieldset>
-          <legend>Choose your widgets</legend>
-          {systemWidgets.map((widget) => (
-            <div key={widget}>
-              <input
-                type="checkbox"
-                id={widget}
-                name="interest"
-                value={widget}
-                checked={selectedWidget.includes(widget)}
-                onChange={handleCheckbox}
-              />
-              <label htmlFor={widget}>{widget}</label>
-            </div>
-          ))}
-        </fieldset>
+      <WidgetForm
+        label="System Config"
+        widgetList={systemWidgets}
+        setWidgetList={setSystemList}
+      />
 
-        <button type="submit">Tasks Config:</button>
-        <button type="button" onClick={handleClear}>
-          Clear All
-        </button>
-      </form>
+      <WidgetForm
+        label="Tasks Config"
+        widgetList={tasksWidgets}
+        setWidgetList={setTasksList}
+      />
 
-      <form onSubmit={handleSubmit} className="dashboard">
-        <label htmlFor="widgets">Reports Config:</label>
-        <fieldset>
-          <legend>Choose your widgets</legend>
-          {tasksWidgets.map((widget) => (
-            <div key={widget}>
-              <input
-                type="checkbox"
-                id={widget}
-                name="interest"
-                value={widget}
-                checked={selectedWidget.includes(widget)}
-                onChange={handleCheckbox}
-              />
-              <label htmlFor={widget}>{widget}</label>
-            </div>
-          ))}
-        </fieldset>
-
-        <button type="submit">Add Widgets</button>
-        <button type="button" onClick={handleClear}>
-          Clear All
-        </button>
-      </form>
-
-      <form onSubmit={handleSubmit} className="dashboard">
-        <label htmlFor="widgets">Choose a widget:</label>
-        <fieldset>
-          <legend>Choose your widgets</legend>
-          {reportsWidgets.map((widget) => (
-            <div key={widget}>
-              <input
-                type="checkbox"
-                id={widget}
-                name="interest"
-                value={widget}
-                checked={selectedWidget.includes(widget)}
-                onChange={handleCheckbox}
-              />
-              <label htmlFor={widget}>{widget}</label>
-            </div>
-          ))}
-        </fieldset>
-
-        <button type="submit">Add Widgets</button>
-        <button type="button" onClick={handleClear}>
-          Clear All
-        </button>
-      </form>
-    </div>
+      <WidgetForm
+        label="Reports Config"
+        widgetList={reportsWidgets}
+        setWidgetList={setReportList}
+      />
+    </Box>
   );
 }
