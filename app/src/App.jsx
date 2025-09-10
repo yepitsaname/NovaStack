@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import Dashboard from "./pages/Dashboard";
 import Homepage from "./pages/Homepage";
-import Settings from "./pages/Settings";
+import Configuration from "./pages/Configuration";
 import System from "./pages/System";
 import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
@@ -38,8 +38,9 @@ export default function App() {
         <Route path="/system" element={<System />} />
         <Route path="/tasks" element={<Tasks />} />
         <Route path="/reports" element={<Reports />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/profile:user" element={<Profile />} />
+
+        <Route path="/configuration" element={<Configuration />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/" element={<Homepage />} />
         <Route />
       </Routes>

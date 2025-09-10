@@ -29,9 +29,9 @@ export default function Login() {
   }
 
   return (
-    <form className="form-component"
-      action={login}>
 
+    <form className="form component"
+    action={login}>
       <label htmlFor="username">Username</label>
       <input name="username" type="text" placeholder="Username" /> <br />
       <label htmlFor="password">Password</label>
