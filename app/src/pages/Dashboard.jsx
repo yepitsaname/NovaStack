@@ -1,13 +1,16 @@
+import { Link } from "react-router-dom";
+import "../../css/card.css"; // keep this path for your tree
+import CurrentTasks from "../component/CurrentTasks";
+
 export default function Dashboard() {
   return (
     <>
       <div>
-        <p className="date-time">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-          aspernatur laudantium soluta nobis. In minima, adipisci velit vero
-          illo dolor nobis pariatur sequi maiores provident repellat obcaecati
-          laudantium? Accusamus, eligendi?
-        </p>
+        <h1>Mission Control Dashboard</h1>
+        <p>Welcome back, User. Your systems are operational</p>
+        <div className="dashboard-grid">
+          <CurrentTasks />
+        </div>
       </div>
     </>
   );
