@@ -44,7 +44,7 @@ export default function Signup() {
     if (passCheck && userCheck) {
       let tempToken = await UserSignup(userName, pass1, firstName, lastName, email);
       if (tempToken.token) {
-        setToken(tempToken)
+        setToken(tempToken.token)
         setUser(userName)
       }
 
