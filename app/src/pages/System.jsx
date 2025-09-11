@@ -132,11 +132,8 @@ export default function System() {
 
 
 
-//separate opscaps and syscaps into separate tables --
-//white color for maintenance --
-//syscaps needs more color options --
+
 //add clickability for the colorblocks to display number of reports and criticality
-//make blocks larger --
 //details, date-time, reason, severity, system name
 //background of box' should match the site backgr
 
