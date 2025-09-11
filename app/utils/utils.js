@@ -105,12 +105,30 @@ export async function GetTaskByStatus(id, token) {
  * @returns returns array
  */
 export async function GetAllMissions(token) {
-  return fetch(`${backend}/missions`, {
+  return fetch(`${backend}/mission`, {
     method: "GET",
     headers: { Authorization: token }
   }).then((res) => res.json());
 };
 
+/**
+ *
+ * @param {integer} id ID of the mission being queried
+ * @param {Token} token context token provided upon login
+ * @returns returns mission name and list of systems
+ */
+export async function GetMissionByID(id, token) {
+  return fetch(`${backend}/mission/${id}`, {
+    method: "GET",
+    headers: { Authorization: token }
+  }).then((res) => res.json())
+}
+
+/**
+ *
+ * @param {Token} token
+ * @returns
+ */
 export async function GetTaskByUser(token) {
   return fetch(`${backend}/user/tasks`, {
     method: "GET",
