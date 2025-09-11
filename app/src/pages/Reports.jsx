@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, Box } from "@mui/material"
+import { Card, CardContent, Typography, Box } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import AppContext from "../AppContext";
 
@@ -9,17 +9,17 @@ export default function Reports() {
   const colorMap = {
     Healthy: "green",
     Warning: "yellow",
-    Critical: "red"
+    Critical: "red",
   };
 
   useEffect(() => {
-    fetch('http://localhost:3000/system/status', {
+    fetch("http://localhost:3000/system/status", {
       method: "GET",
-      headers: { Authorization: token }
+      headers: { Authorization: token },
     })
-      .then(data => data.json())
-      .then(res => setSystems(res))
-      .catch(err => console.log(err));
+      .then((data) => data.json())
+      .then((res) => setSystems(res))
+      .catch((err) => console.log(err));
   }, [token]);
 
   const getStopLight = (value) => {
