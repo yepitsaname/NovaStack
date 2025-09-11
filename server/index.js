@@ -213,6 +213,13 @@ app.get("/roles/:id", verifyToken, (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+app.get('/system/status', verifyToken, (req, res) => {
+  knex("system_status")
+  .select("*")
+  .then((data) => res.status(200).json(data))
+  .catch((err) => res.status(400).json(err));
+})
+
 
 //////////////POST FUNCTIONS///////////////////////////
 app.post("/tasks/add", verifyToken, async (req, res) => {
@@ -327,5 +334,6 @@ app.patch('/history/:id/patch', verifyToken, async (req, res) => {
     res.status(500).json({ error: 'Failed to update history' });
   }
 })
+
 
 module.exports = app

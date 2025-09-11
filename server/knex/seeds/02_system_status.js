@@ -11,3 +11,4 @@ exports.seed = async function (knex) {
     { status_name: "Operational" }
   ]);
 };
+

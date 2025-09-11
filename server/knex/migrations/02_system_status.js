@@ -2,8 +2,10 @@
 
 exports.up = function (knex, Promise) {
   return knex.schema.createTable("system_status", (table) => {
-    table.increments("status_id");
-    table.string("status_name");
+    table.increments("system_id");
+    table.string("system_name");
+    table.string("system_status");
+    table.integer("capabilities_available");
   });
 };
 

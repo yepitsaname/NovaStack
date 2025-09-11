@@ -1,41 +1,63 @@
-import { Card, CardContent, Typography, LinearProgress, Chip} from "@mui/material"
+import { Card, CardContent, Typography, Box } from "@mui/material";
+import { useState, useEffect, useContext } from "react";
+import AppContext from "../AppContext";
 
 export default function Reports() {
+  const [systems, setSystems] = useState([]);
+  const { token } = useContext(AppContext);
 
-  // const stopLightOverview = ({ OPSCAP, SYSCAP }) => {
-  //   const getStopLight = (value) => {
-  //     if (value > 75) return 
-  //   }
-  // }
+  const colorMap = {
+    Healthy: "green",
+    Warning: "yellow",
+    Critical: "red",
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:3000/system/status", {
+      method: "GET",
+      headers: { Authorization: token },
+    })
+      .then((data) => data.json())
+      .then((res) => setSystems(res))
+      .catch((err) => console.log(err));
+  }, [token]);
+
+  const getStopLight = (value) => {
+    if (value > 75) return "Healthy";
+    if (value >= 50) return "Warning";
+    return "Critical";
+  };
+
+  const StopLight = ({ status }) => {
+    const lights = ["Critical", "Warning", "Healthy"];
+    return (
+      <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+        {lights.map((light) => (
+          <Box
+            key={light}
+            sx={{
+              width: 20,
+              height: 20,
+              borderRadius: "50%",
+              backgroundColor: status === light ? colorMap[light] : "gray",
+            }}
+          />
+        ))}
+      </Box>
+    );
+  };
 
   return (
-    <>
-    <div>
-      <Card
-      sx={{
-        minWidth: 200,
-        textAlign: "center",
-
-      }}>
-        <CardContent>
-          
-          <Typography variant ="h6">Systems Health</Typography> <br />
-          <Typography> OPSCAPS</Typography> 
-          <Typography>80%</Typography>
-          
-          <Typography>SYSCAPS</Typography>
-          <Typography>72%</Typography>
-          
-        </CardContent>
-      </Card>
-
-        <p className="date-time">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto
-          aspernatur laudantium soluta nobis. In minima, adipisci velit vero
-          illo dolor nobis pariatur sequi maiores provident repellat obcaecati
-          laudantium? Accusamus, eligendi?
-        </p>
-        </div>
-    </>
+    <Box sx={{ p: 2 }}>
+      {systems.map((sys) => (
+        <Card key={sys.system_id} sx={{ mb: 2, width: 300 }}>
+          <CardContent>
+            <Typography variant="h6">{sys.system_name}</Typography>
+            <Typography>Value: {sys.capabilities_available}%</Typography>
+            <StopLight status={getStopLight(sys.capabilities_available)} />
+          </CardContent>
+        </Card>
+      ))}
+    </Box>
   );
 }
