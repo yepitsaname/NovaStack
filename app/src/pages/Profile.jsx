@@ -1,18 +1,25 @@
 import { useEffect, useContext } from "react";
 import AppContext from "../AppContext";
+import { UpdateUser } from "../../utils/utils";
 
 export default function Profile() {
-  const { user, profile, setProfile } = useContext(AppContext);
-  let theme = profile.preferences.theme;
+  const { user, token, profile, setProfile } = useContext(AppContext);
+  let theme = profile?.preferences.theme || '';
 
   // Edit actions
   // should update the user's prefered scheme in the
   // database and on their profile
-  const updateTheme = () => {
-    setProfile((current)=>{
-      return Object.assign(current,
-        {preferences: {theme: theme}}
-      )})
+  const updateTheme = async () => {
+    let payload = { "preferences": {
+      "theme": theme
+    }}
+    console.log(profile)
+    let status = await UpdateUser(user, token, payload)
+    console.log(status);
+    // setProfile((current)=>{
+    //   return Object.assign(current,
+    //     {preferences: {theme: theme}}
+    //   )})
   }
 
 
@@ -37,7 +44,7 @@ export default function Profile() {
       <fieldset>
         <legend>Theming</legend>
         <label htmlFor="theme">Themes</label>
-        <select defaultValue={profile.theme} onChange={(event)=>{theme = event.target.value}}>
+        <select defaultValue={profile.preferences.theme} onChange={(event)=>{theme = event.target.value}}>
           <option value="dark">Dark</option>
           <option value="light">Light</option>
         </select>

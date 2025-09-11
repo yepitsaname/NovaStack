@@ -15,6 +15,20 @@ export async function GetUser(id, token) {
 
 /**
  *
+ * @param {string} username Must be a valid Username.
+ * @param {token} token Must be valid. Query will take the userID off of the token
+ * @returns returns single item array with user information
+ */
+export async function UpdateUser(username, token, payload) {
+  return fetch(`${backend}/user/${username}`, {
+    method: "PATCH",
+    headers: { Authorization: token },
+    body: JSON.stringify(payload)
+  }).then((res) => res.status);
+};
+
+/**
+ *
  * @param {string} username Username
  * @param {password} password Password
  * @returns returns token
