@@ -149,6 +149,7 @@ app.get("/tasks", verifyToken, (req, res) => {
       "status.status as status",
       "tasks.due_date",
       "users.username as assignee")
+    .whereNot('tasks.status', 5)
     .then((data) => res.status(200).json(data))
     .catch((err) => { console.log(err); res.status(400).json(err) });
 });
@@ -185,6 +186,7 @@ app.get("/tasks/:id", verifyToken, (req, res) => {
       "tasks.due_date",
       "users.username as assignee")
     .where("task_id", req.params.id)
+    .whereNot('tasks.status', 5)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
@@ -229,6 +231,7 @@ app.get("/mission/:id/tasks", verifyToken, (req, res) => {
   knex("tasks")
     .select("*")
     .where("mission_id", req.params.id)
+    .whereNot('tasks.status', 5)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });

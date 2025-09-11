@@ -1,29 +1,46 @@
 import AppContext from "../AppContext";
 import { GetTaskById } from "../../utils/utils";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useContext, useEffect, useState } from "react";
+import { ArchievedTask } from "../../utils/utils";
 
 export default function TaskItem() {
   const { token } = useContext(AppContext);
   const [taskData, setTaskData] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
       const tasks = await GetTaskById(id, token);
       setTaskData(tasks);
     })();
-  }, [taskData]);
+  }, []);
+
+  async function handleDelete(data) {
+    const deleteTasks = await ArchievedTask(token, data);
+
+    navigate("/dashboard");
+  }
 
   if (!taskData) return <div> Loading...</div>;
+
+  // let tId;
+  // console.log(taskData);
+  // taskData.map((d) => {
+  //   tId = d.task_id;
+  //   return tId;
+  // });
+
+  // console.log(tId);
 
   return (
     <div>
       <button>Edit</button>
-      <button>Delete</button>
+      <button onClick={() => handleDelete(taskData)}>Delete</button>
 
       {taskData.map((d) => (
-        <div>
+        <div key={d.task_id}>
           <h3>Task: {d.title}</h3>
           <p>Description: {d.description}</p>
           <h4>Mision: {d.mission_id}</h4>

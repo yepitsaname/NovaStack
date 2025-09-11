@@ -240,6 +240,26 @@ export async function EditTask(token, taskID, data) {
 /**
  *
  * @param {Token} token Context token provided upon login
+ * @param {integer} taskID ID of task being altered
+ * @returns returns fetch data
+ */
+export async function ArchievedTask(token, data) {
+  return fetch(`${backend}/tasks/${data.task_id}/patch`, {
+    method: "PATCH",
+    headers: { Authorization: token },
+    body: JSON.stringify({
+      title: data.title,
+      description: data.description,
+      mission_id: data.mission_id,
+      status: 5,
+      due_date: data.due_date
+    })
+  })
+}
+
+/**
+ *
+ * @param {Token} token Context token provided upon login
  * @param {integer} missionID ID of mission being altered
  * @param {Object} data mission_name: string, systems: integer
  * @returns returns fetch data
@@ -278,3 +298,4 @@ export async function DeleteMission(token, missionID) {
     headers: { Authorization: token }
   }).then((res) => res.json());
 }
+
