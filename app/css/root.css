@@ -3,6 +3,7 @@
   --error-bg-color: rgb(193, 147, 147);
   --valid-color: rgb(14, 194, 14);
   --valid-bg-color: rgb(147, 193, 147);
+  --border-color: rgb(44, 116, 203);
 
   @media (prefers-color-scheme: light) {
     /* Light Mode Colors */
@@ -135,17 +136,27 @@ body {
         "side  main" 90vh
         "foot foot" 4vh
         / 20vw 80vw;
-      
+
   }
 }
 
 @media screen and (max-width: 700px) {
   #root {
-    display: unset;
+    grid-template:
+      "nav" 6vh
+      "side" 4vh
+      "main" 86vh
+      "foot" 4vh
+      / 100vw;
   }
 
   :root {
     font-size: smaller;
+
+    h1 {
+      align-self: center;
+      font-size: small;
+    }
 
     a,
     button {
