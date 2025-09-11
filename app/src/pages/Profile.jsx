@@ -1,22 +1,15 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import AppContext from "../AppContext";
 import { GetUser } from "../../utils/utils";
 
 export default function Profile() {
-  const [ info, setInfo ] = useState(null);
   const { user, profile } = useContext(AppContext);
 
+  // Edit actions
+  // should update the user's prefered scheme in the
+  // database and on their profile
+  const updateTheme = (event) => {}
 
-
-
-  // const user = {
-  //   username: "legoman",
-  //   firstname: "lego",
-  //   lastname: "man",
-  //   email: "lego@legoman.com",
-  //   role: ["Lego Crew Chief","Lego Controller","Legoland Denmark"],
-  //   theme: "dark"
-  // }
 
   if( !profile ) return <div className="form"><h2>Loading Profile</h2></div>
 
@@ -35,15 +28,15 @@ export default function Profile() {
           <input type="email" id="email" name="email" value={profile.email} disabled />
           <label htmlFor="roles">Roles</label>
           <input type="text" id="roles" name="roles" value={profile.roles.map(role=>role.role_name).join(", ")} disabled />
-          <button>Edit</button>
         </fieldset>
         <fieldset>
           <legend>Theming</legend>
           <label htmlFor="theme">Themes</label>
-          <select defaultValue={profile.preferences.theme}>
+          <select defaultValue={profile.theme}>
             <option value="dark">Dark</option>
             <option value="light">Light</option>
           </select>
+          <button onClick={()=>{}}>Update</button>
         </fieldset>
         <fieldset>
           <legend>Password Reset</legend>
