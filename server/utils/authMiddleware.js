@@ -8,6 +8,7 @@ function authMiddleware(req, res, next) {
     if (error) return res.status(401).json({ message: "Invalid token" });
     const { uid, userName } = decoded;
     req.body = {
+      ...req.body,
       "uid": uid,
       "username": userName
     }

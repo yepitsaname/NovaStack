@@ -64,7 +64,7 @@ export async function CheckUsername(username) {
 /**
  *
  * @param {token} token Context token provided upon login
- * @returns returns array of tasks
+ * @returns Tasks: task_id, title, description, mission, status, due_date, assignee
  */
 export async function GetAllTasks(token) {
   return fetch(`${backend}/tasks`, {
@@ -77,7 +77,7 @@ export async function GetAllTasks(token) {
  *
  * @param {integer} id ID of task being queried
  * @param {Token} token Context token provided upon login
- * @returns returns single item array
+ * @returns Tasks: task_id, title, description, mission, status, due_date, assignee
  */
 export async function GetTaskById(id, token) {
   return fetch(`${backend}/tasks/${id}`, {
@@ -90,7 +90,7 @@ export async function GetTaskById(id, token) {
  *
  * @param {integer} id ID of status being queried
  * @param {Token} token Context token provided upon login
- * @returns returns array of tasks
+ * @returns Tasks: task_id, title, description, mission, status, due_date, assignee
  */
 export async function GetTaskByStatus(id, token) {
   return fetch(`${backend}/status/${id}`, {
@@ -105,12 +105,30 @@ export async function GetTaskByStatus(id, token) {
  * @returns returns array
  */
 export async function GetAllMissions(token) {
-  return fetch(`${backend}/missions`, {
+  return fetch(`${backend}/mission`, {
     method: "GET",
     headers: { Authorization: token }
   }).then((res) => res.json());
 };
 
+/**
+ *
+ * @param {integer} id ID of the mission being queried
+ * @param {Token} token context token provided upon login
+ * @returns returns mission name and list of systems
+ */
+export async function GetMissionByID(id, token) {
+  return fetch(`${backend}/mission/${id}`, {
+    method: "GET",
+    headers: { Authorization: token }
+  }).then((res) => res.json())
+}
+
+/**
+ *
+ * @param {Token} token
+ * @returns Tasks: task_id, title, description, mission, status, due_date, assignee
+ */
 export async function GetTaskByUser(token) {
   return fetch(`${backend}/user/tasks`, {
     method: "GET",

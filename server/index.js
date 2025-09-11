@@ -138,16 +138,34 @@ app.get("/username/:name", (req, res) => {
 
 app.get("/tasks", verifyToken, (req, res) => {
   knex("tasks")
-    .select("*")
-    .from("tasks")
+    .join("mission", "tasks.mission_id", "mission.mission_id")
+    .join("status", "tasks.status", "status.status_id")
+    .join("users", "tasks.assignee", "users.user_id")
+    .select(
+      "tasks.task_id",
+      "tasks.title",
+      "tasks.description",
+      "mission.mission_name as mission",
+      "status.status as status",
+      "tasks.due_date",
+      "users.username as assignee")
     .then((data) => res.status(200).json(data))
-    .catch((err) => res.status(400).json(err));
+    .catch((err) => { console.log(err); res.status(400).json(err) });
 });
 
 app.get("/user/:id/tasks", verifyToken, (req, res) => {
   knex("tasks")
-    .select("*")
-    .from("tasks")
+    .join("mission", "tasks.mission_id", "mission.mission_id")
+    .join("status", "tasks.status", "status.status_id")
+    .join("users", "tasks.assignee", "users.user_id")
+    .select(
+      "tasks.task_id",
+      "tasks.title",
+      "tasks.description",
+      "mission.mission_name as mission",
+      "status.status as status",
+      "tasks.due_date",
+      "users.username as assignee")
     .where("assignee", req.body.uid)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err))
@@ -155,7 +173,17 @@ app.get("/user/:id/tasks", verifyToken, (req, res) => {
 
 app.get("/tasks/:id", verifyToken, (req, res) => {
   knex("tasks")
-    .select("*")
+    .join("mission", "tasks.mission_id", "mission.mission_id")
+    .join("status", "tasks.status", "status.status_id")
+    .join("users", "tasks.assignee", "users.user_id")
+    .select(
+      "tasks.task_id",
+      "tasks.title",
+      "tasks.description",
+      "mission.mission_name as mission",
+      "status.status as status",
+      "tasks.due_date",
+      "users.username as assignee")
     .where("task_id", req.params.id)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
@@ -163,20 +191,41 @@ app.get("/tasks/:id", verifyToken, (req, res) => {
 
 app.get("/status/:id", verifyToken, (req, res) => {
   knex("tasks")
-    .select("*")
+    .join("mission", "tasks.mission_id", "mission.mission_id")
+    .join("status", "tasks.status", "status.status_id")
+    .join("users", "tasks.assignee", "users.user_id")
+    .select(
+      "tasks.task_id",
+      "tasks.title",
+      "tasks.description",
+      "mission.mission_name as mission",
+      "status.status as status",
+      "tasks.due_date",
+      "users.username as assignee")
     .where("status", req.params.id)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
 
 app.get("/mission", verifyToken, (req, res) => {
+  console.log("called all missions")
   knex("mission")
     .select("*")
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
 
+app.get("/mission/:id", verifyToken, (req, res) => {
+  console.log("called mission by ID")
+  knex("mission")
+    .select("*")
+    .where("mission_id", req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+})
+
 app.get("/mission/:id/tasks", verifyToken, (req, res) => {
+  console.log("called tasks by mission")
   knex("tasks")
     .select("*")
     .where("mission_id", req.params.id)
@@ -217,17 +266,17 @@ app.get("/roles/:id", verifyToken, (req, res) => {
 
 app.get('/system/status', verifyToken, (req, res) => {
   knex("system_status")
-  .select("*")
-  .then((data) => res.status(200).json(data))
-  .catch((err) => res.status(400).json(err));
+    .select("*")
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
 })
 
 
 //////////////POST FUNCTIONS///////////////////////////
 app.post("/tasks/add", verifyToken, async (req, res) => {
-  const data = req.param;
+  const data = req.body;
   try {
-    await knex('tasks').insert(data);
+    await knex('tasks').insert({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date });
     res.status(200).json({ message: "item saved" })
   } catch (err) {
     console.error("ERROR", err);
@@ -239,7 +288,7 @@ app.post("/tasks/add", verifyToken, async (req, res) => {
 app.post("/mission/add", verifyToken, async (req, res) => {
   const data = req.body;
   try {
-    await knex('mission').insert(data);
+    await knex('mission').insert({ mission_name: data.mission_name, systems: data.systems });
     res.status(200).json({ message: "item saved" })
   } catch (err) {
     console.error("ERROR", err);
@@ -305,7 +354,7 @@ app.patch('/tasks/:id/patch', verifyToken, async (req, res) => {
   const id = req.params.id;
   const data = req.body;
   try {
-    await knex('tasks').where('task_id', id).update(data);
+    await knex('tasks').where('task_id', id).update({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date, assignee: data.assignee });
     res.status(200).json({ message: 'task updated' });
   } catch (err) {
     console.error('ERROR ', err);
@@ -317,7 +366,7 @@ app.patch('/mission/:id/patch', verifyToken, async (req, res) => {
   const id = req.params.id;
   const data = req.body;
   try {
-    await knex('mission').where('mission_id', id).update(data);
+    await knex('mission').where('mission_id', req.params.id).update({ mission_name: data.mission_name, systems: JSON.stringify(data.systems) });
     res.status(200).json({ message: 'mission updated' });
   } catch (err) {
     console.error('ERROR ', err);
