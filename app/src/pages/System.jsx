@@ -1,5 +1,6 @@
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
+
 import AppContext from "../AppContext";
 
 export default function Reports() {
@@ -48,16 +49,25 @@ export default function Reports() {
   };
 
   return (
-    <Box sx={{ p: 2 }}>
-      {systems.map((sys) => (
-        <Card key={sys.system_id} sx={{ mb: 2, width: 300 }}>
-          <CardContent>
-            <Typography variant="h6">{sys.system_name}</Typography>
-            <Typography>Value: {sys.capabilities_available}%</Typography>
-            <StopLight status={getStopLight(sys.capabilities_available)} />
-          </CardContent>
-        </Card>
-      ))}
-    </Box>
+    <>
+      <br />
+      <h1>Syscaps</h1>
+      <Box
+        sx={{
+          display: "flex",              
+          flexDirection: "column",      
+          alignItems: "center",         
+          minHeight: "100vh",      
+          p: 2,}}>
+        {systems.map((sys) => (
+          <Card key={sys.system_id} sx={{ mb: 2, width: 500 }}>
+            <CardContent>
+              <Typography variant="h6">{sys.system_name}</Typography> <br />
+              <StopLight status={getStopLight(sys.capabilities_available)} />
+            </CardContent>
+          </Card>
+        ))}
+      </Box>
+    </>
   );
 }
