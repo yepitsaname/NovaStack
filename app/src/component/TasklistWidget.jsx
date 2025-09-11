@@ -39,24 +39,18 @@ export default function TaskListWidget({
   isDashboard = false,
   isCurrent = false,
 }) {
-  const [taskData, setTaskData] = useState([]);
-  const [selected, setSelected] = useState(null);
+  const [taskListData, setTaskListData] = useState([]);
   const { token } = useContext(AppContext);
   const navigate = useNavigate();
-
-  const handleRowClick = (row) => {
-    setSelected(row.id);
-    navigate("/tasks/item");
-  };
 
   useEffect(() => {
     (async () => {
       const tasks = await GetAllTasks(token);
-      setTaskData(tasks);
+      setTaskListData(tasks);
     })();
   }, []);
 
-  if (!taskData.length) return <div>Loading</div>;
+  if (!taskListData.length) return <div>Loading</div>;
 
   return (
     <>
@@ -65,8 +59,6 @@ export default function TaskListWidget({
       ) : (
         <div>
           <button>Add</button>
-          <button>Edit</button>
-          <button>Delete</button>
         </div>
       )}
       <Box mb={2} p={2} border={0.5} borderRadius={5} borderColor="#edf1f5ff">
@@ -81,11 +73,10 @@ export default function TaskListWidget({
               </TableRow>
             </TableHead>
             <TableBody>
-              {taskData.map((row) => (
+              {taskListData.map((row) => (
                 <StyledTableRow
-                  key={row.tasks}
-                  selected={selected === row.title}
-                  onClick={() => handleRowClick(row)}
+                  key={row.task_id}
+                  onClick={() => navigate(`/taskslist/${row.task_id}`)}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
                     cursor: "pointer",
