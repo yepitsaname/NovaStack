@@ -244,15 +244,17 @@ export async function EditTask(token, taskID, data) {
  * @returns returns fetch data
  */
 export async function ArchievedTask(token, data) {
+  console.log(data.mission_id)
   return fetch(`${backend}/tasks/${data.task_id}/patch`, {
     method: "PATCH",
     headers: { Authorization: token },
     body: JSON.stringify({
       title: data.title,
       description: data.description,
-      mission_id: data.mission_id,
+      mission_id: data.mission,
       status: 5,
-      due_date: data.due_date
+      due_date: data.due_date,
+      assignee: data.assignee
     })
   })
 }

@@ -18,8 +18,9 @@ export default function TaskItem() {
   }, []);
 
   async function handleDelete(data) {
-    const deleteTasks = await ArchievedTask(token, data);
-
+    //console.log(data);
+    const deleteTasks = await ArchievedTask(token, data[0]);
+    console.log(deleteTasks);
     navigate("/dashboard");
   }
 
@@ -43,7 +44,7 @@ export default function TaskItem() {
         <div key={d.task_id}>
           <h3>Task: {d.title}</h3>
           <p>Description: {d.description}</p>
-          <h4>Mision: {d.mission_id}</h4>
+          <h4>Mission: {d.mission_id}</h4>
           <h4>Status: {d.status}</h4>
         </div>
       ))}

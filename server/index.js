@@ -123,7 +123,7 @@ app.post('/signup', async (req, res) => {
 //////////////////GET FUNCTIONS//////////////////////////
 app.get("/user/:id", verifyToken, (req, res) => {
   knex("users")
-    .select("user_id","first_name","last_name","email","username","preferences")
+    .select("user_id", "first_name", "last_name", "email", "username", "preferences")
     .where("users.user_id", "=", req.body.uid)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
@@ -260,8 +260,8 @@ app.get("/history", verifyToken, (req, res) => {
 
 app.get("/roles/:id", verifyToken, (req, res) => {
   knex("role_list")
-    .select("role_name.role_name","role_name.default_layout")
-    .join("role_name","role_list.role","=","role_name.role_name_id")
+    .select("role_name.role_name", "role_name.default_layout")
+    .join("role_name", "role_list.role", "=", "role_name.role_name_id")
     .where("role", req.params.id)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
@@ -356,8 +356,10 @@ app.delete('/history/:id/delete', verifyToken, async (req, res) => {
 app.patch('/tasks/:id/patch', verifyToken, async (req, res) => {
   const id = req.params.id;
   const data = req.body;
+  console.log(data);
   try {
-    await knex('tasks').where('task_id', id).update({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date, assignee: data.assignee });
+    await knex('tasks').where('task_id', id)
+      .update({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date, assignee: data.assignee });
     res.status(200).json({ message: 'task updated' });
   } catch (err) {
     console.error('ERROR ', err);
