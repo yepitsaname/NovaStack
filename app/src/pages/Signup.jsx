@@ -9,7 +9,7 @@ import Alert from '@mui/material/Alert';
 
 export default function Signup() {
   const { user, setUser } = useContext(AppContext);
-  const { token, setToken } = useContext(AppContext);
+  const { setToken } = useContext(AppContext);
   const { setProfile } = useContext(AppContext);
   const [userAlert, setUserAlert] = useState(false);
   const [passAlert, setPassAlert] = useState(false);

@@ -97,7 +97,8 @@ app.post('/signup', async (req, res) => {
     first_name: firstName,
     last_name: lastName,
     email: email,
-    password: passwordHash
+    password: passwordHash,
+    preferences: `{"theme": "dark", "layout": "default"}`
   });
 
 
