@@ -2,7 +2,8 @@ nav {
   grid-area: nav;
   display: flex;
   width: 100%;
-background-color: var(--head-foot-bg);
+  background-color: var(--head-foot-bg);
+
   a {
     justify-self: flex-end;
   }
@@ -20,10 +21,11 @@ main {
 }
 
 aside {
-  grid-area: side;
+  grid-area: main;
   display: flex;
   flex-direction: column;
   background-color: var(--aside-bg);
+  max-width: 10vw;
 
   a {
     justify-self: flex-end;
@@ -44,9 +46,16 @@ footer {
     margin-block: auto;
   }
 }
-.main-content{
+
+.main-content {
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: navy rgb(167, 54, 54);
 }
 
+@media screen and (max-width: 700px) {
+  aside {
+    grid-area: side;
+    max-width: unset;
+  }
+}

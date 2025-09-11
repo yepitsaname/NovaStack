@@ -36,9 +36,9 @@ export default function App() {
       }}
     >
       <NavBar />
-      <SideBar />
       <Footer />
-      <div className="main-content">
+      <main className="main-content">
+      <SideBar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
@@ -53,7 +53,7 @@ export default function App() {
           <Route path="/taskslist/edit" element={<EditTask />} />
           <Route path="/taskslist/:id" element={<TaskItem />} />
         </Routes>
-      </div>
+      </main>
     </AppContext.Provider>
   );
 }
