@@ -9,7 +9,6 @@ import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
 import Reports from "./pages/Reports";
 import Signup from "./pages/Signup";
-import AddTask from "./component/AddTask";
 import EditTask from "./component/EditTask";
 import TaskItem from "./component/TaskItem";
 
@@ -30,9 +29,12 @@ export default function App() {
   return (
     <AppContext.Provider
       value={{
-        user: user, setUser: setUser,
-        profile: profile, setProfile: setProfile,
-        token: token, setToken: setToken
+        user: user,
+        setUser: setUser,
+        profile: profile,
+        setProfile: setProfile,
+        token: token,
+        setToken: setToken,
       }}
     >
       <NavBar />
@@ -49,7 +51,6 @@ export default function App() {
           <Route path="/configuration" element={<Configuration />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Homepage />} />
-          <Route path="/taskslist/add" element={<AddTask />} />
           <Route path="/taskslist/edit" element={<EditTask />} />
           <Route path="/taskslist/:id" element={<TaskItem />} />
         </Routes>
