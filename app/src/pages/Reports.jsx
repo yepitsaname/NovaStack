@@ -31,7 +31,7 @@ export default function Reports() {
   const StopLight = ({ status }) => {
     const lights = ["Critical", "Warning", "Healthy"];
     return (
-      <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
+      <Box display="flex" flexDirection="row" alignItems="center" gap={1}>
         {lights.map((light) => (
           <Box
             key={light}
