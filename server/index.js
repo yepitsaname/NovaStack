@@ -119,7 +119,7 @@ app.post('/signup', async (req, res) => {
     })
 })
 
-
+//////////////////GET FUNCTIONS//////////////////////////
 app.get("/user/:id", verifyToken, (req, res) => {
   knex("users")
     .select("*")
@@ -128,6 +128,13 @@ app.get("/user/:id", verifyToken, (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+app.get("/username/:name", (req, res) => {
+  knex("users").select("user_id")
+    .where("username", req.params.name)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+})
+
 app.get("/tasks", verifyToken, (req, res) => {
   knex("tasks")
     .select("*")
@@ -135,6 +142,15 @@ app.get("/tasks", verifyToken, (req, res) => {
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
+
+app.get("/user/:id/tasks", verifyToken, (req, res) => {
+  knex("tasks")
+    .select("*")
+    .from("tasks")
+    .where("assignee", req.body.uid)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err))
+})
 
 app.get("/tasks/:id", verifyToken, (req, res) => {
   knex("tasks")
@@ -205,7 +221,7 @@ app.get('/system/status', verifyToken, (req, res) => {
 })
 
 
-
+//////////////POST FUNCTIONS///////////////////////////
 app.post("/tasks/add", verifyToken, async (req, res) => {
   const data = req.param;
   try {
@@ -241,6 +257,9 @@ app.post("/history/add", verifyToken, async (req, res) => {
   }
 });
 
+
+
+///////////////DELETE FUNCTIONS///////////////////////////
 app.delete('/tasks/:id/delete', verifyToken, async (req, res) => {
   const id = req.params.id;
   try {
@@ -277,6 +296,9 @@ app.delete('/history/:id/delete', verifyToken, async (req, res) => {
   }
 })
 
+
+
+/////////////////////////PATCH FUNCTIONS////////////////////////////////
 app.patch('/tasks/:id/patch', verifyToken, async (req, res) => {
   const id = req.params.id;
   const data = req.body;

@@ -55,6 +55,12 @@ export async function UserSignup(userName, password, firstName, lastName, email)
     .then((res) => res.json());
 }
 
+export async function CheckUsername(username) {
+  const nameExists = await fetch(`${backend}/username/${username}`).then((res) => res.json());
+  console.log(nameExists);
+  let check = nameExists.length > 0 ? false : true;
+  return check;
+}
 /**
  *
  * @param {token} token Context token provided upon login
@@ -105,6 +111,13 @@ export async function GetAllMissions(token) {
   }).then((res) => res.json());
 };
 
+export async function GetTaskByUser(token) {
+  return fetch(`${backend}/user/tasks`, {
+    method: "GET",
+    headers: { Authorization: token }
+  }).then((res) => res.json());
+
+}
 /**
  *
  * @param {integer} id ID of mission being queried

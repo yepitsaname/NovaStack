@@ -6,8 +6,9 @@ exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex("system_status").del();
   await knex("system_status").insert([
-    { system_name: "system_name", system_status: "healthy", capabilities_available: 76 }
+    { status_name: "Critical" },
+    { status_name: "Warning" },
+    { status_name: "Operational" }
   ]);
-
 };
 

@@ -4,8 +4,9 @@ exports.up = function (knex, Promise) {
   return knex.schema.createTable("mission", (table) => {
     table.increments("mission_id");
     table.string("mission_name");
-    table.integer("systems");
-    table.foreign("systems").references("system_status.system_id");
+    table.jsonb("systems").defaultTo("{}")
+    // table.integer("systems"); //array
+    // table.foreign("systems").references("system_status.system_id");
   });
 };
 

@@ -3,11 +3,12 @@ import { useState } from "react";
 
 import Dashboard from "./pages/Dashboard";
 import Homepage from "./pages/Homepage";
-import Settings from "./pages/Settings";
+import Configuration from "./pages/Configuration";
 import System from "./pages/System";
 import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
 import Reports from "./pages/Reports";
+import Signup from "./pages/Signup";
 
 import NavBar from "./component/NavBar";
 import SideBar from "./component/SideBar";
@@ -29,19 +30,20 @@ export default function App() {
       <NavBar />
       <SideBar />
       <Footer />
-
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/system" element={<System />} />
-        <Route path="/tasks" element={<Tasks />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/profile:user" element={<Profile />} />
-        <Route path="/" element={<Homepage />} />
-        <Route />
-      </Routes>
+      <div className="main-content">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Signup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/system" element={<System />} />
+          <Route path="/tasks" element={<Tasks />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/configuration" element={<Configuration />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={<Homepage />} />
+          <Route />
+        </Routes>
+      </div>
     </AppContext.Provider>
   );
 }

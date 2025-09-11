@@ -18,7 +18,7 @@ export default function NavBar() {
       {user ? (
         <>
           <p>🔔</p>
-          <Link>{user}</Link>
+          <Link to="/profile">{user}</Link>
           <Link onClick={()=>{logout()}}>Logout</Link>
         </>
       ) : (
