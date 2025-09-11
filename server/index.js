@@ -122,7 +122,7 @@ app.post('/signup', async (req, res) => {
 //////////////////GET FUNCTIONS//////////////////////////
 app.get("/user/:id", verifyToken, (req, res) => {
   knex("users")
-    .select("*")
+    .select("user_id","first_name","last_name","email","username","preferences")
     .where("users.user_id", "=", req.body.uid)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
@@ -207,7 +207,8 @@ app.get("/history", verifyToken, (req, res) => {
 
 app.get("/roles/:id", verifyToken, (req, res) => {
   knex("role_list")
-    .select("*")
+    .select("role_name.role_name","role_name.default_layout")
+    .join("role_name","role_list.role","=","role_name.role_name_id")
     .where("role", req.params.id)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));

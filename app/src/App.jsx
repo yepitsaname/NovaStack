@@ -21,11 +21,16 @@ import "../css/app.css";
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const [profile, setProfile] = useState(null);
   const [token, setToken] = useState(null);
 
   return (
     <AppContext.Provider
-      value={{ user: user, setUser: setUser, token: token, setToken: setToken }}
+      value={{
+        user: user, setUser: setUser,
+        profile: profile, setProfile: setProfile,
+        token: token, setToken: setToken
+      }}
     >
       <NavBar />
       <SideBar />

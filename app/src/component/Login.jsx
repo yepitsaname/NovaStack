@@ -4,11 +4,12 @@ import { handleEvent, build_LoginPaylod } from "../../utils/forms";
 import { useNavigate } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import AppContext from "../AppContext";
-import { UserLogin } from "../../utils/utils";
+import { GetUser, GetUsersByRole, UserLogin } from "../../utils/utils";
 
 export default function Login() {
   const { user, setUser } = useContext(AppContext);
-  const { token, setToken } = useContext(AppContext);
+  const { setToken } = useContext(AppContext);
+  const { setProfile } = useContext(AppContext);
   const navigation = useNavigate();
 
   useEffect(() => {
@@ -22,8 +23,17 @@ export default function Login() {
     let password = formData.get("password");
     const res = await UserLogin(username, password);
     if (res.token) {
+      let profile = (await GetUser(username, res.token))[0]
+      let roles = await GetUsersByRole(profile.user_id, res.token)
       setUser(username);
       setToken(res.token);
+      setProfile({
+        first_name: profile.first_name,
+        last_name: profile.last_name,
+        email: profile.email,
+        preferences: profile.preferences,
+        roles: roles
+      })
     }
   }
 

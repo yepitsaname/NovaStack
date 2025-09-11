@@ -1,38 +1,46 @@
-import { useConinput } from "react";
-import AppConinput from "../AppContext";
+import { useEffect, useState, useContext } from "react";
+import AppContext from "../AppContext";
+import { GetUser } from "../../utils/utils";
 
 export default function Profile() {
-  // const { user } = useContext(AppContext);
-  const user = {
-    username: "legoman",
-    firstname: "lego",
-    lastname: "man",
-    email: "lego@legoman.com",
-    role: ["Lego Crew Chief","Lego Controller","Legoland Denmark"],
-    theme: "dark"
-  }
+  const [ info, setInfo ] = useState(null);
+  const { user, profile } = useContext(AppContext);
+
+
+
+
+  // const user = {
+  //   username: "legoman",
+  //   firstname: "lego",
+  //   lastname: "man",
+  //   email: "lego@legoman.com",
+  //   role: ["Lego Crew Chief","Lego Controller","Legoland Denmark"],
+  //   theme: "dark"
+  // }
+
+  if( !profile ) return <div className="form"><h2>Loading Profile</h2></div>
 
   return (
     <div className="form">
-        <h2>{user.username}'s Profile</h2>
+        <h2>{user}'s Profile</h2>
         <fieldset name="user information">
           <legend>Overview</legend>
           <label htmlFor="username">Username</label>
-          <input type="text" id="username" name="user name" value={user.username} disabled/>
+          <input type="text" id="username" name="user name" value={user} disabled/>
           <label htmlFor="firstname">First Name</label>
-          <input type="text" id="firstname" name="first name" value={user.firstname} disabled/>
+          <input type="text" id="firstname" name="first name" value={profile.first_name} disabled/>
           <label htmlFor="lastname">Last Name</label>
-          <input type="text" id="lastname" name="last name" value={user.lastname} disabled/>
+          <input type="text" id="lastname" name="last name" value={profile.last_name} disabled/>
           <label htmlFor="email">Email</label>
-          <input type="email" id="email" name="email" value={user.email} disabled />
+          <input type="email" id="email" name="email" value={profile.email} disabled />
           <label htmlFor="roles">Roles</label>
-          <input type="text" id="roles" name="roles" value={user.role} disabled />
+          <input type="text" id="roles" name="roles" value={profile.roles.map(role=>role.role_name).join(", ")} disabled />
           <button>Edit</button>
         </fieldset>
         <fieldset>
           <legend>Theming</legend>
           <label htmlFor="theme">Themes</label>
-          <select defaultValue={user.theme}>
+          <select defaultValue={profile.preferences.theme}>
             <option value="dark">Dark</option>
             <option value="light">Light</option>
           </select>

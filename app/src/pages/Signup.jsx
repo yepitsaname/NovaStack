@@ -10,6 +10,7 @@ import Alert from '@mui/material/Alert';
 export default function Signup() {
   const { user, setUser } = useContext(AppContext);
   const { token, setToken } = useContext(AppContext);
+  const { setProfile } = useContext(AppContext);
   const [userAlert, setUserAlert] = useState(false);
   const [passAlert, setPassAlert] = useState(false);
   const navigation = useNavigate();
@@ -46,6 +47,13 @@ export default function Signup() {
       if (tempToken.token) {
         setToken(tempToken.token)
         setUser(userName)
+        setProfile({
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          preferences: {theme: "dark", layout: "default"},
+          roles: []
+        })
       }
 
     }
