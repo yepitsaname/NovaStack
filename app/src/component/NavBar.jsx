@@ -9,6 +9,7 @@ export default function NavBar() {
   const logout = () => {
     setUser(null);
     setToken(null);
+    setProfile(null);
   }
 
   return (
