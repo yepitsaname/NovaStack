@@ -319,7 +319,7 @@ app.patch('/mission/:id/patch', verifyToken, async (req, res) => {
   const id = req.params.id;
   const data = req.body;
   try {
-    await knex('mission').where('mission_id', req.params.id).update({ mission_name: data.mission_name, systems: data.systems });
+    await knex('mission').where('mission_id', req.params.id).update({ mission_name: data.mission_name, systems: JSON.stringify(data.systems) });
     res.status(200).json({ message: 'mission updated' });
   } catch (err) {
     console.error('ERROR ', err);

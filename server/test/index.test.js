@@ -236,7 +236,7 @@ request(index)
 // //   })
 
 request(index)
-  .patch("/tasks/2/delete")
+  .delete("/tasks/2/delete")
   .set("Authorization", testToken)
   .expect(200)
   .end(function (err, res) {
@@ -247,9 +247,8 @@ request(index)
   })
 
 request(index)
-  .post("/mission/2/delete")
+  .delete("/mission/2/delete")
   .set("Authorization", testToken)
-  .send({ mission_name: "Test2 Mission", systems: {} })
   .expect(200)
   .end(function (err, res) {
     if (err) { throw err }
