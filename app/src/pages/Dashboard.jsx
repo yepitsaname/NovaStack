@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
 import "../../css/card.css"; // keep this path for your tree
-import CurrentTasks from "../component/CurrentTasks";
+import TaskListWidget from "../component/TasklistWidget";
 
 export default function Dashboard() {
   return (
@@ -9,7 +8,7 @@ export default function Dashboard() {
         <h1>Mission Control Dashboard</h1>
         <p>Welcome back, User. Your systems are operational</p>
         <div className="dashboard-grid">
-          <CurrentTasks />
+          <TaskListWidget isDashboard={true} isCurrent={true} />
         </div>
       </div>
     </>
