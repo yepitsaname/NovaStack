@@ -137,10 +137,19 @@ app.get("/username/:name", (req, res) => {
 
 app.get("/tasks", verifyToken, (req, res) => {
   knex("tasks")
-    .select("*")
-    .from("tasks")
+    .join("mission", "tasks.mission_id", "mission.mission_id")
+    .join("status", "tasks.status", "status.status_id")
+    .join("users", "tasks.assignee", "users.user_id")
+    .select(
+      "tasks.task_id",
+      "tasks.title",
+      "tasks.description",
+      "mission.mission_name as mission",
+      "status.status as status",
+      "tasks.due_date",
+      "users.username as assignee")
     .then((data) => res.status(200).json(data))
-    .catch((err) => res.status(400).json(err));
+    .catch((err) => { console.log(err); res.status(400).json(err) });
 });
 
 app.get("/user/:id/tasks", verifyToken, (req, res) => {
@@ -226,9 +235,9 @@ app.get("/roles/:id", verifyToken, (req, res) => {
 
 app.get('/system/status', verifyToken, (req, res) => {
   knex("system_status")
-  .select("*")
-  .then((data) => res.status(200).json(data))
-  .catch((err) => res.status(400).json(err));
+    .select("*")
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
 })
 
 

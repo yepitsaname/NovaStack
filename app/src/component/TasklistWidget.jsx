@@ -44,10 +44,11 @@ export default function TaskListWidget({
   const navigate = useNavigate();
 
   useEffect(() => {
-    (async () => {
-      const tasks = await GetAllTasks(token);
-      setTaskListData(tasks);
-    })();
+    const tasks = async () => {
+      let temp = await GetAllTasks(token);
+      setTaskListData(temp);
+    }
+    tasks();
   }, []);
 
   if (!taskListData.length) return <div>Loading</div>;
@@ -86,7 +87,7 @@ export default function TaskListWidget({
                     {row.title}
                   </StyledTableCell>
                   <StyledTableCell align="center">
-                    {row.mission_id}
+                    {row.mission}
                   </StyledTableCell>
                   <StyledTableCell align="center">{row.status}</StyledTableCell>
                   <StyledTableCell align="center">

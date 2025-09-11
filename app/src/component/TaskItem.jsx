@@ -13,7 +13,7 @@ export default function TaskItem() {
       const tasks = await GetTaskById(id, token);
       setTaskData(tasks);
     })();
-  }, []);
+  }, [taskData]);
 
   if (!taskData) return <div> Loading...</div>;
 
