@@ -387,6 +387,8 @@ app.patch('/history/:id/patch', verifyToken, async (req, res) => {
 })
 
 app.patch("/user/:username", verifyToken, (req, res) => {
+  console.log(req.body);
+  delete req.body["uid"]
   knex("users")
     .update(req.body)
     .where("users.username", "=", req.params.username)

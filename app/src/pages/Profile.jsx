@@ -13,13 +13,11 @@ export default function Profile() {
     let payload = { "preferences": {
       "theme": theme
     }}
-    console.log(profile)
     let status = await UpdateUser(user, token, payload)
-    console.log(status);
-    // setProfile((current)=>{
-    //   return Object.assign(current,
-    //     {preferences: {theme: theme}}
-    //   )})
+    setProfile((current)=>{
+      return Object.assign(current,
+        {preferences: {theme: theme}}
+      )})
   }
 
 
