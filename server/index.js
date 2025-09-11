@@ -169,13 +169,24 @@ app.get("/status/:id", verifyToken, (req, res) => {
 });
 
 app.get("/mission", verifyToken, (req, res) => {
+  console.log("called all missions")
   knex("mission")
     .select("*")
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
 
+app.get("/mission/:id", verifyToken, (req, res) => {
+  console.log("called mission by ID")
+  knex("mission")
+    .select("*")
+    .where("mission_id", req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+})
+
 app.get("/mission/:id/tasks", verifyToken, (req, res) => {
+  console.log("called tasks by mission")
   knex("tasks")
     .select("*")
     .where("mission_id", req.params.id)
@@ -216,9 +227,9 @@ app.get("/roles/:id", verifyToken, (req, res) => {
 
 //////////////POST FUNCTIONS///////////////////////////
 app.post("/tasks/add", verifyToken, async (req, res) => {
-  const data = req.param;
+  const data = req.body;
   try {
-    await knex('tasks').insert(data);
+    await knex('tasks').insert({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date });
     res.status(200).json({ message: "item saved" })
   } catch (err) {
     console.error("ERROR", err);
@@ -230,7 +241,7 @@ app.post("/tasks/add", verifyToken, async (req, res) => {
 app.post("/mission/add", verifyToken, async (req, res) => {
   const data = req.body;
   try {
-    await knex('mission').insert(data);
+    await knex('mission').insert({ mission_name: data.mission_name, systems: data.systems });
     res.status(200).json({ message: "item saved" })
   } catch (err) {
     console.error("ERROR", err);
@@ -296,7 +307,7 @@ app.patch('/tasks/:id/patch', verifyToken, async (req, res) => {
   const id = req.params.id;
   const data = req.body;
   try {
-    await knex('tasks').where('task_id', id).update(data);
+    await knex('tasks').where('task_id', id).update({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date, assignee: data.assignee });
     res.status(200).json({ message: 'task updated' });
   } catch (err) {
     console.error('ERROR ', err);
@@ -308,7 +319,7 @@ app.patch('/mission/:id/patch', verifyToken, async (req, res) => {
   const id = req.params.id;
   const data = req.body;
   try {
-    await knex('mission').where('mission_id', id).update(data);
+    await knex('mission').where('mission_id', req.params.id).update({ mission_name: data.mission_name, systems: data.systems });
     res.status(200).json({ message: 'mission updated' });
   } catch (err) {
     console.error('ERROR ', err);
