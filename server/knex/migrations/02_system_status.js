@@ -5,8 +5,8 @@ exports.up = function (knex, Promise) {
     table.increments("system_id");
     table.string("system_name");
     table.string("system_status");
-    table.integer("capabilities_available");
-    table.integer("op_capabilities_available");
+    table.string("capabilities_available");
+    table.string("op_capabilities_available");
   });
 };
 

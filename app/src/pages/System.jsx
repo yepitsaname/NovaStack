@@ -1,5 +1,6 @@
 import { Card, CardContent, Typography, Box, Divider, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
+
 import AppContext from "../AppContext";
 
 
@@ -11,6 +12,9 @@ export default function System() {
     Healthy: "green",
     Warning: "yellow",
     Critical: "red",
+    Maintenance: "white",
+    Special_Case: "magenta",
+    Offline: "black"
   };
 
   useEffect(() => {
@@ -24,84 +28,117 @@ export default function System() {
   }, [token]);
 
   const getStopLight = (status) => {
-    if (status > 75) return "Healthy";
-    if (status >= 50) return "Warning";
-    return "Critical";
+    if (status == "Healthy") return "Healthy";
+    if (status == "Warning") return "Warning";
+    if (status == "Critical") return "Critical";
+    if (status == "Maintenance") return "Maintenance";
+    if (status == "Special_Case") return "Special_Case";
+    return "Offline";
   };
 
   const ColorBlock = ({ status }) => (
     <Box
       sx={{
-        width: 30,
-        height: 30,
+        width: 80,
+        height: 80,
         bgcolor: colorMap[status],
-        border: "1px solid #ccc",
-        borderRadius: 1,
+        border: "2px solid #333",
+        borderRadius: 2,
+        mx: "auto"
       }}
     />
   );
 
   return (
-    <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
-      <Card sx={{ mb: 3, p: 2 }}>
-        <CardContent>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell />
-                {systems.map((sys) => (
-                  <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
-                    <Typography variant="h6">HoneyPack: {sys.system_name}</Typography>
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+    <>
+      <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
+        <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)"}}>
+          <CardContent>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  {systems.map((sys) => (
+                    <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
+                      <Typography variant="h6">HoneyPack: {sys.system_name}</Typography>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
 
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  <Typography variant="subtitle1" fontWeight="bold">
-                    OPSCAP
-                  </Typography>
-                </TableCell>
-                {systems.map((sys) => (
-                  <TableCell key={sys.system_id + "-opscap"} align="center">
-                    <Box display="flex" justifyContent="center" alignItems="center">
-                      <ColorBlock
-                        status={getStopLight(sys.op_capabilities_available)}
-                      />
-                    </Box>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                    <Typography variant="subtitle1" fontWeight="bold">
+                      OPSCAP
+                    </Typography>
                   </TableCell>
-                ))}
-              </TableRow>
+                  {systems.map((sys) => (
+                    <TableCell key={sys.system_id + "-opscap"} align="center">
+                      <Box display="flex" justifyContent="center" alignItems="center">
+                        <ColorBlock
+                          status={getStopLight(sys.op_capabilities_available)}
+                        />
+                      </Box>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      </Box>
 
-              <TableRow>
-                <TableCell>
-                  <Typography variant="subtitle1" fontWeight="bold">
-                    SYSCAP
-                  </Typography>
-                </TableCell>
-                {systems.map((sys) => (
-                  <TableCell key={sys.system_id + "-syscap"} align="center">
-                    <Box display="flex" justifyContent="center" alignItems="center">
-                      <ColorBlock status={getStopLight(sys.capabilities_available)} />
-                    </Box>
+
+
+      <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
+        <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)" }}>
+          <CardContent>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  {systems.map((sys) => (
+                    <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
+                      <Typography variant="h6">HoneyPack: {sys.system_name}</Typography>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                    <Typography variant="subtitle1" fontWeight="bold">
+                      SYSCAP
+                    </Typography>
                   </TableCell>
-                ))}
-              </TableRow>
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-    </Box>
+                  {systems.map((sys) => (
+                    <TableCell key={sys.system_id + "-syscap"} align="center">
+                      <Box display="flex" justifyContent="center" alignItems="center">
+                        <ColorBlock status={getStopLight(sys.capabilities_available)} />
+                      </Box>
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      </Box>
+    </>
   );
 }
 
 
 
-//separate opscaps and syscaps into separate tables and a number to see open reports for opcaps
-//white color for maintenance
-//syscaps needs more color options
+//separate opscaps and syscaps into separate tables --
+//white color for maintenance --
+//syscaps needs more color options --
 //add clickability for the colorblocks to display number of reports and criticality
-//make blocks larger
-//details, date-time, reason, criticality, system name
+//make blocks larger --
+//details, date-time, reason, severity, system name
+//background of box' should match the site backgr
+
+//9/12 need to alter the presentation of the data, checks for string rather than numerical
+//button with a form to change the name of the system type/make new system dd an over
