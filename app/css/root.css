@@ -122,20 +122,21 @@ body {
 #root {
   display: grid;
   grid-template:
-    "nav nav" 6vh
-    "side  main" 90vh
-    "foot foot" 4vh
-    / 10vw 90vw;
-    width: 100%;
-    max-height: 100vh;
-  }
-  @media screen and (max-width: 1920px){
-    #root {
-      grid-template:
-        "nav nav" 6vh
-        "side  main" 90vh
-        "foot foot" 4vh
-        / 20vw 80vw;
+    "nav" 6vh
+    "main " 90vh
+    "foot" 4vh
+    / 100vw;
+  width: 100%;
+  max-height: 100vh;
+}
+
+@media screen and (max-width: 1920px) {
+  #root {
+    grid-template:
+      "nav" 6vh
+      "main" 90vh
+      "foot" 4vh
+      / 100vw;
 
   }
 }
