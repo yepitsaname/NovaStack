@@ -56,11 +56,12 @@ export default function System() {
           <CardContent>
             <Table>
               <TableHead>
+              <Typography variant="h4">OPSCAP</Typography>
                 <TableRow>
                   <TableCell />
                   {systems.map((sys) => (
                     <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
-                      <Typography variant="h6">HoneyPack: {sys.system_name}</Typography>
+                      <Typography variant="h6">StarFall: {sys.system_name}</Typography>
                     </TableCell>
                   ))}
                 </TableRow>
@@ -96,11 +97,12 @@ export default function System() {
           <CardContent>
             <Table>
               <TableHead>
+              <Typography variant="h4">SYSCAP</Typography>
                 <TableRow>
                   <TableCell />
                   {systems.map((sys) => (
                     <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
-                      <Typography variant="h6">HoneyPack: {sys.system_name}</Typography>
+                      <Typography variant="h6">StarFall: {sys.system_name}</Typography>
                     </TableCell>
                   ))}
                 </TableRow>
@@ -135,7 +137,6 @@ export default function System() {
 
 //add clickability for the colorblocks to display number of reports and criticality
 //details, date-time, reason, severity, system name
-//background of box' should match the site backgr
+//move OPSCAP and SYSCAP to top of the Components
 
-//9/12 need to alter the presentation of the data, checks for string rather than numerical
 //button with a form to change the name of the system type/make new system dd an over
