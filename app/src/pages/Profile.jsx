@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import AppContext from "../AppContext";
-import { UpdateUser } from "../../utils/utils";
+import { UpdatePassword, UpdateUser } from "../../utils/utils";
 import Alert from "@mui/material/Alert";
 import { Navigate } from "react-router";
 
@@ -30,15 +30,11 @@ export default function Profile() {
     const new_password = document.querySelector("#new_password").value;
     const con_password = document.querySelector("#confirm_password").value;
 
-    console.log(cur_password, new_password, con_password, new_password == cur_password, new_password != con_password)
-
     if(new_password == cur_password) return setPassStatus(1);
     if(new_password != con_password) return setPassStatus(2);
 
     //send request to endpoint, compare current password, if true reset pass else throw error
-    console.log("passChange")
-    let passChange = await UpdateUser(user, token, {password: new_password});
-    console.log("post")
+    let passChange = await UpdatePassword(user, token, {password: new_password, current: cur_password});
     if( passChange != 200 ) return setPassStatus(3);
     return setPassStatus(4);
   }

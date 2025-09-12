@@ -422,10 +422,10 @@ app.patch("/user/:username/reset_pass", verifyToken, async (req, res) => {
   const user = await knex("users").select("password").where("username","=",req.params.username).first()
   const passwordMatch = await bcrypt.compare(req.body.current, user.password)
 
-  if( !passwordMatch ){ return res.status(400).status("Bad password") }
+  if( !passwordMatch ){ return res.status(400).send("Bad password") }
   const saltRounds = 10;
   const salt = await bcrypt.genSalt(saltRounds);
-  const passwordHash = await bcrypt.hash(password, salt);
+  const passwordHash = await bcrypt.hash(req.body.password, salt);
 
   knex("users")
     .update({"password": passwordHash})

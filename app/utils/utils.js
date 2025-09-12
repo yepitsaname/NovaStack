@@ -32,6 +32,19 @@ export async function UpdateUser(username, token, payload) {
   .catch(err => err);
 };
 
+export async function UpdatePassword(username, token, payload) {
+  console.log(payload)
+  return fetch(`${backend}/user/${username}/reset_pass`, {
+    method: "PATCH",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  }).then((res) => res.status)
+  .catch(err => err);
+};
+
 /**
  *
  * @param {string} username Username
