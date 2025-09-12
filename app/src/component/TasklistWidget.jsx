@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import AppContext from "../AppContext";
 import { GetAllTasks } from "../../utils/utils";
 import { AddTask } from "../../utils/utils";
+import "../../css/forms.css";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -39,17 +40,17 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  borderRadius: 2,
-  boxShadow: 24,
-  p: 4,
-};
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "background.paper",
+//   borderRadius: 2,
+//   boxShadow: 24,
+//   p: 4,
+// };
 
 export default function TaskListWidget({
   isDashboard = false,
@@ -107,23 +108,24 @@ export default function TaskListWidget({
           Add
         </Button>
       )}
-      <Modal
-        open={open}
-        onClose={handleModalClose}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
-        <Box sx={style}>
-          <form onSubmit={handleFormSubmit}>
-            <TextField
-              name="title"
-              label="Title"
-              value={form.title}
-              onChange={handleInputChange}
-              fullWidth
-              sx={{ mb: 2 }}
-            />
-            {/* <TextField
+      <div className="form component">
+        <Modal
+          open={open}
+          onClose={handleModalClose}
+          aria-labelledby="modal-title"
+          aria-describedby="modal-description"
+        >
+          <Box>
+            <form onSubmit={handleFormSubmit}>
+              <TextField
+                name="title"
+                label="Title"
+                value={form.title}
+                onChange={handleInputChange}
+                fullWidth
+                sx={{ color: "#a1d4d4", mb: 2 }}
+              />
+              {/* <TextField
               name="mission"
               label="mission"
               value={mission}
@@ -131,15 +133,15 @@ export default function TaskListWidget({
               fullWidth
               sx={{ mb: 2 }}
             /> */}
-            <TextField
-              name="description"
-              label="description"
-              value={form.description}
-              onChange={handleInputChange}
-              fullWidth
-              sx={{ mb: 2 }}
-            />
-            {/* <TextField
+              <TextField
+                name="description"
+                label="description"
+                value={form.description}
+                onChange={handleInputChange}
+                fullWidth
+                sx={{ mb: 2 }}
+              />
+              {/* <TextField
               name="status"
               label="status"
               value={form.status}
@@ -147,20 +149,21 @@ export default function TaskListWidget({
               fullWidth
               sx={{ mb: 2 }}
             /> */}
-            <TextField
-              name="due_date"
-              label="due_date"
-              value={form.due_date}
-              onChange={handleInputChange}
-              fullWidth
-              sx={{ mb: 2 }}
-            />
-            <Button type="submit" variant="contained" fullWidth>
-              Submit
-            </Button>
-          </form>
-        </Box>
-      </Modal>
+              <TextField
+                name="due_date"
+                label="due_date"
+                value={form.due_date}
+                onChange={handleInputChange}
+                fullWidth
+                sx={{ mb: 2 }}
+              />
+              <Button type="submit" variant="contained" fullWidth>
+                Submit
+              </Button>
+            </form>
+          </Box>
+        </Modal>
+      </div>
       <Box mb={2} p={2} border={0.5} borderRadius={5} borderColor="#edf1f5ff">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 600 }} aria-label="simple table">
