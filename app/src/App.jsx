@@ -40,7 +40,7 @@ export default function App() {
       <NavBar />
       <Footer />
       <main className="main-content">
-      <SideBar />
+        <SideBar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />

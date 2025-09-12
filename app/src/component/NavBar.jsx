@@ -20,11 +20,11 @@ export default function NavBar() {
         <>
           <p>🔔</p>
           <Link to="/profile">{user}</Link>
-          <Link to="/login" onClick={()=>{logout()}}>Logout</Link>
+          <Link to="/login" onClick={() => { logout() }}>Logout</Link>
         </>
       ) : (
         <>
-          <Link to="/Login">Login</Link>
+          <Link to="/login">Login</Link>
           <Link to="/register">Register</Link>
         </>
       )}

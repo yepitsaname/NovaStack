@@ -1,10 +1,13 @@
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import AppContext from "../AppContext";
+import { Navigate } from "react-router-dom";
 
 export default function Reports() {
   const [systems, setSystems] = useState([]);
-  const { token } = useContext(AppContext);
+  const { token, user, profile } = useContext(AppContext);
+
+  if (!token || !user || !profile) return <Navigate to="/login" />
 
   const colorMap = {
     Healthy: "green",
