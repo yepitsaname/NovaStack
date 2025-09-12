@@ -7,8 +7,7 @@ function authMiddleware(req, res, next) {
   jwt.verify(token, process.env.JWT_Secret, (error, decoded) => {
     if (error) return res.status(401).json({ message: "Invalid token" });
     const { uid, userName } = decoded;
-    req.body = {
-      ...req.body,
+    req.user= {
       "uid": uid,
       "username": userName
     }
