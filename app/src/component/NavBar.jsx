@@ -20,7 +20,7 @@ export default function NavBar() {
         <>
           <p>🔔</p>
           <Link to="/profile">{user}</Link>
-          <Link onClick={()=>{logout()}}>Logout</Link>
+          <Link to="/login" onClick={()=>{logout()}}>Logout</Link>
         </>
       ) : (
         <>

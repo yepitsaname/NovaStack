@@ -10,6 +10,7 @@ form {
   div.remember-me {
     align-self: start;
     width: 45%;
+
     input[type="checkbox"] {
       width: unset;
     }
@@ -39,7 +40,7 @@ form {
   }
 }
 
-.form{
+.form {
   margin-bottom: 16px;
   padding: 16px;
   border: 0.5px solid var(--border-color);
@@ -47,7 +48,7 @@ form {
   max-width: 600px;
   justify-self: center;
 
-  fieldset{
+  fieldset {
     padding-block: 0.35em 0.625em;
     padding-inline: 0.75em;
     min-inline-size: min-content;
@@ -70,7 +71,8 @@ form {
     min-width: 400px;
     justify-self: center;
   }
-  legend{
+
+  legend {
     text-align: center;
   }
 
@@ -167,13 +169,55 @@ form {
 }
 
 
-#toggle-form.collapsible{ display: none;}
-#toggle-form:checked ~ .collapsible{ display: block;}
+#toggle-form.collapsible {
+  display: none;
+}
 
+#toggle-form:checked~.collapsible {
+  display: block;
+}
+
+.signup {
+  display: grid;
+  grid-template-columns: 15% 70% 15%;
+  grid-template-rows: 20% 50% 30%;
+}
+
+.signupTitle {
+  grid-column: 2/2;
+  grid-row: 1/1;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.signupForm {
+  grid-column: 2/2;
+  grid-row: 2/2;
+  height: 75%;
+  width: 75%;
+  align-self: center;
+  align-content: center;
+  justify-self: center;
+}
+
+.signUp {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+
+}
+
+.signupError {
+  height: 70%;
+  justify-self: center;
+  align-self: center;
+  grid-column: 2/2;
+  grid-row: 3/3;
+}
 
 @media screen and (max-width: 700px) {
   .form {
-    fieldset{
+    fieldset {
       min-width: 300px;
     }
   }
