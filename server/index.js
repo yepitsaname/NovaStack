@@ -367,6 +367,20 @@ app.patch('/tasks/:id/patch', verifyToken, async (req, res) => {
   }
 })
 
+app.patch('/tasks/:id/archive', verifyToken, async (req, res) => {
+  const id = req.params.id;
+  const data = req.body;
+  console.log(data);
+  try {
+    await knex('tasks').where('task_id', id)
+      .update({ status: data.status });
+    res.status(200).json({ message: 'task updated' });
+  } catch (err) {
+    console.error('ERROR ', err);
+    res.status(500).json({ error: 'Failed to update task' });
+  }
+})
+
 app.patch('/mission/:id/patch', verifyToken, async (req, res) => {
   const id = req.params.id;
   const data = req.body;
