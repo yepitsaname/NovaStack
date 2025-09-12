@@ -1,5 +1,6 @@
-import { Card, CardContent, Typography, Box, Divider, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Card, CardContent, Typography, Box, Divider, Table, TableBody, TableCell, TableHead, TableRow, ButtonBase } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router"
 
 import AppContext from "../AppContext";
 
@@ -7,6 +8,7 @@ import AppContext from "../AppContext";
 export default function System() {
   const [systems, setSystems] = useState([]);
   const { token } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const colorMap = {
     Healthy: "green",
@@ -36,12 +38,13 @@ export default function System() {
     return "Offline";
   };
 
-  const ColorBlock = ({ status }) => (
-    <Box
+
+  const ColorBlock = (status) => (
+    <Box onClick={handleClick}
       sx={{
         width: 80,
         height: 80,
-        bgcolor: colorMap[status],
+        backgroundColor: colorMap[status],
         border: "2px solid #333",
         borderRadius: 2,
         mx: "auto"
@@ -49,14 +52,27 @@ export default function System() {
     />
   );
 
+  const handleClick = () => {
+    const systems = useState(systems)
+    if (systems.status == sys.op_capabilities_available || sys.capabilities_available) {
+      navigate('/Reports')
+    } else {
+      alert("Could not find data")
+    }
+  }
+
   return (
     <>
       <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
-        <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)"}}>
+        <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)" }}>
           <CardContent>
             <Table>
               <TableHead>
-              <Typography variant="h4">OPSCAP</Typography>
+                <TableRow>
+                  <TableCell colSpan={5} sx={{ textAlign: 'center' }}>
+                    <Typography variant="h4" align="center" fontWeight={"bold"}>OPSCAP</Typography>
+                  </TableCell>
+                </TableRow>
                 <TableRow>
                   <TableCell />
                   {systems.map((sys) => (
@@ -69,11 +85,6 @@ export default function System() {
 
               <TableBody>
                 <TableRow>
-                  <TableCell>
-                    <Typography variant="subtitle1" fontWeight="bold">
-                      OPSCAP
-                    </Typography>
-                  </TableCell>
                   {systems.map((sys) => (
                     <TableCell key={sys.system_id + "-opscap"} align="center">
                       <Box display="flex" justifyContent="center" alignItems="center">
@@ -90,14 +101,16 @@ export default function System() {
         </Card>
       </Box>
 
-
-
       <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
         <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)" }}>
           <CardContent>
             <Table>
               <TableHead>
-              <Typography variant="h4">SYSCAP</Typography>
+                <TableRow>
+                  <TableCell colSpan={5} sx={{ textAlign: 'center' }}>
+                    <Typography variant="h4" align="center" fontWeight={"bold"}>SYSCAP</Typography>
+                  </TableCell>
+                </TableRow>
                 <TableRow>
                   <TableCell />
                   {systems.map((sys) => (
@@ -135,8 +148,28 @@ export default function System() {
 
 
 
-//add clickability for the colorblocks to display number of reports and criticality
-//details, date-time, reason, severity, system name
-//move OPSCAP and SYSCAP to top of the Components
 
-//button with a form to change the name of the system type/make new system dd an over
+const ColorBlock = ({ status, system }) => {
+  const handleClick = () => {
+    if (system.op_capabilities_available || system.capabilities_available) {
+      navigate("/Reports");
+    } else {
+      alert("Could not find data");
+    }
+  };
+
+  return (
+    <Box
+      onClick={handleClick}
+      sx={{
+        width: 80,
+        height: 80,
+        backgroundColor: colorMap[status],
+        border: "2px solid #333",
+        borderRadius: 2,
+        mx: "auto",
+        cursor: "pointer",
+      }}
+    />
+  );
+};
