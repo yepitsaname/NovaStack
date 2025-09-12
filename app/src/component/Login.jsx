@@ -33,6 +33,7 @@ export default function Login() {
         preferences: profile.preferences,
         roles: roles
       })
+      document.querySelector("html").theme=profile.preferences.theme
     }
   }
 
