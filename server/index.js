@@ -124,7 +124,7 @@ app.post('/signup', async (req, res) => {
 app.get("/user/:id", verifyToken, (req, res) => {
   knex("users")
     .select("user_id", "first_name", "last_name", "email", "username", "preferences")
-    .where("users.user_id", "=", req.body.uid)
+    .where("users.user_id", "=", req.user.uid)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
@@ -167,7 +167,7 @@ app.get("/user/:id/tasks", verifyToken, (req, res) => {
       "status.status as status",
       "tasks.due_date",
       "users.username as assignee")
-    .where("assignee", req.body.uid)
+    .where("assignee", req.user.uid)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err))
 })
@@ -405,5 +405,13 @@ app.patch('/history/:id/patch', verifyToken, async (req, res) => {
   }
 })
 
+app.patch("/user/:username", verifyToken, (req, res) => {
+  console.log(req.body, req.user)
+  knex("users")
+    .update(req.body)
+    .where("users.username", "=", req.params.username)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+});
 
 module.exports = app
