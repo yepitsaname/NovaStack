@@ -20,7 +20,6 @@ export async function GetUser(id, token) {
  * @returns returns single item array with user information
  */
 export async function UpdateUser(username, token, payload) {
-  console.log(payload)
   return fetch(`${backend}/user/${username}`, {
     method: "PATCH",
     headers: {
@@ -33,7 +32,6 @@ export async function UpdateUser(username, token, payload) {
 };
 
 export async function UpdatePassword(username, token, payload) {
-  console.log(payload)
   return fetch(`${backend}/user/${username}/reset_pass`, {
     method: "PATCH",
     headers: {
