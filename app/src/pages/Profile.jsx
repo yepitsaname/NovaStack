@@ -4,27 +4,28 @@ import { UpdateUser } from "../../utils/utils";
 
 export default function Profile() {
   const { user, token, profile, setProfile } = useContext(AppContext);
-  let theme = profile?.preferences.theme || '';
+  let theme = profile.preferences.theme;
 
   // Edit actions
   // should update the user's prefered scheme in the
   // database and on their profile
   const updateTheme = async () => {
     let payload = { "preferences": {
-      "theme": theme
+      "theme": theme,
+      "layout": profile.preferences.layout
     }}
     let status = await UpdateUser(user, token, payload)
-    setProfile((current)=>{
-      return Object.assign(current,
-        {preferences: {theme: theme}}
-      )})
+    // setProfile((current)=>{
+    //   return Object.assign(current,
+    //     {preferences: {theme: theme}}
+    //   )})
   }
 
 
   if( !profile ) return <div className="form"><h2>Loading Profile</h2></div>
 
   return (
-    <div className="form">
+    <div className="form component">
       <h2>{user}'s Profile</h2>
       <fieldset name="user information">
         <legend>Overview</legend>
