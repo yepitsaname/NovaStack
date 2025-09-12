@@ -11,6 +11,7 @@ require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 (async () => {
   try {
@@ -370,7 +371,7 @@ app.patch('/tasks/:id/patch', verifyToken, async (req, res) => {
 app.patch('/tasks/:id/archive', verifyToken, async (req, res) => {
   const id = req.params.id;
   const data = req.body;
-  console.log(data);
+  //console.log(data);
   try {
     await knex('tasks').where('task_id', id)
       .update({ status: 5 });
