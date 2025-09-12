@@ -11,6 +11,7 @@ require('dotenv').config();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 (async () => {
   try {
@@ -123,8 +124,8 @@ app.post('/signup', async (req, res) => {
 //////////////////GET FUNCTIONS//////////////////////////
 app.get("/user/:id", verifyToken, (req, res) => {
   knex("users")
-    .select("user_id","first_name","last_name","email","username","preferences")
-    .where("users.user_id", "=", req.body.uid)
+    .select("user_id", "first_name", "last_name", "email", "username", "preferences")
+    .where("users.user_id", "=", req.user.uid)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
@@ -145,13 +146,26 @@ app.get("/tasks", verifyToken, (req, res) => {
       "tasks.task_id",
       "tasks.title",
       "tasks.description",
+      "tasks.mission_id",
       "mission.mission_name as mission",
+      "tasks.status",
       "status.status as status",
       "tasks.due_date",
+      "tasks.assignee as assignee_id",
       "users.username as assignee")
+    .whereNot('tasks.status', 5)
     .then((data) => res.status(200).json(data))
     .catch((err) => { console.log(err); res.status(400).json(err) });
 });
+
+
+app.get("/users/all".verifyToken, (req, res) => {
+  knex("users")
+    .select("user_id", "username")
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+})
+
 
 app.get("/user/:id/tasks", verifyToken, (req, res) => {
   knex("tasks")
@@ -162,11 +176,14 @@ app.get("/user/:id/tasks", verifyToken, (req, res) => {
       "tasks.task_id",
       "tasks.title",
       "tasks.description",
+      "tasks.mission_id",
       "mission.mission_name as mission",
+      "tasks.status",
       "status.status as status",
       "tasks.due_date",
+      "tasks.assignee as assignee_id",
       "users.username as assignee")
-    .where("assignee", req.body.uid)
+    .where("assignee", req.user.uid)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err))
 })
@@ -180,11 +197,15 @@ app.get("/tasks/:id", verifyToken, (req, res) => {
       "tasks.task_id",
       "tasks.title",
       "tasks.description",
+      "tasks.mission_id",
       "mission.mission_name as mission",
+      "tasks.status",
       "status.status as status",
       "tasks.due_date",
+      "tasks.assignee as assignee_id",
       "users.username as assignee")
     .where("task_id", req.params.id)
+    .whereNot('tasks.status', 5)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
@@ -198,9 +219,12 @@ app.get("/status/:id", verifyToken, (req, res) => {
       "tasks.task_id",
       "tasks.title",
       "tasks.description",
+      "tasks.mission_id",
       "mission.mission_name as mission",
+      "tasks.status",
       "status.status as status",
       "tasks.due_date",
+      "tasks.assignee as assignee_id",
       "users.username as assignee")
     .where("status", req.params.id)
     .then((data) => res.status(200).json(data))
@@ -229,6 +253,7 @@ app.get("/mission/:id/tasks", verifyToken, (req, res) => {
   knex("tasks")
     .select("*")
     .where("mission_id", req.params.id)
+    .whereNot('tasks.status', 5)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
@@ -257,8 +282,8 @@ app.get("/history", verifyToken, (req, res) => {
 
 app.get("/roles/:id", verifyToken, (req, res) => {
   knex("role_list")
-    .select("role_name.role_name","role_name.default_layout")
-    .join("role_name","role_list.role","=","role_name.role_name_id")
+    .select("role_name.role_name", "role_name.default_layout")
+    .join("role_name", "role_list.role", "=", "role_name.role_name_id")
     .where("role", req.params.id)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
@@ -353,8 +378,24 @@ app.delete('/history/:id/delete', verifyToken, async (req, res) => {
 app.patch('/tasks/:id/patch', verifyToken, async (req, res) => {
   const id = req.params.id;
   const data = req.body;
+  console.log(data);
   try {
-    await knex('tasks').where('task_id', id).update({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date, assignee: data.assignee });
+    await knex('tasks').where('task_id', id)
+      .update({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date, assignee: data.assignee });
+    res.status(200).json({ message: 'task updated' });
+  } catch (err) {
+    console.error('ERROR ', err);
+    res.status(500).json({ error: 'Failed to update task' });
+  }
+})
+
+app.patch('/tasks/:id/archive', verifyToken, async (req, res) => {
+  const id = req.params.id;
+  const data = req.body;
+  //console.log(data);
+  try {
+    await knex('tasks').where('task_id', id)
+      .update({ status: 5 });
     res.status(200).json({ message: 'task updated' });
   } catch (err) {
     console.error('ERROR ', err);
@@ -386,5 +427,32 @@ app.patch('/history/:id/patch', verifyToken, async (req, res) => {
   }
 })
 
+app.patch("/user/:username", verifyToken, (req, res) => {
+  if( req.body.hasOwnProperty("password") ) { return res.status(403).send() }
+  knex("users")
+    .update(req.body)
+    .where("users.username", "=", req.params.username)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+});
+
+app.patch("/user/:username/reset_pass", verifyToken, async (req, res) => {
+  const keys = Object.keys(req.body);
+  if(keys.length != 2 || !keys.includes("password") || !keys.includes("current")){ return res.status(400).send() }
+
+  const user = await knex("users").select("password").where("username","=",req.params.username).first()
+  const passwordMatch = await bcrypt.compare(req.body.current, user.password)
+
+  if( !passwordMatch ){ return res.status(400).send("Bad password") }
+  const saltRounds = 10;
+  const salt = await bcrypt.genSalt(saltRounds);
+  const passwordHash = await bcrypt.hash(req.body.password, salt);
+
+  knex("users")
+    .update({"password": passwordHash})
+    .where("users.username", "=", req.params.username)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+});
 
 module.exports = app

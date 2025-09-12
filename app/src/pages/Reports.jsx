@@ -1,7 +1,9 @@
-import { Card, CardContent, Typography, Box } from "@mui/material";
+import { Card, CardContent, Typography, Box, Divider, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import AppContext from "../AppContext";
 import { Navigate } from "react-router-dom";
+
+
 
 export default function Reports() {
   const [systems, setSystems] = useState([]);
@@ -25,42 +27,76 @@ export default function Reports() {
       .catch((err) => console.log(err));
   }, [token]);
 
-  const getStopLight = (value) => {
-    if (value > 75) return "Healthy";
-    if (value >= 50) return "Warning";
+  const getStopLight = (status) => {
+    if (status > 75) return "Healthy";
+    if (status >= 50) return "Warning";
     return "Critical";
   };
 
-  const StopLight = ({ status }) => {
-    const lights = ["Critical", "Warning", "Healthy"];
-    return (
-      <Box display="flex" flexDirection="row" alignItems="center" gap={1}>
-        {lights.map((light) => (
-          <Box
-            key={light}
-            sx={{
-              width: 20,
-              height: 20,
-              borderRadius: "50%",
-              backgroundColor: status === light ? colorMap[light] : "gray",
-            }}
-          />
-        ))}
-      </Box>
-    );
-  };
+  const ColorBlock = ({ status }) => (
+    <Box
+      sx={{
+        width: 30,
+        height: 30,
+        bgcolor: colorMap[status],
+        border: "1px solid #ccc",
+        borderRadius: 1,
+      }}
+    />
+  );
 
   return (
-    <Box sx={{ p: 2 }}>
-      {systems.map((sys) => (
-        <Card key={sys.system_id} sx={{ mb: 2, width: 300 }}>
-          <CardContent>
-            <Typography variant="h6">{sys.system_name}</Typography>
-            <Typography>Value: {sys.capabilities_available}%</Typography>
-            <StopLight status={getStopLight(sys.capabilities_available)} />
-          </CardContent>
-        </Card>
-      ))}
+    <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
+      <Card sx={{ mb: 3, p: 2 }}>
+        <CardContent>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell />
+                {systems.map((sys) => (
+                  <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
+                    <Typography variant="h6">HoneyPack: {sys.system_name}</Typography>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <Typography variant="subtitle1" fontWeight="bold">
+                    OPSCAP
+                  </Typography>
+                </TableCell>
+                {systems.map((sys) => (
+                  <TableCell key={sys.system_id + "-opscap"} align="center">
+                    <Box display="flex" justifyContent="center" alignItems="center">
+                      <ColorBlock
+                        status={getStopLight(sys.op_capabilities_available)}
+                      />
+                    </Box>
+                  </TableCell>
+                ))}
+              </TableRow>
+
+              <TableRow>
+                <TableCell>
+                  <Typography variant="subtitle1" fontWeight="bold">
+                    SYSCAP
+                  </Typography>
+                </TableCell>
+                {systems.map((sys) => (
+                  <TableCell key={sys.system_id + "-syscap"} align="center">
+                    <Box display="flex" justifyContent="center" alignItems="center">
+                      <ColorBlock status={getStopLight(sys.capabilities_available)} />
+                    </Box>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </Box>
   );
 }

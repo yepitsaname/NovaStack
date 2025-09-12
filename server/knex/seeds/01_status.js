@@ -9,6 +9,7 @@ exports.seed = async function (knex) {
     { status: "Requested" },
     { status: "Pending" },
     { status: "Assigned" },
-    { status: "Completed" }
+    { status: "Completed" },
+    { status: "Archieved" }
   ]);
 };
