@@ -58,7 +58,7 @@ export default function TaskListWidget({
       {isDashboard ? (
         <></>
       ) : (
-        <Button variant="contained" onClick={() => navigate("/tasks/add")}>
+        <Button variant="contained" onClick={() => navigate("/taskslist/add")}>
           Add
         </Button>
       )}
@@ -77,7 +77,7 @@ export default function TaskListWidget({
               {taskListData.map((row) => (
                 <StyledTableRow
                   key={row.task_id}
-                  onClick={() => navigate(`/tasks/${row.task_id}`)}
+                  onClick={() => navigate(`/taskslist/${row.task_id}`)}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
                     cursor: "pointer",

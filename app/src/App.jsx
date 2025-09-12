@@ -22,19 +22,22 @@ import AppContext from "./AppContext";
 
 import "../css/app.css";
 
-
 export default function App() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [token, setToken] = useState(null);
 
   const PrivateRoute = () => {
-    return user && profile && token ? <Outlet /> : <Navigate to="/login" replace />;
-  }
+    return user && profile && token ? (
+      <Outlet />
+    ) : (
+      <Navigate to="/login" replace />
+    );
+  };
 
   const AnonymousRoute = () => {
     return user && profile && token ? <Navigate to="/" replace /> : <Outlet />;
-  }
+  };
 
   return (
     <AppContext.Provider
@@ -47,7 +50,6 @@ export default function App() {
         setToken: setToken,
       }}
     >
-
       <NavBar />
       <Footer />
       <main className="main-content">
@@ -63,6 +65,7 @@ export default function App() {
             <Route path="/configuration" element={<Configuration />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/taskslist/edit" element={<EditTask />} />
+            <Route path="/taskslist/add" element={<AddTasks />} />
             <Route path="/taskslist/:id" element={<TaskItem />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Route>
