@@ -3,6 +3,7 @@ import { GetTaskById } from "../../utils/utils";
 import { useParams, useNavigate } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { ArchievedTask } from "../../utils/utils";
+import { Alert } from "@mui/material";
 
 export default function TaskItem() {
   const { token } = useContext(AppContext);
@@ -18,7 +19,7 @@ export default function TaskItem() {
   }, []);
 
   async function handleDelete(data) {
-    //console.log(data);
+    if (!confirm("Delete this task?")) return;
     const deleteTasks = await ArchievedTask(token, data[0]);
     console.log(deleteTasks);
     navigate("/dashboard");
@@ -38,6 +39,7 @@ export default function TaskItem() {
   return (
     <div>
       <button>Edit</button>
+
       <button onClick={() => handleDelete(taskData)}>Delete</button>
 
       {taskData.map((d) => (
