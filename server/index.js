@@ -146,14 +146,26 @@ app.get("/tasks", verifyToken, (req, res) => {
       "tasks.task_id",
       "tasks.title",
       "tasks.description",
+      "tasks.mission_id",
       "mission.mission_name as mission",
+      "tasks.status",
       "status.status as status",
       "tasks.due_date",
+      "tasks.assignee as assignee_id",
       "users.username as assignee")
     .whereNot('tasks.status', 5)
     .then((data) => res.status(200).json(data))
     .catch((err) => { console.log(err); res.status(400).json(err) });
 });
+
+
+app.get("/users/all".verifyToken, (req, res) => {
+  knex("users")
+    .select("user_id", "username")
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+})
+
 
 app.get("/user/:id/tasks", verifyToken, (req, res) => {
   knex("tasks")
@@ -164,9 +176,12 @@ app.get("/user/:id/tasks", verifyToken, (req, res) => {
       "tasks.task_id",
       "tasks.title",
       "tasks.description",
+      "tasks.mission_id",
       "mission.mission_name as mission",
+      "tasks.status",
       "status.status as status",
       "tasks.due_date",
+      "tasks.assignee as assignee_id",
       "users.username as assignee")
     .where("assignee", req.user.uid)
     .then((data) => res.status(200).json(data))
@@ -182,9 +197,12 @@ app.get("/tasks/:id", verifyToken, (req, res) => {
       "tasks.task_id",
       "tasks.title",
       "tasks.description",
+      "tasks.mission_id",
       "mission.mission_name as mission",
+      "tasks.status",
       "status.status as status",
       "tasks.due_date",
+      "tasks.assignee as assignee_id",
       "users.username as assignee")
     .where("task_id", req.params.id)
     .whereNot('tasks.status', 5)
@@ -201,9 +219,12 @@ app.get("/status/:id", verifyToken, (req, res) => {
       "tasks.task_id",
       "tasks.title",
       "tasks.description",
+      "tasks.mission_id",
       "mission.mission_name as mission",
+      "tasks.status",
       "status.status as status",
       "tasks.due_date",
+      "tasks.assignee as assignee_id",
       "users.username as assignee")
     .where("status", req.params.id)
     .then((data) => res.status(200).json(data))

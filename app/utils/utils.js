@@ -9,9 +9,9 @@ const backend = "http://localhost:3000";
 export async function GetUser(id, token) {
   return fetch(`${backend}/user/${id}`, {
     method: "GET",
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }).then((res) => res.json());
-};
+}
 
 /**
  *
@@ -20,17 +20,28 @@ export async function GetUser(id, token) {
  * @returns returns single item array with user information
  */
 export async function UpdateUser(username, token, payload) {
-  console.log(payload.preferences)
+  console.log(payload.preferences);
   return fetch(`${backend}/user/${username}`, {
     method: "PATCH",
     headers: {
       Authorization: token,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
   }).then((res) => res.status);
-};
+}
 
+/**
+ *
+ * @param {Token} token must be a valid token
+ * @returns Returns array of user_id and username
+ */
+export async function GetAllUsers(token) {
+  return fetch(`${backend}/users/all`, {
+    method: "GET",
+    headers: { Authorization: token }
+  }).then((res) => res.json());
+}
 /**
  *
  * @param {string} username Username
@@ -43,10 +54,9 @@ export async function UserLogin(username, password) {
     headers: { "Content-type": "application/json" },
     body: JSON.stringify({
       userName: username,
-      password: password
-    })
-  })
-    .then((res) => res.json());
+      password: password,
+    }),
+  }).then((res) => res.json());
 }
 
 /**
@@ -58,7 +68,13 @@ export async function UserLogin(username, password) {
  * @param {string} email User's email
  * @returns returns Token
  */
-export async function UserSignup(userName, password, firstName, lastName, email) {
+export async function UserSignup(
+  userName,
+  password,
+  firstName,
+  lastName,
+  email
+) {
   return fetch(`${backend}/signup`, {
     method: "POST",
     headers: { "Content-type": "application/json" },
@@ -67,14 +83,15 @@ export async function UserSignup(userName, password, firstName, lastName, email)
       password: password,
       firstName: firstName,
       lastName: lastName,
-      email: email
-    })
-  })
-    .then((res) => res.json());
+      email: email,
+    }),
+  }).then((res) => res.json());
 }
 
 export async function CheckUsername(username) {
-  const nameExists = await fetch(`${backend}/username/${username}`).then((res) => res.json());
+  const nameExists = await fetch(`${backend}/username/${username}`).then(
+    (res) => res.json()
+  );
   console.log(nameExists);
   let check = nameExists.length > 0 ? false : true;
   return check;
@@ -82,43 +99,43 @@ export async function CheckUsername(username) {
 /**
  *
  * @param {token} token Context token provided upon login
- * @returns Tasks: task_id, title, description, mission, status, due_date, assignee
+ * @returns Tasks: task_id, title, description, mission_id, mission, status_id, status, due_date, assignee_id, assignee
  */
 export async function GetAllTasks(token) {
   return fetch(`${backend}/tasks`, {
     method: "GET",
     headers: {
       Authorization: token,
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   }).then((res) => res.json());
-};
+}
 
 /**
  *
  * @param {integer} id ID of task being queried
  * @param {Token} token Context token provided upon login
- * @returns Tasks: task_id, title, description, mission, status, due_date, assignee
+ * @returns Tasks: task_id, title, description, mission_id, mission, status_id, status, due_date, assignee_id, assignee
  */
 export async function GetTaskById(id, token) {
   return fetch(`${backend}/tasks/${id}`, {
     method: "GET",
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }).then((res) => res.json());
-};
+}
 
 /**
  *
  * @param {integer} id ID of status being queried
  * @param {Token} token Context token provided upon login
- * @returns Tasks: task_id, title, description, mission, status, due_date, assignee
+ * @returns Tasks: task_id, title, description, mission_id, mission, status_id, status, due_date, assignee_id, assignee
  */
 export async function GetTaskByStatus(id, token) {
   return fetch(`${backend}/status/${id}`, {
     method: "GET",
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }).then((res) => res.json());
-};
+}
 
 /**
  *
@@ -128,9 +145,9 @@ export async function GetTaskByStatus(id, token) {
 export async function GetAllMissions(token) {
   return fetch(`${backend}/mission`, {
     method: "GET",
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }).then((res) => res.json());
-};
+}
 
 /**
  *
@@ -141,21 +158,20 @@ export async function GetAllMissions(token) {
 export async function GetMissionByID(id, token) {
   return fetch(`${backend}/mission/${id}`, {
     method: "GET",
-    headers: { Authorization: token }
-  }).then((res) => res.json())
+    headers: { Authorization: token },
+  }).then((res) => res.json());
 }
 
 /**
  *
  * @param {Token} token
- * @returns Tasks: task_id, title, description, mission, status, due_date, assignee
+ * @returns Tasks: task_id, title, description, mission_id, mission, status_id, status, due_date, assignee_id, assignee
  */
 export async function GetTaskByUser(token) {
   return fetch(`${backend}/user/tasks`, {
     method: "GET",
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }).then((res) => res.json());
-
 }
 /**
  *
@@ -166,9 +182,9 @@ export async function GetTaskByUser(token) {
 export async function GetTaskByMission(id, token) {
   return fetch(`${backend}/mission/${id}/tasks`, {
     method: "GET",
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }).then((res) => res.json());
-};
+}
 
 // export function GetSystemStatus(id) {
 //   return fetch(`${backend}/mission/${id}/systems`).then((res) => res.json());
@@ -182,9 +198,9 @@ export async function GetTaskByMission(id, token) {
 export async function GetAllHistory(token) {
   return fetch(`${backend}/history`, {
     method: "GET",
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }).then((res) => res.json());
-};
+}
 
 /**
  *
@@ -195,9 +211,9 @@ export async function GetAllHistory(token) {
 export async function GetUsersByRole(id, token) {
   return fetch(`${backend}/roles/${id}`, {
     method: "GET",
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }).then((res) => res.json());
-};
+}
 
 //POST functions
 /**
@@ -211,16 +227,16 @@ export async function AddTask(token, data) {
     method: "POST",
     headers: {
       Authorization: token,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       title: data.title,
       description: data.description,
       mission_id: data.mission_id,
       status: data.status,
-      due_date: data.due_date
-    })
-  })
+      due_date: data.due_date,
+    }),
+  });
 }
 
 /**
@@ -234,13 +250,13 @@ export async function AddMission(token, data) {
     method: "POST",
     headers: {
       Authorization: token,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       mission_name: data.mission_name,
-      systems: data.systems
-    })
-  })
+      systems: data.systems,
+    }),
+  });
 }
 
 /**
@@ -255,16 +271,16 @@ export async function EditTask(token, taskID, data) {
     method: "PATCH",
     headers: {
       Authorization: token,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       title: data.title,
       description: data.description,
       mission_id: data.mission_id,
       status: data.status,
-      due_date: data.due_date
-    })
-  })
+      due_date: data.due_date,
+    }),
+  });
 }
 
 /**
@@ -274,17 +290,17 @@ export async function EditTask(token, taskID, data) {
  * @returns returns fetch data
  */
 export async function ArchievedTask(token, data) {
-  console.log(data.status)
+  console.log(data.status);
   return fetch(`${backend}/tasks/${data.task_id}/archive`, {
     method: "PATCH",
     headers: {
       Authorization: token,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      status: 5
-    })
-  })
+      status: 5,
+    }),
+  });
 }
 
 /**
@@ -299,13 +315,13 @@ export async function EditMission(token, missionID, data) {
     method: "PATCH",
     headers: {
       Authorization: token,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
       mission_name: data.mission_name,
-      systems: data.systems
-    })
-  })
+      systems: data.systems,
+    }),
+  });
 }
 
 /**
@@ -316,7 +332,7 @@ export async function EditMission(token, missionID, data) {
 export async function DeleteTask(token, taskID) {
   return fetch(`${backend}/tasks/${taskID}/delete`, {
     method: "DELETE",
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }).then((res) => res.json());
 }
 
@@ -328,7 +344,13 @@ export async function DeleteTask(token, taskID) {
 export async function DeleteMission(token, missionID) {
   return fetch(`${backend}/mission/${missionID}/delete`, {
     method: "DELETE",
-    headers: { Authorization: token }
+    headers: { Authorization: token },
   }).then((res) => res.json());
 }
 
+
+
+//Conversion functions:
+export async function ConvertFieldsToID(token, data) {
+  const missionId = await fetch(`${backend}/`)
+}
