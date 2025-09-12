@@ -20,9 +20,13 @@ export async function GetUser(id, token) {
  * @returns returns single item array with user information
  */
 export async function UpdateUser(username, token, payload) {
+  console.log(payload.preferences);
   return fetch(`${backend}/user/${username}`, {
     method: "PATCH",
-    headers: { Authorization: token },
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(payload),
   }).then((res) => res.status);
 }
@@ -89,7 +93,10 @@ export async function CheckUsername(username) {
 export async function GetAllTasks(token) {
   return fetch(`${backend}/tasks`, {
     method: "GET",
-    headers: { Authorization: token },
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
   }).then((res) => res.json());
 }
 
@@ -207,7 +214,10 @@ export async function GetUsersByRole(id, token) {
 export async function AddTask(token, data) {
   return fetch(`${backend}/tasks/add`, {
     method: "POST",
-    headers: { Authorization: token },
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       title: data.title,
       description: data.description,
@@ -227,7 +237,10 @@ export async function AddTask(token, data) {
 export async function AddMission(token, data) {
   return fetch(`${backend}/tasks/add`, {
     method: "POST",
-    headers: { Authorization: token },
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       mission_name: data.mission_name,
       systems: data.systems,
@@ -245,7 +258,10 @@ export async function AddMission(token, data) {
 export async function EditTask(token, taskID, data) {
   return fetch(`${backend}/tasks/${taskID}/patch`, {
     method: "PATCH",
-    headers: { Authorization: token },
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       title: data.title,
       description: data.description,
@@ -266,7 +282,10 @@ export async function ArchievedTask(token, data) {
   console.log(data.status);
   return fetch(`${backend}/tasks/${data.task_id}/archive`, {
     method: "PATCH",
-    headers: { Authorization: token },
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       status: 5,
     }),
@@ -283,7 +302,10 @@ export async function ArchievedTask(token, data) {
 export async function EditMission(token, missionID, data) {
   return fetch(`${backend}/mission/${missionID}/patch`, {
     method: "PATCH",
-    headers: { Authorization: token },
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       mission_name: data.mission_name,
       systems: data.systems,
