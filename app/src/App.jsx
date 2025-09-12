@@ -11,6 +11,7 @@ import Reports from "./pages/Reports";
 import Signup from "./pages/Signup";
 import EditTask from "./component/EditTask";
 import TaskItem from "./component/TaskItem";
+import AddTasks from "./component/AddTask";
 
 import NavBar from "./component/NavBar";
 import SideBar from "./component/SideBar";
@@ -40,19 +41,20 @@ export default function App() {
       <NavBar />
       <Footer />
       <main className="main-content">
-      <SideBar />
+        <SideBar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/system" element={<System />} />
-          <Route path="/taskslist" element={<Tasks />} />
+          <Route path="/tasks" element={<Tasks />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/configuration" element={<Configuration />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Homepage />} />
-          <Route path="/taskslist/edit" element={<EditTask />} />
-          <Route path="/taskslist/:id" element={<TaskItem />} />
+          <Route path="/tasks/edit" element={<EditTask />} />
+          <Route path="/tasks/:id" element={<TaskItem />} />
+          <Route path="/tasks/add" element={<AddTasks />} />
         </Routes>
       </main>
     </AppContext.Provider>
