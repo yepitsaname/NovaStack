@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import { useState } from "react";
 
 import Dashboard from "./pages/Dashboard";
@@ -22,10 +22,19 @@ import AppContext from "./AppContext";
 
 import "../css/app.css";
 
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [token, setToken] = useState(null);
+
+  const PrivateRoute = () => {
+    return user && profile && token ? <Outlet /> : <Navigate to="/login" replace />;
+  }
+
+  const AnonymousRoute = () => {
+    return user && profile && token ? <Navigate to="/" replace /> : <Outlet />;
+  }
 
   return (
     <AppContext.Provider
@@ -38,23 +47,30 @@ export default function App() {
         setToken: setToken,
       }}
     >
+
       <NavBar />
       <Footer />
       <main className="main-content">
         <SideBar />
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Signup />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/system" element={<System />} />
-          <Route path="/tasks" element={<Tasks />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/configuration" element={<Configuration />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/" element={<Homepage />} />
-          <Route path="/tasks/edit" element={<EditTask />} />
-          <Route path="/tasks/:id" element={<TaskItem />} />
-          <Route path="/tasks/add" element={<AddTasks />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/system" element={<System />} />
+            <Route path="/taskslist" element={<Tasks />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/configuration" element={<Configuration />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/taskslist/edit" element={<EditTask />} />
+            <Route path="/taskslist/:id" element={<TaskItem />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+          <Route element={<AnonymousRoute />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Signup />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
         </Routes>
       </main>
     </AppContext.Provider>
