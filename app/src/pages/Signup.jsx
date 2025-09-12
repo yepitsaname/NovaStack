@@ -1,6 +1,5 @@
 import { Link } from "react-router";
 import "../../css/forms.css";
-import { handleEvent, build_LoginPaylod } from "../../utils/forms";
 import { useNavigate } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import AppContext from "../AppContext";
@@ -51,7 +50,7 @@ export default function Signup() {
           first_name: firstName,
           last_name: lastName,
           email: email,
-          preferences: {theme: "dark", layout: "default"},
+          preferences: { theme: "dark", layout: "default" },
           roles: []
         })
       }
@@ -74,32 +73,41 @@ export default function Signup() {
 
   return (
     <div className="signup">
-      {passAlert && (
-        <Alert severity="error" onClose={() => resetAlert()}>
-          Passwords do not match
-        </Alert>
-      )}
-      {userAlert && (
-        <Alert severity="error" onClose={() => resetAlert()}>
-          Username is already in use
-        </Alert>
-      )}
-      <form className="signup-form" action={Register}>
-        <label>First Name: </label>
-        <input name="firstName" type="text" /> <br />
-        <label>Last Name: </label>
-        <input name="lastName" type="text" /><br />
-        <label>Email: </label>
-        <input name="email" type="text" /><br />
-        <label>Username: </label>
-        <input name="username" type="text" /> <br />
-        <label>Password: </label>
-        <input name="pass1" type="password" /><br />
-        <label>Re-enter Password: </label>
-        <input name="pass2" type="password" /><br />
-        <button type="submit">Register</button>
-      </form>
 
+      <div className="signupTitle">
+        <h1>Register</h1>
+      </div>
+      <div className="signupForm">
+
+        <form className="form signUp" action={Register}>
+          <label>First Name: </label>
+          <input name="firstName" type="text" /> <br />
+          <label>Last Name: </label>
+          <input name="lastName" type="text" /><br />
+          <label>Email: </label>
+          <input name="email" type="text" /><br />
+          <label>Username: </label>
+          <input name="username" type="text" /> <br />
+          <label>Password: </label>
+          <input name="pass1" type="password" /><br />
+          <label>Re-enter Password: </label>
+          <input name="pass2" type="password" /><br />
+          <button type="submit">Register</button>
+        </form>
+      </div>
+
+      <div className="signupError">
+        {passAlert && (
+          <Alert severity="error" onClose={() => resetAlert()}>
+            Passwords do not match
+          </Alert>
+        )}
+        {userAlert && (
+          <Alert severity="error" onClose={() => resetAlert()}>
+            Username is already in use
+          </Alert>
+        )}
+      </div>
     </div>
   )
 }
