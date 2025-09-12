@@ -1,13 +1,15 @@
 import { useState, useContext } from "react";
 import AppContext from "../AppContext";
+
 import { UpdatePassword, UpdateUser } from "../../utils/utils";
 import Alert from "@mui/material/Alert";
 import { Navigate } from "react-router";
-
+import { GetUser } from "../../utils/utils";
 export default function Profile() {
   const { user, token, profile, setProfile } = useContext(AppContext);
 
   if( !user || !token || !profile ) return <Navigate to="/login" />;
+
 
   // Flags: new matches current, new doees not match confirmation, error setting password, password change success
   const [ passStatus, setPassStatus ] = useState(0)
@@ -39,14 +41,17 @@ export default function Profile() {
     return setPassStatus(4);
   }
 
-  if( !profile ) return <div className="form"><h2>Loading Profile</h2></div>
+  if (!profile) return <div className="form"><h2>Loading Profile</h2></div>
 
   return (
+
     <div className="form component">
+
       <h2>{user}'s Profile</h2>
       <fieldset name="user information">
         <legend>Overview</legend>
         <label htmlFor="username">Username</label>
+
         <input type="text" id="username" name="user name" value={user} disabled/>
         <label htmlFor="firstname">First Name</label>
         <input type="text" id="firstname" name="first name" value={profile.first_name} disabled/>
@@ -56,10 +61,12 @@ export default function Profile() {
         <input type="email" id="email" name="email" value={profile.email} disabled />
         <label htmlFor="roles">Roles</label>
         <input type="text" id="roles" name="roles" value={profile.roles.map(role=>role.role_name).join(", ")} disabled />
+
       </fieldset>
       <fieldset>
         <legend>Theming</legend>
         <label htmlFor="theme">Themes</label>
+
         <select defaultValue={profile.preferences.theme} onChange={(event)=>{theme = event.target.value}}>
           <option value="dark">Dark</option>
           <option value="light">Light</option>
@@ -89,6 +96,7 @@ export default function Profile() {
             <Alert severity="success" onClose={() => setPassStatus(0)}>Password Changed!</Alert>
           )}
         </div>
+
       </fieldset>
     </div>
   );
