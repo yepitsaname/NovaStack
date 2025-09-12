@@ -9,8 +9,8 @@ export default function Profile() {
 
   if( !user || !token || !profile ) return <Navigate to="/login" />;
 
-  // ERROR Flags: new matches current, new doees not match confirmation, current does not match current
-  const [ passErrors, setPassErrors ] = useState(0)
+  // Flags: new matches current, new doees not match confirmation, error setting password, password change success
+  const [ passStatus, setPassStatus ] = useState(0)
   let theme = profile.preferences.theme;
 
   const updateTheme = async () => {
@@ -25,17 +25,22 @@ export default function Profile() {
     document.querySelector("html").setAttribute("theme", profile.preferences.theme)
   }
 
-  const resetPassword = ()=>{
+  const resetPassword = async ()=>{
     const cur_password = document.querySelector("#current_password").value;
     const new_password = document.querySelector("#new_password").value;
     const con_password = document.querySelector("#confirm_password").value;
 
     console.log(cur_password, new_password, con_password, new_password == cur_password, new_password != con_password)
 
-    if(new_password == cur_password) return setPassErrors(1);
-    if(new_password != con_password) return setPassErrors(2);
+    if(new_password == cur_password) return setPassStatus(1);
+    if(new_password != con_password) return setPassStatus(2);
 
     //send request to endpoint, compare current password, if true reset pass else throw error
+    console.log("passChange")
+    let passChange = await UpdateUser(user, token, {password: new_password});
+    console.log("post")
+    if( passChange != 200 ) return setPassStatus(3);
+    return setPassStatus(4);
   }
 
   if( !profile ) return <div className="form"><h2>Loading Profile</h2></div>
@@ -75,14 +80,17 @@ export default function Profile() {
         <input type="password" id="confirm_password" name="confirm password" />
         <button onClick={()=>{resetPassword()}}>Reset Password</button>
         <div className="">
-          {passErrors == 1 && (
-            <Alert severity="error" onClose={() => setPassErrors(0)}>New password cannot be the current password</Alert>
+          {passStatus == 1 && (
+            <Alert severity="error" onClose={() => setPassStatus(0)}>New password cannot be the current password</Alert>
           )}
-          {passErrors == 2 && (
-            <Alert severity="error" onClose={() => setPassErrors(0)}>Passwords do not match</Alert>
+          {passStatus == 2 && (
+            <Alert severity="error" onClose={() => setPassStatus(0)}>Passwords do not match</Alert>
           )}
-          {passErrors == 3 && (
-            <Alert severity="error" onClose={() => setPassErrors(0)}>Current password is invalid</Alert>
+          {passStatus == 3 && (
+            <Alert severity="error" onClose={() => setPassStatus(0)}>Unable to change password</Alert>
+          )}
+          {passStatus == 4 && (
+            <Alert severity="success" onClose={() => setPassStatus(0)}>Password Changed!</Alert>
           )}
         </div>
       </fieldset>

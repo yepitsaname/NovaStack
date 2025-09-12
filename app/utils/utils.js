@@ -20,7 +20,7 @@ export async function GetUser(id, token) {
  * @returns returns single item array with user information
  */
 export async function UpdateUser(username, token, payload) {
-  console.log(payload.preferences)
+  console.log(payload)
   return fetch(`${backend}/user/${username}`, {
     method: "PATCH",
     headers: {
@@ -28,7 +28,8 @@ export async function UpdateUser(username, token, payload) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(payload)
-  }).then((res) => res.status);
+  }).then((res) => res.status)
+  .catch(err => err);
 };
 
 /**
