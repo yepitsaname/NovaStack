@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import AppContext from "../AppContext";
 import { GetAllTasks } from "../../utils/utils";
 import { AddTask } from "../../utils/utils";
-import "../../css/forms.css";
+// import "../../css/forms.css";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -40,17 +40,18 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-// const style = {
-//   position: "absolute",
-//   top: "50%",
-//   left: "50%",
-//   transform: "translate(-50%, -50%)",
-//   width: 400,
-//   bgcolor: "background.paper",
-//   borderRadius: 2,
-//   boxShadow: 24,
-//   p: 4,
-// };
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  borderRadius: 2,
+  boxShadow: 24,
+  p: 4,
+  backgroundColor: "primary",
+};
 
 export default function TaskListWidget({
   isDashboard = false,
@@ -115,7 +116,7 @@ export default function TaskListWidget({
           aria-labelledby="modal-title"
           aria-describedby="modal-description"
         >
-          <Box>
+          <Box sx={style}>
             <form onSubmit={handleFormSubmit}>
               <TextField
                 name="title"
@@ -123,7 +124,11 @@ export default function TaskListWidget({
                 value={form.title}
                 onChange={handleInputChange}
                 fullWidth
-                sx={{ color: "#a1d4d4", mb: 2 }}
+                sx={{ input: { color: " #a1d4d4 " }, mb: 2 }}
+                inputLabelProps={{
+                  sx: { color: " #a1d4d4 " },
+                  "&.Mui_focused": { color: " #a1d4d4 " },
+                }}
               />
               {/* <TextField
               name="mission"
@@ -136,10 +141,16 @@ export default function TaskListWidget({
               <TextField
                 name="description"
                 label="description"
+                multiLine
+                rows={3}
                 value={form.description}
                 onChange={handleInputChange}
                 fullWidth
-                sx={{ mb: 2 }}
+                sx={{ input: { color: " #a1d4d4 " }, mb: 2 }}
+                inputLabel={{
+                  sx: { color: " #a1d4d4 " },
+                  "&.Mui_focused": { color: " #a1d4d4 " },
+                }}
               />
               {/* <TextField
               name="status"
@@ -155,7 +166,11 @@ export default function TaskListWidget({
                 value={form.due_date}
                 onChange={handleInputChange}
                 fullWidth
-                sx={{ mb: 2 }}
+                sx={{ input: { color: " #a1d4d4 " }, mb: 2 }}
+                inputLabelProps={{
+                  sx: { color: " #a1d4d4 " },
+                  "&.Mui_focused": { color: " #a1d4d4 " },
+                }}
               />
               <Button type="submit" variant="contained" fullWidth>
                 Submit
@@ -179,7 +194,7 @@ export default function TaskListWidget({
               {taskListData.map((row) => (
                 <StyledTableRow
                   key={row.task_id}
-                  onClick={() => navigate(`/taskslist/${row.task_id}`)}
+                  onClick={() => navigate(`/tasks/${row.task_id}`)}
                   sx={{
                     "&:last-child td, &:last-child th": { border: 0 },
                     cursor: "pointer",
