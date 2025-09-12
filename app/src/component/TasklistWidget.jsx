@@ -53,7 +53,6 @@ export default function TaskListWidget({
   }, []);
 
   if (!taskListData.length) return <div>Loading</div>;
-
   return (
     <>
       {isDashboard ? (
