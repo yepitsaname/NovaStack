@@ -15,10 +15,10 @@ export default function Profile() {
       "layout": profile.preferences.layout
     }}
     let status = await UpdateUser(user, token, payload)
-    // setProfile((current)=>{
-    //   return Object.assign(current,
-    //     {preferences: {theme: theme}}
-    //   )})
+    setProfile((current)=>{
+      return Object.assign(current, {preferences: {...current.preferences, theme: theme}})
+    })
+    document.querySelector("html").setAttribute("theme", profile.preferences.theme)
   }
 
 
