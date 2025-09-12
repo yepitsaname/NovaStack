@@ -20,28 +20,29 @@ export async function GetUser(id, token) {
  * @returns returns single item array with user information
  */
 export async function UpdateUser(username, token, payload) {
-  console.log(payload.preferences);
   return fetch(`${backend}/user/${username}`, {
     method: "PATCH",
     headers: {
       Authorization: token,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload),
-  }).then((res) => res.status);
-}
+    body: JSON.stringify(payload)
+  }).then((res) => res.status)
+  .catch(err => err);
+};
 
-/**
- *
- * @param {Token} token must be a valid token
- * @returns Returns array of user_id and username
- */
-export async function GetAllUsers(token) {
-  return fetch(`${backend}/users/all`, {
-    method: "GET",
-    headers: { Authorization: token }
-  }).then((res) => res.json());
-}
+export async function UpdatePassword(username, token, payload) {
+  return fetch(`${backend}/user/${username}/reset_pass`, {
+    method: "PATCH",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  }).then((res) => res.status)
+  .catch(err => err);
+};
+
 /**
  *
  * @param {string} username Username

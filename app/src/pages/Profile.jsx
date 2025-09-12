@@ -1,30 +1,48 @@
-import { useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import AppContext from "../AppContext";
-import { UpdateUser } from "../../utils/utils";
+import { UpdatePassword, UpdateUser } from "../../utils/utils";
+import Alert from "@mui/material/Alert";
+import { Navigate } from "react-router";
 
 export default function Profile() {
   const { user, token, profile, setProfile } = useContext(AppContext);
-  let theme = profile?.preferences.theme || '';
 
-  // Edit actions
-  // should update the user's prefered scheme in the
-  // database and on their profile
+  if( !user || !token || !profile ) return <Navigate to="/login" />;
+
+  // Flags: new matches current, new doees not match confirmation, error setting password, password change success
+  const [ passStatus, setPassStatus ] = useState(0)
+  let theme = profile.preferences.theme;
+
   const updateTheme = async () => {
     let payload = { "preferences": {
-      "theme": theme
+      "theme": theme,
+      "layout": profile.preferences.layout
     }}
     let status = await UpdateUser(user, token, payload)
     setProfile((current)=>{
-      return Object.assign(current,
-        {preferences: {theme: theme}}
-      )})
+      return Object.assign(current, {preferences: {...current.preferences, theme: theme}})
+    })
+    document.querySelector("html").setAttribute("theme", profile.preferences.theme)
   }
 
+  const resetPassword = async ()=>{
+    const cur_password = document.querySelector("#current_password").value;
+    const new_password = document.querySelector("#new_password").value;
+    const con_password = document.querySelector("#confirm_password").value;
+
+    if(new_password == cur_password) return setPassStatus(1);
+    if(new_password != con_password) return setPassStatus(2);
+
+    //send request to endpoint, compare current password, if true reset pass else throw error
+    let passChange = await UpdatePassword(user, token, {password: new_password, current: cur_password});
+    if( passChange != 200 ) return setPassStatus(3);
+    return setPassStatus(4);
+  }
 
   if( !profile ) return <div className="form"><h2>Loading Profile</h2></div>
 
   return (
-    <div className="form">
+    <div className="form component">
       <h2>{user}'s Profile</h2>
       <fieldset name="user information">
         <legend>Overview</legend>
@@ -56,7 +74,21 @@ export default function Profile() {
         <input type="password" id="new_password" name="new password" />
         <label htmlFor="confirm_password">Confirm Password</label>
         <input type="password" id="confirm_password" name="confirm password" />
-        <button>Reset Password</button>
+        <button onClick={()=>{resetPassword()}}>Reset Password</button>
+        <div className="">
+          {passStatus == 1 && (
+            <Alert severity="error" onClose={() => setPassStatus(0)}>New password cannot be the current password</Alert>
+          )}
+          {passStatus == 2 && (
+            <Alert severity="error" onClose={() => setPassStatus(0)}>Passwords do not match</Alert>
+          )}
+          {passStatus == 3 && (
+            <Alert severity="error" onClose={() => setPassStatus(0)}>Unable to change password</Alert>
+          )}
+          {passStatus == 4 && (
+            <Alert severity="success" onClose={() => setPassStatus(0)}>Password Changed!</Alert>
+          )}
+        </div>
       </fieldset>
     </div>
   );
