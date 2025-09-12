@@ -11,6 +11,7 @@ import Reports from "./pages/Reports";
 import Signup from "./pages/Signup";
 import EditTask from "./component/EditTask";
 import TaskItem from "./component/TaskItem";
+import AddTasks from "./component/AddTask";
 
 import NavBar from "./component/NavBar";
 import SideBar from "./component/SideBar";
