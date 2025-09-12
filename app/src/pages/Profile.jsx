@@ -1,14 +1,18 @@
-import { useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import AppContext from "../AppContext";
 import { UpdateUser } from "../../utils/utils";
+import Alert from "@mui/material/Alert";
+import { Navigate } from "react-router";
 
 export default function Profile() {
   const { user, token, profile, setProfile } = useContext(AppContext);
+
+  if( !user || !token || !profile ) return <Navigate to="/login" />;
+
+  // ERROR Flags: new matches current, new doees not match confirmation, current does not match current
+  const [ passErrors, setPassErrors ] = useState(0)
   let theme = profile.preferences.theme;
 
-  // Edit actions
-  // should update the user's prefered scheme in the
-  // database and on their profile
   const updateTheme = async () => {
     let payload = { "preferences": {
       "theme": theme,
@@ -21,6 +25,18 @@ export default function Profile() {
     document.querySelector("html").setAttribute("theme", profile.preferences.theme)
   }
 
+  const resetPassword = ()=>{
+    const cur_password = document.querySelector("#current_password").value;
+    const new_password = document.querySelector("#new_password").value;
+    const con_password = document.querySelector("#confirm_password").value;
+
+    console.log(cur_password, new_password, con_password, new_password == cur_password, new_password != con_password)
+
+    if(new_password == cur_password) return setPassErrors(1);
+    if(new_password != con_password) return setPassErrors(2);
+
+    //send request to endpoint, compare current password, if true reset pass else throw error
+  }
 
   if( !profile ) return <div className="form"><h2>Loading Profile</h2></div>
 
@@ -57,7 +73,18 @@ export default function Profile() {
         <input type="password" id="new_password" name="new password" />
         <label htmlFor="confirm_password">Confirm Password</label>
         <input type="password" id="confirm_password" name="confirm password" />
-        <button>Reset Password</button>
+        <button onClick={()=>{resetPassword()}}>Reset Password</button>
+        <div className="">
+          {passErrors == 1 && (
+            <Alert severity="error" onClose={() => setPassErrors(0)}>New password cannot be the current password</Alert>
+          )}
+          {passErrors == 2 && (
+            <Alert severity="error" onClose={() => setPassErrors(0)}>Passwords do not match</Alert>
+          )}
+          {passErrors == 3 && (
+            <Alert severity="error" onClose={() => setPassErrors(0)}>Current password is invalid</Alert>
+          )}
+        </div>
       </fieldset>
     </div>
   );
