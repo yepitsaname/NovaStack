@@ -373,7 +373,7 @@ app.patch('/tasks/:id/archive', verifyToken, async (req, res) => {
   console.log(data);
   try {
     await knex('tasks').where('task_id', id)
-      .update({ status: data.status });
+      .update({ status: 5 });
     res.status(200).json({ message: 'task updated' });
   } catch (err) {
     console.error('ERROR ', err);
