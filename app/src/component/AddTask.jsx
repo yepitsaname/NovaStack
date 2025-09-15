@@ -1,26 +1,53 @@
-import { useState, useContext } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { useState, useContext, useEffect } from "react";
+import { Box, Button, TextField, Select, MenuItem } from "@mui/material";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { useNavigate } from "react-router-dom";
-
+//import { SelectChangeEvent } from "@mui/material/Select";
 import AppContext from "../AppContext";
-import { AddTask } from "../../utils/utils";
+import { AddTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
 
 import dayjs from "dayjs";
 
 export default function AddTasks() {
   const { token } = useContext(AppContext);
   const navigate = useNavigate();
+  const [mission, setMission] = useState([]);
+  const [status, setStatus] = useState([]);
+  const [userList, setUserList] = useState([]);
+
   const [form, setForm] = useState({
     title: "",
     description: "",
     status: "",
-    mission: "",
+    mission_id: "",
     due_date: dayjs(),
+    assignee: "",
   });
+
+  useEffect(() => {
+    const missions = async () => {
+      let temp = await GetAllMissions(token);
+      setMission(temp);
+    };
+    missions();
+
+    const statuses = async () => {
+      let temp = await GetAllStatus(token);
+      setStatus(temp);
+    };
+    statuses();
+
+    const users = async () => {
+      let temp = await GetAllUsers(token);
+      setUserList(temp);
+    };
+    users();
+    console.log(userList)
+  }, [])
+
 
   const handleInputChange = (e) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -42,10 +69,11 @@ export default function AddTasks() {
       title: "",
       description: "",
       status: "",
-      mission: "",
+      mission_id: "",
       due_date: dayjs(),
+      assignee: "",
     });
-    navigate("/tasks");
+    navigate("/taskslist");
   };
 
   return (
@@ -60,17 +88,25 @@ export default function AddTasks() {
           sx={{ mb: 2, input: { color: "#22C55E" } }}
           InputLabelProps={{ sx: { color: "#A855F7" } }}
         />
-        <TextField
-          name="mission"
+        <Select
+          name="mission_id"
           label="Mission"
-          value={form.mission}
+          value={form.mission_id}
           onChange={handleInputChange}
           fullWidth
           sx={{ mb: 2, input: { color: "#22C55E" } }}
           InputLabelProps={{
             sx: { color: "#A855F7" },
           }}
-        />
+        >
+          {mission.map((elem, key) => {
+            return (
+              <MenuItem value={elem.mission_id}>{elem.mission_name}</MenuItem>
+            )
+          })}
+
+        </Select>
+
         <TextField
           name="description"
           label="Description"
@@ -84,7 +120,7 @@ export default function AddTasks() {
             },
           }}
         />
-        <TextField
+        <Select
           name="status"
           label="Status"
           value={form.status}
@@ -96,7 +132,14 @@ export default function AddTasks() {
               color: "#A855F7",
             },
           }}
-        />
+        >
+          {status.map((elem, key) => {
+            return (
+              <MenuItem value={elem.status_id}>{elem.status}</MenuItem>
+            )
+          })}
+
+        </Select>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DemoContainer components={["DateTimePicker"]}>
             <DateTimePicker
@@ -106,6 +149,28 @@ export default function AddTasks() {
             />
           </DemoContainer>
         </LocalizationProvider>
+
+        <Select
+          name="assignee"
+          label="Assignee"
+          value={form.assignee}
+          onChange={handleInputChange}
+          fullWidth
+          sx={{ mb: 2, input: { color: "#22C55E" } }}
+          InputLabelProps={{
+            sx: {
+              color: "#A855F7",
+            },
+          }}
+        >
+          {userList.map((elem, key) => {
+            return (
+              <MenuItem value={elem.user_id}>{elem.username}</MenuItem>
+            )
+          })}
+
+        </Select>
+
         <Button type="submit" variant="contained" fullWidth>
           Submit
         </Button>
