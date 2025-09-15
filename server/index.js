@@ -160,6 +160,7 @@ app.get("/tasks", verifyToken, (req, res) => {
 
 
 app.get("/users/all".verifyToken, (req, res) => {
+  console.log("all users called")
   knex("users")
     .select("user_id", "username")
     .then((data) => res.status(200).json(data))
