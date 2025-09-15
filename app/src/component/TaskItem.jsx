@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams, } from "react-router";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import "../../css/forms.css";
 
 import { GetTaskById, EditTask, ArchievedTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
 import AppContext from "../AppContext";
@@ -71,14 +72,22 @@ export default function TaskItem() {
   console.log(taskData);
 
   return (
-    <div>
-      <button type="button" onClick={enableEdit}>
-        Edit
-      </button>
-      <button type="button" onClick={() => handleDelete(taskData)}>
-        Delete
-      </button>
-      <form className="form component" onSubmit={applyEdit}>
+    <div className="form component">
+      <fieldset>
+        <div>
+        <button type="button" onClick={enableEdit}>
+          Edit
+        </button>
+        <button type="button" onClick={() => handleDelete(taskData)}>
+          Delete
+        </button>
+        </div>
+
+      </fieldset>
+
+
+      <form  onSubmit={applyEdit}>
+        <fieldset>
         <label htmlFor="title">Task Name:</label>
         <input
           type="text"
@@ -156,6 +165,7 @@ export default function TaskItem() {
         >
           Save
         </button>
+        </fieldset>
       </form>
     </div>
   );

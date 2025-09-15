@@ -55,7 +55,7 @@ form {
     margin-inline: 2px;
     position: relative;
     min-width: 0;
-    margin: 0;
+    margin: 1em;
     border: 0.5px solid var(--border-color);
     border-radius: 20px;
     vertical-align: top;
@@ -95,7 +95,8 @@ form {
   align-items: center;
 
   input,
-  textarea, select {
+  textarea,
+  select {
     /* width: 80%; */
     border-radius: 1ch;
     padding: 1ch;

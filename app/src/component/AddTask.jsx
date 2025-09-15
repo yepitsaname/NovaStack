@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AppContext from "../AppContext";
+import "../../css/forms.css";
 import { AddTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
 
 import dayjs from "dayjs";
@@ -67,11 +68,10 @@ export default function AddTasks() {
   };
 
   return (
-       <div style={{ margin: "40px", padding: "8px" }}>
-      <form onSubmit={handleFormSubmit}>
-
-        <div style={{ marginBottom: "16px" }}>
-          <label htmlFor="title" style={{ color: "#A855F7", display: "block", fontWeight: "bold" }}>
+    <div className="form component">
+      <form onSubmit={handleFormSubmit} >
+        <fieldset>
+          <label htmlFor="title" >
             Title
           </label>
           <input
@@ -80,14 +80,11 @@ export default function AddTasks() {
             name="title"
             value={form.title}
             onChange={handleInputChange}
-            style={{ width: "100%", color: "#22C55E", padding: "8px" }}
             required
           />
-        </div>
-
-
-        <div style={{ marginBottom: "16px" }}>
-          <label htmlFor="mission_id" style={{ color: "#A855F7", display: "block", fontWeight: "bold" }}>
+        
+       
+          <label htmlFor="mission_id">
             Mission
           </label>
           <select
@@ -95,7 +92,7 @@ export default function AddTasks() {
             name="mission_id"
             value={form.mission_id}
             onChange={handleInputChange}
-            style={{ width: "100%", color: "#22C55E", padding: "8px" }}
+            
             required
           >
             <option value="">Select Mission</option>
@@ -105,11 +102,8 @@ export default function AddTasks() {
               </option>
             ))}
           </select>
-        </div>
-
-  
-        <div style={{ marginBottom: "16px" }}>
-          <label htmlFor="description" style={{ color: "#A855F7", display: "block", fontWeight: "bold" }}>
+        
+          <label htmlFor="description" >
             Description
           </label>
           <input
@@ -118,14 +112,11 @@ export default function AddTasks() {
             name="description"
             value={form.description}
             onChange={handleInputChange}
-            style={{ width: "100%", color: "#22C55E", padding: "8px" }}
+            
             required
           />
-        </div>
-
- 
-        <div style={{ marginBottom: "16px" }}>
-          <label htmlFor="status" style={{ color: "#A855F7", display: "block", fontWeight: "bold" }}>
+      
+          <label htmlFor="status" >
             Status
           </label>
           <select
@@ -133,7 +124,6 @@ export default function AddTasks() {
             name="status"
             value={form.status}
             onChange={handleInputChange}
-            style={{ width: "100%", color: "#22C55E", padding: "8px" }}
             required
           >
             <option value="">Select Status</option>
@@ -143,11 +133,8 @@ export default function AddTasks() {
               </option>
             ))}
           </select>
-        </div>
-
-
-        <div style={{ marginBottom: "16px" }}>
-          <label htmlFor="due_date" style={{ color: "#A855F7", display: "block", fontWeight: "bold" }}>
+        
+          <label htmlFor="due_date" >
             Due Date/Time
           </label>
           <input
@@ -156,13 +143,9 @@ export default function AddTasks() {
             name="due_date"
             value={form.due_date.format("YYYY-MM-DDTHH:mm")}
             onChange={(e) => setForm((f) => ({ ...f, due_date: dayjs(e.target.value) }))}
-            style={{ width: "100%", color: "#22C55E", padding: "8px" }}
           />
-        </div>
 
-        {/* Assignee Select */}
-        <div style={{ marginBottom: "16px" }}>
-          <label htmlFor="assignee" style={{ color: "#A855F7", display: "block", fontWeight: "bold" }}>
+          <label htmlFor="assignee">
             Assignee
           </label>
           <select
@@ -170,7 +153,6 @@ export default function AddTasks() {
             name="assignee"
             value={form.assignee}
             onChange={handleInputChange}
-            style={{ width: "100%", color: "#22C55E", padding: "8px" }}
             required
           >
             <option value="">Select Assignee</option>
@@ -180,12 +162,10 @@ export default function AddTasks() {
               </option>
             ))}
           </select>
-        </div>
-
-        {/* Submit Button */}
-        <button type="submit" style={{ width: "100%", backgroundColor: "#A855F7", color: "#fff", padding: "12px", border: "none", borderRadius: "4px", fontWeight: "bold" }}>
+        <button type="submit">
           Submit
         </button>
+        </fieldset>
       </form>
     </div>
   );
