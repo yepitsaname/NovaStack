@@ -22,7 +22,7 @@ export default function AddTasks() {
     title: "",
     description: "",
     status: "",
-    mission: "",
+    mission_id: "",
     due_date: dayjs(),
     assignee: "",
   });
@@ -69,10 +69,11 @@ export default function AddTasks() {
       title: "",
       description: "",
       status: "",
-      mission: "",
+      mission_id: "",
       due_date: dayjs(),
+      assignee: "",
     });
-    navigate("/tasks");
+    navigate("/taskslist");
   };
 
   return (
@@ -88,9 +89,9 @@ export default function AddTasks() {
           InputLabelProps={{ sx: { color: "#A855F7" } }}
         />
         <Select
-          name="mission"
+          name="mission_id"
           label="Mission"
-          value={form.mission}
+          value={form.mission_id}
           onChange={handleInputChange}
           fullWidth
           sx={{ mb: 2, input: { color: "#22C55E" } }}
@@ -100,7 +101,7 @@ export default function AddTasks() {
         >
           {mission.map((elem, key) => {
             return (
-              <MenuItem value={key}>{elem.mission_name}</MenuItem>
+              <MenuItem value={elem.mission_id}>{elem.mission_name}</MenuItem>
             )
           })}
 
@@ -134,7 +135,7 @@ export default function AddTasks() {
         >
           {status.map((elem, key) => {
             return (
-              <MenuItem value={key}>{elem.status}</MenuItem>
+              <MenuItem value={elem.status_id}>{elem.status}</MenuItem>
             )
           })}
 
@@ -164,7 +165,7 @@ export default function AddTasks() {
         >
           {userList.map((elem, key) => {
             return (
-              <MenuItem value={key}>{elem.username}</MenuItem>
+              <MenuItem value={elem.user_id}>{elem.username}</MenuItem>
             )
           })}
 

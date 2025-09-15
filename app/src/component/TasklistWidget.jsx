@@ -44,12 +44,15 @@ export default function TaskListWidget({
   const { token } = useContext(AppContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const refetch = async () => {
     const tasks = async () => {
       let temp = await GetAllTasks(token);
       setTaskListData(temp);
     };
     tasks();
+  }
+  useEffect(() => {
+    refetch()
   }, []);
 
   if (!taskListData.length) return <div>Loading</div>;
