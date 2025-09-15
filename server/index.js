@@ -159,7 +159,7 @@ app.get("/tasks", verifyToken, (req, res) => {
 });
 
 
-app.get("/users/all".verifyToken, (req, res) => {
+app.get("/all/users".verifyToken, (req, res) => {
   console.log("all users called")
   knex("users")
     .select("user_id", "username")

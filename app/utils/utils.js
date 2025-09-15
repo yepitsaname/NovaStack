@@ -109,7 +109,7 @@ export async function CheckUsername(username) {
  * @returns Return array of user IDs and names
  */
 export async function GetAllUsers(token) {
-  return fetch(`${backend}/users/all`, {
+  return fetch(`${backend}/all/users`, {
     method: "GET",
     headers: { Authorization: token }
   }).then((res) => res.json())
