@@ -5,6 +5,14 @@
   --valid-bg-color: rgb(147, 193, 147);
   --border-color: rgb(44, 116, 203);
 
+  .unclassified{
+    color: rgb(0,122,51);
+  }
+
+  .cui{
+    color: rgb(80,43,133);
+  }
+
   background-color: var(--main-bg);
   color: var(--text);
 
