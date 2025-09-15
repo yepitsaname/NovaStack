@@ -198,3 +198,7 @@ body {
     }
   }
 }
+.color-block {
+  all: unset;             
+  display: inline-block;   
+}
