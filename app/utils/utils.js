@@ -89,6 +89,11 @@ export async function UserSignup(
   }).then((res) => res.json());
 }
 
+/**
+ *
+ * @param {string} username username
+ * @returns returns user ID of given username
+ */
 export async function CheckUsername(username) {
   const nameExists = await fetch(`${backend}/username/${username}`).then(
     (res) => res.json()
@@ -96,6 +101,18 @@ export async function CheckUsername(username) {
   console.log(nameExists);
   let check = nameExists.length > 0 ? false : true;
   return check;
+}
+
+/**
+ *
+ * @param {token} token
+ * @returns Return array of user IDs and names
+ */
+export async function GetAllUsers(token) {
+  return fetch(`${backend}/users/all`, {
+    method: "GET",
+    headers: { Authorization: token }
+  }).then((res) => res.json())
 }
 /**
  *
