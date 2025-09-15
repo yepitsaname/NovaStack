@@ -1,12 +1,13 @@
 import AppContext from "../AppContext";
 import { GetTaskById, EditTask, ArchievedTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
-import { useParams, useNavigate } from "react-router";
+import { useParams, } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 export default function TaskItem() {
   const { token } = useContext(AppContext);
@@ -18,7 +19,6 @@ export default function TaskItem() {
   const [status, setStatus] = useState([]);
   const [userList, setUserList] = useState([]);
   const [date, setDate] = useState(dayjs())
-
   useEffect(() => {
     (async () => {
       const tasks = await GetTaskById(id, token);
@@ -124,7 +124,8 @@ export default function TaskItem() {
           })}
         </select>
         {/* <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].assignee} /> */}
-        <button type="submit" disabled={!edit} hidden={!edit}>Save</button>
+        <button Linktype="submit" disabled={!edit} hidden={!edit} onClick={() => navigate("/taskslist")}
+        >Save</button>
       </form>
       {/* <h1>{taskData[0].title}</h1> */}
       {/* {taskData.map((d) => (
