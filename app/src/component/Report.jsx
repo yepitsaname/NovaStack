@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import AppContext from "../AppContext";
 
 export default function Report(){
+  const { systems } = useContext(AppContext)
   const [report, setReport] = useState({
-    classification: "Unclassified",
+    classification: "unclassified",
     title: null,
     system: null,
     syscap: null,
@@ -15,22 +17,52 @@ export default function Report(){
     fix_action: null,
     cause: null
   });
+  const [classification, setClassification] = useState(report.classification || null)
+
 
   return(
     <div className="form component">
-      <h3 className={report.classification}>{report.classification}</h3>
+      <h3 className={"classification " + classification}>{classification}</h3>
       <fieldset name="user information">
         <legend>Basic Information</legend>
-        <label htmlFor="title">Title</label>
-        <input type="text" id="title" name="title" value={report.title} disabled/>
         <label htmlFor="classification">Classification</label>
-        <select defaultValue={report.classification} onChange={(event)=>{ event.target.value}}>
+        <select defaultValue={classification} onChange={(event)=>{setClassification(event.target.value)}}>
           <option value={null}>--Select an Option--</option>
           <option value="unclassified">Unclassified</option>
-          <option value="unclassified">CUI</option>
+          <option value="cui">CUI</option>
         </select>
+        <label htmlFor="title">Title</label>
+        <input type="text" id="title" name="title" value={report.title} />
+        <label htmlFor="start_time">Time of Event</label>
+        <input type="datetime-local" id="start_time" name="start time" value={report.start} />
+        <label htmlFor="short_description" >Short Description</label>
+        <input type="text" id="short_description" name="short description" value={report.short_description}/>
       </fieldset>
-      <h3 className={report.classification}>{report.classification}</h3>
+      <fieldset name="event details">
+        <legend>Event Details</legend>
+        <label htmlFor="system">Impacted System</label>
+        <div>
+          <select defaultValue={report.system}>
+            <option value={null}></option>
+            {systems?.map(sys=>sys?.system_name)}
+          </select>
+          <select defaultValue={report.syscap}>
+            <option value={null}>N/A</option>
+            <option value="Warning">Yellow</option>
+            <option value="Critical">Red</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Special_Case">Other</option>
+            <option value="Offline">Offline</option>
+          </select>
+          <select defaultValue={report.opscap}>
+            <option value={null}>N/A</option>
+            <option value="Warning">Warning</option>
+            <option value="Critical">Red</option>
+            <option value="Offline">Offline</option>
+          </select>
+        </div>
+      </fieldset>
+      <h3 className={"classification " + classification}>{classification}</h3>
     </div>
   )
 }
