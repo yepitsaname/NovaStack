@@ -18,6 +18,7 @@ export default function TaskItem() {
   const [status, setStatus] = useState([]);
   const [userList, setUserList] = useState([]);
   const [date, setDate] = useState(dayjs())
+
   useEffect(() => {
     (async () => {
       const tasks = await GetTaskById(id, token);
@@ -107,7 +108,7 @@ export default function TaskItem() {
             <DateTimePicker
               name="due_date"
               label={"Due Date/Time"}
-              value={taskData[0].due_date}
+              value={dayjs(taskData[0].due_date)}
               onChange={handleDateChange}
             />
           </DemoContainer>
