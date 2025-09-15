@@ -26,3 +26,7 @@ export default function System() {
     </>
   );
 }
+
+
+//make each box pull from new table "reports" with seeded data
+//Reports should present the data from the specific box
