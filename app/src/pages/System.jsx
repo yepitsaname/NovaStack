@@ -1,5 +1,6 @@
-import { Card, CardContent, Typography, Box, Divider, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Card, CardContent, Typography, Box, Divider, Table, TableBody, TableCell, TableHead, TableRow, ButtonBase } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router"
 
 import AppContext from "../AppContext";
 import { Navigate } from "react-router-dom";
@@ -7,6 +8,7 @@ import { Navigate } from "react-router-dom";
 
 export default function System() {
   const [systems, setSystems] = useState([]);
+  const navigate = useNavigate();
   const { token, user, profile } = useContext(AppContext);
 
   if (!token || !user || !profile) return <Navigate to="/login" />
@@ -38,29 +40,43 @@ export default function System() {
     return "Offline";
   };
 
-  const ColorBlock = ({ status }) => (
+
+  const ColorBlock = ({ status, system }) => (
     <Box
+      onClick={() => handleClick(system)}
       sx={{
         width: 80,
         height: 80,
-        bgcolor: colorMap[status],
+        backgroundColor: colorMap[status],
         border: "2px solid #333",
         borderRadius: 2,
-        mx: "auto"
+        mx: "auto",
+        cursor: "pointer"
       }}
     />
   );
 
+  const handleClick = (sys) => {
+    if (sys.op_capabilities_available || sys.capabilities_available) {
+      navigate('/reports');
+    } else {
+      alert("Could not find data");
+    }
+  };
+
   return (
     <>
       <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
-        <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)"}}>
+        <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)" }}>
           <CardContent>
             <Table>
               <TableHead>
-              <Typography variant="h4">OPSCAP</Typography>
                 <TableRow>
-                  <TableCell />
+                  <TableCell colSpan={systems.length} sx={{ textAlign: 'center' }}>
+                    <Typography variant="h4" align="center" fontWeight={"bold"}>OPSCAP</Typography>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
                   {systems.map((sys) => (
                     <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
                       <Typography variant="h6">StarFall: {sys.system_name}</Typography>
@@ -71,16 +87,12 @@ export default function System() {
 
               <TableBody>
                 <TableRow>
-                  <TableCell>
-                    <Typography variant="subtitle1" fontWeight="bold">
-                      OPSCAP
-                    </Typography>
-                  </TableCell>
                   {systems.map((sys) => (
                     <TableCell key={sys.system_id + "-opscap"} align="center">
                       <Box display="flex" justifyContent="center" alignItems="center">
                         <ColorBlock
                           status={getStopLight(sys.op_capabilities_available)}
+                          system={sys}
                         />
                       </Box>
                     </TableCell>
@@ -92,16 +104,18 @@ export default function System() {
         </Card>
       </Box>
 
-
-
       <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
         <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)" }}>
           <CardContent>
             <Table>
               <TableHead>
-              <Typography variant="h4">SYSCAP</Typography>
                 <TableRow>
-                  <TableCell />
+                  <TableCell colSpan={systems.length} sx={{ textAlign: 'center' }}>
+                    <Typography variant="h4" align="center" fontWeight={"bold"}>SYSCAP</Typography>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+
                   {systems.map((sys) => (
                     <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
                       <Typography variant="h6">StarFall: {sys.system_name}</Typography>
@@ -112,15 +126,11 @@ export default function System() {
 
               <TableBody>
                 <TableRow>
-                  <TableCell>
-                    <Typography variant="subtitle1" fontWeight="bold">
-                      SYSCAP
-                    </Typography>
-                  </TableCell>
                   {systems.map((sys) => (
                     <TableCell key={sys.system_id + "-syscap"} align="center">
                       <Box display="flex" justifyContent="center" alignItems="center">
-                        <ColorBlock status={getStopLight(sys.capabilities_available)} />
+                        <ColorBlock status={getStopLight(sys.capabilities_available)}
+                          system={sys} />
                       </Box>
                     </TableCell>
                   ))}
@@ -133,12 +143,3 @@ export default function System() {
     </>
   );
 }
-
-
-
-
-//add clickability for the colorblocks to display number of reports and criticality
-//details, date-time, reason, severity, system name
-//move OPSCAP and SYSCAP to top of the Components
-
-//button with a form to change the name of the system type/make new system dd an over

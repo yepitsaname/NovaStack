@@ -89,6 +89,11 @@ export async function UserSignup(
   }).then((res) => res.json());
 }
 
+/**
+ *
+ * @param {string} username username
+ * @returns returns user ID of given username
+ */
 export async function CheckUsername(username) {
   const nameExists = await fetch(`${backend}/username/${username}`).then(
     (res) => res.json()
@@ -96,6 +101,18 @@ export async function CheckUsername(username) {
   console.log(nameExists);
   let check = nameExists.length > 0 ? false : true;
   return check;
+}
+
+/**
+ *
+ * @param {token} token
+ * @returns Return array of user IDs and names
+ */
+export async function GetAllUsers(token) {
+  return fetch(`${backend}/all/users`, {
+    method: "GET",
+    headers: { Authorization: token }
+  }).then((res) => res.json())
 }
 /**
  *
@@ -150,6 +167,17 @@ export async function GetAllMissions(token) {
   }).then((res) => res.json());
 }
 
+/**
+ *
+ * @param {Token} token
+ * @returns returns array of status information
+ */
+export async function GetAllStatus(token) {
+  return fetch(`${backend}/status`, {
+    method: "GET",
+    headers: { Authorization: token }
+  }).then((res) => res.json());
+}
 /**
  *
  * @param {integer} id ID of the mission being queried
@@ -236,6 +264,7 @@ export async function AddTask(token, data) {
       mission_id: data.mission_id,
       status: data.status,
       due_date: data.due_date,
+      assignee: data.assignee
     }),
   });
 }
@@ -280,6 +309,7 @@ export async function EditTask(token, taskID, data) {
       mission_id: data.mission_id,
       status: data.status,
       due_date: data.due_date,
+      assignee: data.assignee
     }),
   });
 }

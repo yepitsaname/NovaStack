@@ -159,7 +159,8 @@ app.get("/tasks", verifyToken, (req, res) => {
 });
 
 
-app.get("/users/all".verifyToken, (req, res) => {
+app.get("/all/users", verifyToken, (req, res) => {
+  console.log("all users called")
   knex("users")
     .select("user_id", "username")
     .then((data) => res.status(200).json(data))
@@ -221,7 +222,7 @@ app.get("/status/:id", verifyToken, (req, res) => {
       "tasks.description",
       "tasks.mission_id",
       "mission.mission_name as mission",
-      "tasks.status",
+      "tasks.status as status_id",
       "status.status as status",
       "tasks.due_date",
       "tasks.assignee as assignee_id",
@@ -230,6 +231,13 @@ app.get("/status/:id", verifyToken, (req, res) => {
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
+
+app.get("/status", verifyToken, (req, res) => {
+  knex("status")
+    .select("*")
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+})
 
 app.get("/mission", verifyToken, (req, res) => {
   console.log("called all missions")
@@ -301,7 +309,7 @@ app.get('/system/status', verifyToken, (req, res) => {
 app.post("/tasks/add", verifyToken, async (req, res) => {
   const data = req.body;
   try {
-    await knex('tasks').insert({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date });
+    await knex('tasks').insert({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date, assignee: data.assignee });
     res.status(200).json({ message: "item saved" })
   } catch (err) {
     console.error("ERROR", err);
