@@ -17,7 +17,7 @@ export default function TaskItem() {
   const [mission, setMission] = useState([]);
   const [status, setStatus] = useState([]);
   const [userList, setUserList] = useState([]);
-
+  const [date, setDate] = useState(dayjs())
   useEffect(() => {
     (async () => {
       const tasks = await GetTaskById(id, token);
@@ -49,6 +49,9 @@ export default function TaskItem() {
     console.log(deleteTasks);
     navigate("/dashboard");
   }
+  const handleDateChange = (dateTime) => {
+    setDate(dayjs(dateTime).toISOString());
+  };
 
   async function applyEdit(formData) {
     let data = {
@@ -56,7 +59,7 @@ export default function TaskItem() {
       description: formData.get("description"),
       mission_id: formData.get("mission_id"),
       status: formData.get("status"),
-      due_date: formData.get("due_date"),
+      due_date: date,
       assignee: formData.get("assignee")
     }
     console.log(data)
@@ -105,7 +108,7 @@ export default function TaskItem() {
               name="due_date"
               label={"Due Date/Time"}
               value={taskData[0].due_date}
-            //onChange={applyEdit()}
+              onChange={handleDateChange}
             />
           </DemoContainer>
         </LocalizationProvider>
