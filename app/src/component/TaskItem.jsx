@@ -1,24 +1,23 @@
-import AppContext from "../AppContext";
-import { GetTaskById, EditTask, ArchievedTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
-import { useParams, } from "react-router";
 import { useContext, useEffect, useState } from "react";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import dayjs from "dayjs";
+import { useParams, } from "react-router";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+
+import { GetTaskById, EditTask, ArchievedTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
+import AppContext from "../AppContext";
 
 export default function TaskItem() {
+  
   const { token } = useContext(AppContext);
   const [taskData, setTaskData] = useState([]);
-  const { id } = useParams();
-  const navigate = useNavigate();
   const [edit, setEdit] = useState(false)
   const [mission, setMission] = useState([]);
   const [status, setStatus] = useState([]);
   const [userList, setUserList] = useState([]);
   const [date, setDate] = useState(dayjs())
+  const { id } = useParams();
+  const navigate = useNavigate();
+
   useEffect(() => {
     (async () => {
       const tasks = await GetTaskById(id, token);
@@ -45,98 +44,119 @@ export default function TaskItem() {
 
 
   async function handleDelete(data) {
-    //console.log(data);
     const deleteTasks = await ArchievedTask(token, data[0]);
-    console.log(deleteTasks);
     navigate("/dashboard");
   }
-  const handleDateChange = (dateTime) => {
-    setDate(dayjs(dateTime).toISOString());
-  };
 
   async function applyEdit(formData) {
+    await EditTask(token, id, data);
     let data = {
       title: formData.get("title"),
       description: formData.get("description"),
       mission_id: formData.get("mission_id"),
       status: formData.get("status"),
-      due_date: date,
+      due_date: dayjs(),
       assignee: formData.get("assignee")
     }
     console.log(data)
-    await EditTask(token, id, data);
+    navigate("/taskslist")
     setEdit(false);
+    
   }
   function enableEdit() {
     setEdit(true)
   }
   if (!taskData[0]) return <div> Loading...</div>;
 
-  // let tId;
-  // console.log(taskData);
-  // taskData.map((d) => {
-  //   tId = d.task_id;
-  //   return tId;
-  // });
-
   console.log(taskData);
 
   return (
     <div>
-      <button onClick={() => enableEdit()}>Edit</button>
-      <button onClick={() => handleDelete(taskData)}>Delete</button>
-      <form className="form component" action={applyEdit}>
-        <label htmlFor="">Task Name:</label>
-        <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].title} />
-        <label htmlFor="">Description</label>
-        <input type="text" disabled={!edit} name="description" defaultValue={taskData[0].description} />
-        <label htmlFor="">Mission:</label>
-        <select name="mission_id" defaultValue={taskData[0].mission_id} disabled={!edit}>
-          {mission.map((elem) => {
-            return (<option value={elem.mission_id}>{elem.mission_name}</option>)
-          })}
-        </select>
-        {/* <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].mission} /> */}
-        <label htmlFor="">Status:</label>
-        <select name="status" defaultValue={taskData[0].status_id} disabled={!edit}>
-          {status.map((elem) => {
-            return (<option value={elem.status_id}>{elem.status}</option>)
-          })}
-        </select>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer components={["DateTimePicker"]}>
-            <DateTimePicker
-              name="due_date"
-              label={"Due Date/Time"}
-              defaultValue={dayjs(taskData[0].due_date)}
-              value={dayjs(date)}
-              disabled={!edit}
-              onChange={handleDateChange}
-            />
-          </DemoContainer>
-        </LocalizationProvider>
+      <button type="button" onClick={enableEdit}>
+        Edit
+      </button>
+      <button type="button" onClick={() => handleDelete(taskData)}>
+        Delete
+      </button>
+      <form className="form component" onSubmit={applyEdit}>
+        <label htmlFor="title">Task Name:</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          disabled={!edit}
+          defaultValue={taskData[0].title}
+        />
 
-        {/* <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].status} /> */}
-        <label htmlFor="">Assignee:</label>
-        <select name="assignee" defaultValue={taskData[0].assignee_id} disabled={!edit}>
-          {userList.map((elem) => {
-            return (<option value={elem.user_id}>{elem.username}</option>)
-          })}
+        <label htmlFor="description">Description:</label>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          disabled={!edit}
+          defaultValue={taskData[0].description}
+        />
+
+        <label htmlFor="mission_id">Mission:</label>
+        <select
+          name="mission_id"
+          id="mission_id"
+          defaultValue={taskData[0].mission_id}
+          disabled={!edit}
+        >
+          {mission.map((elem) => (
+            <option key={elem.mission_id} value={elem.mission_id}>
+              {elem.mission_name}
+            </option>
+          ))}
         </select>
-        {/* <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].assignee} /> */}
-        <button Linktype="submit" disabled={!edit} hidden={!edit} onClick={() => navigate("/taskslist")}
-        >Save</button>
+
+        <label htmlFor="status">Status:</label>
+        <select
+          name="status"
+          id="status"
+          defaultValue={taskData[0].status_id}
+          disabled={!edit}
+        >
+          {status.map((elem) => (
+            <option key={elem.status_id} value={elem.status_id}>
+              {elem.status}
+            </option>
+          ))}
+        </select>
+
+        <label htmlFor="due_date">Due Date/Time:</label>
+        <input
+          type="datetime-local"
+          name="due_date"
+          id="due_date"
+          disabled={!edit}
+          value={taskData.due_date}
+          onChange={(e) => setDate((f) => ({due_date: dayjs(e.target.value) }))}
+        />
+
+        <label htmlFor="assignee">Assignee:</label>
+        <select
+          name="assignee"
+          id="assignee"
+          defaultValue={taskData[0].assignee_id}
+          disabled={!edit}
+        >
+          {userList.map((elem) => (
+            <option key={elem.user_id} value={elem.user_id}>
+              {elem.username}
+            </option>
+          ))}
+        </select>
+
+        <button
+          type="submit"
+          disabled={!edit}
+          hidden={!edit}
+        >
+          Save
+        </button>
       </form>
-      {/* <h1>{taskData[0].title}</h1> */}
-      {/* {taskData.map((d) => (
-        <div key={d.task_id}>
-          <h3>Task: {d.title}</h3>
-          <p>Description: {d.description}</p>
-          <h4>Mission: {d.mission}</h4>
-          <h4>Status: {d.status}</h4>
-          <h4>Assignee: {d.assignee}</h4>
-        </div>
-      ))} */}
     </div>
   );
 }

@@ -57,53 +57,64 @@ export default function TaskListWidget({
 
   if (!taskListData.length) return <div>Loading</div>;
   return (
-    <>
-      {isDashboard ? (
-        <></>
-      ) : (
-        <Button variant="contained" onClick={() => navigate("/taskslist/add")}>
+<div>
+      {!isDashboard && (
+        <button
+          style={{
+            background: "#1976d2",
+            color: "#fff",
+            border: "none",
+            padding: "8px 16px",
+            borderRadius: "4px",
+            cursor: "pointer",
+            marginBottom: "16px",
+          }}
+          onClick={() => navigate("/taskslist/add")}
+        >
           Add
-        </Button>
+        </button>
       )}
-      <Box mb={2} p={2} border={0.5} borderRadius={5} borderColor="#edf1f5ff">
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 600 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Tasks</StyledTableCell>
-                <StyledTableCell align="center">Mission</StyledTableCell>
-                <StyledTableCell align="center">Status</StyledTableCell>
-                <StyledTableCell align="center">Date</StyledTableCell>
-                <StyledTableCell align="center">Assignee</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {taskListData.map((row) => (
-                <StyledTableRow
-                  key={row.task_id}
-                  onClick={() => navigate(`/taskslist/${row.task_id}`)}
-                  sx={{
-                    "&:last-child td, &:last-child th": { border: 0 },
-                    cursor: "pointer",
-                  }}
-                >
-                  <StyledTableCell component="th" scope="row">
-                    {row.title}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    {row.mission}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">{row.status}</StyledTableCell>
-                  <StyledTableCell align="center">
-                    {row.due_date}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">{row.assignee}</StyledTableCell>
-                </StyledTableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
-    </>
+
+      <div
+        style={{
+          marginBottom: "16px",
+          padding: "16px",
+          border: "1px solid #edf1f5",
+          borderRadius: "20px",
+        }}
+      >
+        <table style={{ minWidth: 600, width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th >Tasks</th>
+              <th >Mission</th>
+              <th >Status</th>
+              <th >Date</th>
+              <th >Assignee</th>
+            </tr>
+          </thead>
+          <tbody>
+            {taskListData.map((row) => (
+              <tr
+                key={row.task_id}
+                onClick={() => navigate(`/taskslist/${row.task_id}`)}
+                style={{
+                  cursor: "pointer",
+                  borderBottom: "1px solid #edf1f5",
+                }}
+              >
+                <td >{row.title}</td>
+                <td >{row.mission}</td>
+                <td >{row.status}</td>
+                <td >{row.due_date}</td>
+                <td >{row.assignee}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
+
+

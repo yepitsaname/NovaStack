@@ -9,7 +9,6 @@ import Tasks from "./pages/Tasks";
 import Profile from "./pages/Profile";
 import Reports from "./pages/Reports";
 import Signup from "./pages/Signup";
-import EditTask from "./component/EditTask";
 import TaskItem from "./component/TaskItem";
 import AddTasks from "./component/AddTask";
 
@@ -64,7 +63,6 @@ export default function App() {
             <Route path="/reports" element={<Reports />} />
             <Route path="/configuration" element={<Configuration />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/taskslist/edit" element={<EditTask />} />
             <Route path="/taskslist/add" element={<AddTasks />} />
             <Route path="/taskslist/:id" element={<TaskItem />} />
             <Route path="*" element={<Navigate to="/" replace />} />

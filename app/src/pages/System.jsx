@@ -65,81 +65,80 @@ export default function System() {
   };
 
   return (
-    <>
-      <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
-        <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)" }}>
-          <CardContent>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell colSpan={systems.length} sx={{ textAlign: 'center' }}>
-                    <Typography variant="h4" align="center" fontWeight={"bold"}>OPSCAP</Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  {systems.map((sys) => (
-                    <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
-                      <Typography variant="h6">StarFall: {sys.system_name}</Typography>
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
+<>
+  <div className="box" style={{ padding: "16px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+    <div className="card" style={{ marginBottom: "24px", padding: "16px", backgroundColor: "var(--main-comp-mask)" }}>
+      <div className="card-content">
+        <table>
+          <thead>
+            <tr>
+              <th colSpan={systems.length} style={{ textAlign: "center" }}>
+                <h4 style={{ textAlign: "center", fontWeight: "bold" }}>OPSCAP</h4>
+              </th>
+            </tr>
+            <tr>
+              {systems.map((sys) => (
+                <th key={sys.system_id} style={{ verticalAlign: "middle", textAlign: "center" }}>
+                  <h6>StarFall: {sys.system_name}</h6>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {systems.map((sys) => (
+                <td key={sys.system_id + "-opscap"} style={{ textAlign: "center" }}>
+                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <ColorBlock
+                      status={getStopLight(sys.op_capabilities_available)}
+                      system={sys}
+                    />
+                  </div>
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-              <TableBody>
-                <TableRow>
-                  {systems.map((sys) => (
-                    <TableCell key={sys.system_id + "-opscap"} align="center">
-                      <Box display="flex" justifyContent="center" alignItems="center">
-                        <ColorBlock
-                          status={getStopLight(sys.op_capabilities_available)}
-                          system={sys}
-                        />
-                      </Box>
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      </Box>
-
-      <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
-        <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)" }}>
-          <CardContent>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell colSpan={systems.length} sx={{ textAlign: 'center' }}>
-                    <Typography variant="h4" align="center" fontWeight={"bold"}>SYSCAP</Typography>
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-
-                  {systems.map((sys) => (
-                    <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
-                      <Typography variant="h6">StarFall: {sys.system_name}</Typography>
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
-
-              <TableBody>
-                <TableRow>
-                  {systems.map((sys) => (
-                    <TableCell key={sys.system_id + "-syscap"} align="center">
-                      <Box display="flex" justifyContent="center" alignItems="center">
-                        <ColorBlock status={getStopLight(sys.capabilities_available)}
-                          system={sys} />
-                      </Box>
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      </Box>
-    </>
+  <div className="box" style={{ padding: "16px", display: "flex", justifyContent: "center", alignItems: "center" }}>
+    <div className="card" style={{ marginBottom: "24px", padding: "16px", backgroundColor: "var(--main-comp-mask)" }}>
+      <div className="card-content">
+        <table>
+          <thead>
+            <tr>
+              <th colSpan={systems.length} style={{ textAlign: "center" }}>
+                <h4 style={{ textAlign: "center", fontWeight: "bold" }}>SYSCAP</h4>
+              </th>
+            </tr>
+            <tr>
+              {systems.map((sys) => (
+                <th key={sys.system_id} style={{ verticalAlign: "middle", textAlign: "center" }}>
+                  <h6>StarFall: {sys.system_name}</h6>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {systems.map((sys) => (
+                <td key={sys.system_id + "-syscap"} style={{ textAlign: "center" }}>
+                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                    <ColorBlock
+                      status={getStopLight(sys.capabilities_available)}
+                      system={sys}
+                    />
+                  </div>
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</>
   );
 }
