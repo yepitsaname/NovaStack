@@ -568,4 +568,30 @@ app.get("reports/user/:id", verifyToken, (req, res) => {
     .catch((err) => res.status(400).json(err))
 })
 
+app.get("reports/system/:id", verifyToken, (req, res) => {
+  knex("reports")
+    .join("user_id", "reports.user_id", "users.user_id")
+    .join("system", "reports.system", "mission_systems.system_id")
+    .select(
+      "reports.report_id",
+      "reports.user_id",
+      "users.username",
+      "reports.system",
+      "mission_systems.system_name",
+      "reports.title",
+      "reports.classification",
+      "reports.opscap",
+      "reports.syscap",
+      "reports.short_description",
+      "reports.long_description",
+      "reports.start",
+      "reports.stop",
+      "reports.impact",
+      "reports.fix_action",
+      "reports.cause")
+    .where("reports.system", req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err))
+})
+
 module.exports = app

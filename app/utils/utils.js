@@ -435,6 +435,19 @@ export async function GetReportByUser(token, userId) {
 /**
  *
  * @param {token} token
+ * @param {integer} userId ID of system associated with the report
+ * @returns array with multiple entries: report_id, user_id, username, system, system_name, title, classification, opscap, syscap, short_description, long_description, start, stop, impact, fix_action, cause
+ */
+export async function GetReportByUser(token, userId) {
+  return fetch(`${backend}/reports/system/${userId}`, {
+    method: "GET",
+    headers: { Authorization: token },
+  }).then((res) => res.json())
+}
+
+/**
+ *
+ * @param {token} token
  * @param {object{user_id, system, title, classification, opscap, syscap, short_description, long_description, start, stop, impact, fix_action, cause}} data
  * @returns Success/fail codes
  */
