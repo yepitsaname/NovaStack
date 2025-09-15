@@ -3,9 +3,10 @@ import TaskListWidget from "../component/TasklistWidget";
 import AppContext from "../AppContext";
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
+import CapesChart from "../component/CapesChart";
 
 export default function Dashboard() {
-  const { token, user, profile } = useContext(AppContext);
+  const { token, user, profile, systems } = useContext(AppContext);
   if (!token || !user || !profile) return <Navigate to="/login" />
 
   return (
@@ -15,6 +16,8 @@ export default function Dashboard() {
         <p>Welcome back, {user}. Your systems are operational</p>
         <div className="dashboard-grid">
           <TaskListWidget isDashboard={true} isCurrent={true} />
+          <CapesChart title="OPSCAP" systems={systems}/>
+          <CapesChart title="SYSCAP" systems={systems}/>
         </div>
       </div>
     </>
