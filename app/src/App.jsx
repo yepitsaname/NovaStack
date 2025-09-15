@@ -27,6 +27,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [token, setToken] = useState(null);
+  const [systems, setSystems]= useState([])
 
   const PrivateRoute = () => {
     return user && profile && token ? (
@@ -49,6 +50,8 @@ export default function App() {
         setProfile: setProfile,
         token: token,
         setToken: setToken,
+        systems: systems,
+        setSystems:setSystems
       }}
     >
       <NavBar />

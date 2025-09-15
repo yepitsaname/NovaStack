@@ -3,12 +3,10 @@ import "../../css/forms.css";
 import { useNavigate } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import AppContext from "../AppContext";
-import { GetUser, GetUsersByRole, UserLogin } from "../../utils/utils";
+import { GetUser, GetUsersByRole, UserLogin, GetSystems } from "../../utils/utils";
 
 export default function Login() {
-  const { user, setUser } = useContext(AppContext);
-  const { setToken } = useContext(AppContext);
-  const { setProfile } = useContext(AppContext);
+  const { user, setUser, setToken, setProfile, setSystems } = useContext(AppContext);
   const navigation = useNavigate();
 
   useEffect(() => {
@@ -24,6 +22,7 @@ export default function Login() {
     if (res.token) {
       let profile = (await GetUser(username, res.token))[0]
       let roles = await GetUsersByRole(profile.user_id, res.token)
+      let systems = await GetSystems(res.token)
       setUser(username);
       setToken(res.token);
       setProfile({
@@ -33,6 +32,7 @@ export default function Login() {
         preferences: profile.preferences,
         roles: roles
       })
+      setSystems(systems)
       document.querySelector("html").setAttribute("theme", profile.preferences.theme)
     }
   }
