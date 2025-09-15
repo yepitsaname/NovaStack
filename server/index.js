@@ -309,7 +309,7 @@ app.get('/system/status', verifyToken, (req, res) => {
 app.post("/tasks/add", verifyToken, async (req, res) => {
   const data = req.body;
   try {
-    await knex('tasks').insert({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date });
+    await knex('tasks').insert({ title: data.title, description: data.description, mission_id: data.mission_id, status: data.status, due_date: data.due_date, assignee: data.assignee });
     res.status(200).json({ message: "item saved" })
   } catch (err) {
     console.error("ERROR", err);

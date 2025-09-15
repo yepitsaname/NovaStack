@@ -264,6 +264,7 @@ export async function AddTask(token, data) {
       mission_id: data.mission_id,
       status: data.status,
       due_date: data.due_date,
+      assignee: data.assignee
     }),
   });
 }
