@@ -39,28 +39,28 @@ export default function System() {
   };
 
 
-const ColorBlock = ({ status, system }) => (
-  <Box
-    onClick={() => handleClick(system)}
-    sx={{
-      width: 80,
-      height: 80,
-      backgroundColor: colorMap[status],
-      border: "2px solid #333",
-      borderRadius: 2,
-      mx: "auto",
-      cursor: "pointer" 
-    }}
-  />
-);
+  const ColorBlock = ({ status, system }) => (
+    <Box
+      onClick={() => handleClick(system)}
+      sx={{
+        width: 80,
+        height: 80,
+        backgroundColor: colorMap[status],
+        border: "2px solid #333",
+        borderRadius: 2,
+        mx: "auto",
+        cursor: "pointer"
+      }}
+    />
+  );
 
   const handleClick = (sys) => {
-  if (sys.op_capabilities_available || sys.capabilities_available) {
-    navigate('/reports'); 
-  } else {
-    alert("Could not find data");
-  }
-};
+    if (sys.op_capabilities_available || sys.capabilities_available) {
+      navigate('/reports');
+    } else {
+      alert("Could not find data");
+    }
+  };
 
   return (
     <>
@@ -70,12 +70,11 @@ const ColorBlock = ({ status, system }) => (
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell colSpan={5} sx={{ textAlign: 'center' }}>
+                  <TableCell colSpan={systems.length} sx={{ textAlign: 'center' }}>
                     <Typography variant="h4" align="center" fontWeight={"bold"}>OPSCAP</Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell />
                   {systems.map((sys) => (
                     <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
                       <Typography variant="h6">StarFall: {sys.system_name}</Typography>
@@ -109,12 +108,12 @@ const ColorBlock = ({ status, system }) => (
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell colSpan={5} sx={{ textAlign: 'center' }}>
+                  <TableCell colSpan={systems.length} sx={{ textAlign: 'center' }}>
                     <Typography variant="h4" align="center" fontWeight={"bold"}>SYSCAP</Typography>
                   </TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell />
+
                   {systems.map((sys) => (
                     <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
                       <Typography variant="h6">StarFall: {sys.system_name}</Typography>
@@ -125,16 +124,11 @@ const ColorBlock = ({ status, system }) => (
 
               <TableBody>
                 <TableRow>
-                  <TableCell>
-                    <Typography variant="subtitle1" fontWeight="bold">
-                      SYSCAP
-                    </Typography>
-                  </TableCell>
                   {systems.map((sys) => (
                     <TableCell key={sys.system_id + "-syscap"} align="center">
                       <Box display="flex" justifyContent="center" alignItems="center">
                         <ColorBlock status={getStopLight(sys.capabilities_available)}
-                        system={sys} />
+                          system={sys} />
                       </Box>
                     </TableCell>
                   ))}
