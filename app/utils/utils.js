@@ -309,6 +309,7 @@ export async function EditTask(token, taskID, data) {
       mission_id: data.mission_id,
       status: data.status,
       due_date: data.due_date,
+      assignee: data.assignee
     }),
   });
 }
