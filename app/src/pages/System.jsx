@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import AppContext from "../AppContext";
 import { Navigate } from "react-router-dom";
 import CapesChart from "../component/CapesChart";
-import { GetSystems } from "../../utils/utils";
+
 
 
 export default function System() {
@@ -13,11 +13,11 @@ export default function System() {
   if (!token || !user || !profile) return <Navigate to="/login" />
   
 
-  useEffect(() => {
-    GetSystems(token)
-      .then((data) => setSystems(data))
-      .catch((err) => console.log(err));
-  }, [token]);
+  // useEffect(() => {
+  //   GetSystems(token)
+  //     .then((data) => setSystems(data))
+  //     .catch((err) => console.log(err));
+  // }, [token]);
 
   return (
     <>
