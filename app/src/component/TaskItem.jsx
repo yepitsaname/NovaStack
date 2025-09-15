@@ -108,7 +108,9 @@ export default function TaskItem() {
             <DateTimePicker
               name="due_date"
               label={"Due Date/Time"}
-              value={dayjs(taskData[0].due_date)}
+              defaultValue={dayjs(taskData[0].due_date)}
+              value={dayjs(date)}
+              disabled={!edit}
               onChange={handleDateChange}
             />
           </DemoContainer>
