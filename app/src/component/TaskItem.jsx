@@ -1,5 +1,5 @@
 import AppContext from "../AppContext";
-import { GetTaskById, EditTask, ArchievedTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
+import { GetTaskById, EditTask, ArchivedTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
 import { useParams, } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
@@ -46,7 +46,7 @@ export default function TaskItem() {
 
   async function handleDelete(data) {
     //console.log(data);
-    const deleteTasks = await ArchievedTask(token, data[0]);
+    const deleteTasks = await ArchivedTask(token, data[0]);
     console.log(deleteTasks);
     navigate("/dashboard");
   }

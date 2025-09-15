@@ -320,7 +320,7 @@ export async function EditTask(token, taskID, data) {
  * @param {integer} taskID ID of task being altered
  * @returns returns fetch data
  */
-export async function ArchievedTask(token, data) {
+export async function ArchivedTask(token, data) {
   console.log(data.status);
   return fetch(`${backend}/tasks/${data.task_id}/archive`, {
     method: "PATCH",
