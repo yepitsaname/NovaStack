@@ -91,6 +91,7 @@ const ColorBlock = ({ status, system }) => (
                       <Box display="flex" justifyContent="center" alignItems="center">
                         <ColorBlock
                           status={getStopLight(sys.op_capabilities_available)}
+                          system={sys}
                         />
                       </Box>
                     </TableCell>
@@ -132,7 +133,8 @@ const ColorBlock = ({ status, system }) => (
                   {systems.map((sys) => (
                     <TableCell key={sys.system_id + "-syscap"} align="center">
                       <Box display="flex" justifyContent="center" alignItems="center">
-                        <ColorBlock status={getStopLight(sys.capabilities_available)} />
+                        <ColorBlock status={getStopLight(sys.capabilities_available)}
+                        system={sys} />
                       </Box>
                     </TableCell>
                   ))}
