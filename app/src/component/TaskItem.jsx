@@ -1,5 +1,5 @@
 import AppContext from "../AppContext";
-import { GetTaskById, EditTask, ArchievedTask, AddTask } from "../../utils/utils";
+import { GetTaskById, EditTask, ArchievedTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
 import { useParams, useNavigate } from "react-router";
 import { useContext, useEffect, useState } from "react";
 
@@ -12,6 +12,7 @@ export default function TaskItem() {
   const [mission, setMission] = useState([]);
   const [status, setStatus] = useState([]);
   const [userList, setUserList] = useState([]);
+
   useEffect(() => {
     (async () => {
       const tasks = await GetTaskById(id, token);
@@ -78,13 +79,28 @@ export default function TaskItem() {
         <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].title} />
         <label htmlFor="">Description</label>
         <input type="text" disabled={!edit} name="description" defaultValue={taskData[0].description} />
-        <label htmlFor=""></label>
-        <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].title} />
-        <label htmlFor=""></label>
-        <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].title} />
-        <label htmlFor=""></label>
-        <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].title} />
-        <button type="submit" disabled={!edit}>Save</button>
+        <label htmlFor="">Mission:</label>
+        <select name="mission_id" defaultValue={taskData[0].mission_id} disabled={!edit}>
+          {mission.map((elem) => {
+            return (<option value={elem.mission_id}>{elem.mission_name}</option>)
+          })}
+        </select>
+        {/* <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].mission} /> */}
+        <label htmlFor="">Status:</label>
+        <select name="status" defaultValue={taskData[0].status_id} disabled={!edit}>
+          {status.map((elem) => {
+            return (<option value={elem.status_id}>{elem.status}</option>)
+          })}
+        </select>
+        {/* <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].status} /> */}
+        <label htmlFor="">Assignee:</label>
+        <select name="assignee" defaultValue={taskData[0].assignee_id} disabled={!edit}>
+          {userList.map((elem) => {
+            return (<option value={elem.user_id}>{elem.username}</option>)
+          })}
+        </select>
+        {/* <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].assignee} /> */}
+        <button type="submit" disabled={!edit} hidden={!edit}>Save</button>
       </form>
       {/* <h1>{taskData[0].title}</h1> */}
       {/* {taskData.map((d) => (

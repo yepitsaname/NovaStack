@@ -222,7 +222,7 @@ app.get("/status/:id", verifyToken, (req, res) => {
       "tasks.description",
       "tasks.mission_id",
       "mission.mission_name as mission",
-      "tasks.status",
+      "tasks.status as status_id",
       "status.status as status",
       "tasks.due_date",
       "tasks.assignee as assignee_id",
