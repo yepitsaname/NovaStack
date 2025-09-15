@@ -28,7 +28,7 @@ export async function UpdateUser(username, token, payload) {
     },
     body: JSON.stringify(payload)
   }).then((res) => res.status)
-  .catch(err => err);
+    .catch(err => err);
 };
 
 export async function UpdatePassword(username, token, payload) {
@@ -40,7 +40,7 @@ export async function UpdatePassword(username, token, payload) {
     },
     body: JSON.stringify(payload)
   }).then((res) => res.status)
-  .catch(err => err);
+    .catch(err => err);
 };
 
 /**
@@ -150,6 +150,17 @@ export async function GetAllMissions(token) {
   }).then((res) => res.json());
 }
 
+/**
+ *
+ * @param {Token} token
+ * @returns returns array of status information
+ */
+export async function GetAllStatus(token) {
+  return fetch(`${backend}/status`, {
+    method: "GET",
+    headers: { Authorization: token }
+  }).then((res) => res.json());
+}
 /**
  *
  * @param {integer} id ID of the mission being queried

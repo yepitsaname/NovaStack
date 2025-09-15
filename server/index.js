@@ -231,6 +231,13 @@ app.get("/status/:id", verifyToken, (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+app.get("/status", verifyToken, (req, res) => {
+  knex("status")
+    .select("*")
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err));
+})
+
 app.get("/mission", verifyToken, (req, res) => {
   console.log("called all missions")
   knex("mission")
@@ -428,7 +435,7 @@ app.patch('/history/:id/patch', verifyToken, async (req, res) => {
 })
 
 app.patch("/user/:username", verifyToken, (req, res) => {
-  if( req.body.hasOwnProperty("password") ) { return res.status(403).send() }
+  if (req.body.hasOwnProperty("password")) { return res.status(403).send() }
   knex("users")
     .update(req.body)
     .where("users.username", "=", req.params.username)
@@ -438,18 +445,18 @@ app.patch("/user/:username", verifyToken, (req, res) => {
 
 app.patch("/user/:username/reset_pass", verifyToken, async (req, res) => {
   const keys = Object.keys(req.body);
-  if(keys.length != 2 || !keys.includes("password") || !keys.includes("current")){ return res.status(400).send() }
+  if (keys.length != 2 || !keys.includes("password") || !keys.includes("current")) { return res.status(400).send() }
 
-  const user = await knex("users").select("password").where("username","=",req.params.username).first()
+  const user = await knex("users").select("password").where("username", "=", req.params.username).first()
   const passwordMatch = await bcrypt.compare(req.body.current, user.password)
 
-  if( !passwordMatch ){ return res.status(400).send("Bad password") }
+  if (!passwordMatch) { return res.status(400).send("Bad password") }
   const saltRounds = 10;
   const salt = await bcrypt.genSalt(saltRounds);
   const passwordHash = await bcrypt.hash(req.body.password, salt);
 
   knex("users")
-    .update({"password": passwordHash})
+    .update({ "password": passwordHash })
     .where("users.username", "=", req.params.username)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
