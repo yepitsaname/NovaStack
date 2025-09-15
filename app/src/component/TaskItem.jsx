@@ -44,8 +44,9 @@ export default function TaskItem() {
         <div key={d.task_id}>
           <h3>Task: {d.title}</h3>
           <p>Description: {d.description}</p>
-          <h4>Mission: {d.mission_id}</h4>
+          <h4>Mission: {d.mission}</h4>
           <h4>Status: {d.status}</h4>
+          <h4>Assignee: {d.assignee}</h4>
         </div>
       ))}
     </div>
