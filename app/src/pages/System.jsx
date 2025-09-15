@@ -39,27 +39,28 @@ export default function System() {
   };
 
 
-  const ColorBlock = (status) => (
-    <Box onClick={handleClick}
-      sx={{
-        width: 80,
-        height: 80,
-        backgroundColor: colorMap[status],
-        border: "2px solid #333",
-        borderRadius: 2,
-        mx: "auto"
-      }}
-    />
-  );
+const ColorBlock = ({ status, system }) => (
+  <Box
+    onClick={() => handleClick(system)}
+    sx={{
+      width: 80,
+      height: 80,
+      backgroundColor: colorMap[status],
+      border: "2px solid #333",
+      borderRadius: 2,
+      mx: "auto",
+      cursor: "pointer" 
+    }}
+  />
+);
 
-  const handleClick = () => {
-    const systems = useState(systems)
-    if (systems.status == sys.op_capabilities_available || sys.capabilities_available) {
-      navigate('/Reports')
-    } else {
-      alert("Could not find data")
-    }
+  const handleClick = (sys) => {
+  if (sys.op_capabilities_available || sys.capabilities_available) {
+    navigate('/reports'); 
+  } else {
+    alert("Could not find data");
   }
+};
 
   return (
     <>
