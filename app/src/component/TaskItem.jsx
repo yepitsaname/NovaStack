@@ -44,6 +44,7 @@ export default function TaskItem() {
   }, []);
 
 
+  
   async function handleDelete(data) {
     const deleteTasks = await ArchievedTask(token, data[0]);
     navigate("/dashboard");
