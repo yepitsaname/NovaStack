@@ -4,22 +4,18 @@ import { useState, useEffect, useContext } from "react";
 import AppContext from "../AppContext";
 import { Navigate } from "react-router-dom";
 import CapesChart from "../component/CapesChart";
+import { GetSystems } from "../../utils/utils";
 
 
 export default function System() {
-  const [systems, setSystems] = useState([]);
-  const { token, user, profile } = useContext(AppContext);
+  const { token, user, profile, systems, setSystems } = useContext(AppContext);
 
   if (!token || !user || !profile) return <Navigate to="/login" />
   
 
   useEffect(() => {
-    fetch("http://localhost:3000/system/status", {
-      method: "GET",
-      headers: { Authorization: token },
-    })
-      .then((data) => data.json())
-      .then((res) => setSystems(res))
+    GetSystems(token)
+      .then((data) => setSystems(data))
       .catch((err) => console.log(err));
   }, [token]);
 
