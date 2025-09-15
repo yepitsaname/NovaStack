@@ -385,3 +385,105 @@ export async function DeleteMission(token, missionID) {
 export async function ConvertFieldsToID(token, data) {
   const missionId = await fetch(`${backend}/`)
 }
+
+//REPORT functions
+/**
+ *
+ * @param {token} token
+ * @returns array with multiple entries: report_id, user_id, username, system, system_name, title, classification, opscap, syscap, short_description, long_description, start, stop, impact, fix_action, cause
+ */
+export async function GetAllReports(token) {
+  return fetch(`${backend}/all/reports`, {
+    method: "GET",
+    headers: { Authorization: token },
+  }).then((res) => res.json())
+}
+
+/**
+ *
+ * @param {token} token user token
+ * @param {integer} id ID of requested report
+ * @returns array with single entry: report_id, user_id, username, system, system_name, title, classification, opscap, syscap, short_description, long_description, start, stop, impact, fix_action, cause
+ */
+export async function GetReportById(token, id) {
+  return fetch(`${backend}/reports/report/${id}`, {
+    method: "GET",
+    headers: { Authorization: token },
+  }).then((res) => res.json())
+}
+
+/**
+ *
+ * @param {token} token
+ * @param {integer} userId ID of user who wrote the reports
+ * @returns array with multiple entries: report_id, user_id, username, system, system_name, title, classification, opscap, syscap, short_description, long_description, start, stop, impact, fix_action, cause
+ */
+export async function GetReportByUser(token, userId) {
+  return fetch(`${backend}/reports/user/${userId}`, {
+    method: "GET",
+    headers: { Authorization: token },
+  }).then((res) => res.json())
+}
+
+/**
+ *
+ * @param {token} token
+ * @param {object{user_id, system, title, classification, opscap, syscap, short_description, long_description, start, stop, impact, fix_action, cause}} data
+ * @returns Success/fail codes
+ */
+export async function AddReport(token, data) {
+  return fetch(`${backend}/reports/add`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      user_id: data.user_id,
+      system: data.system,
+      title: data.title,
+      classification: data.classification,
+      opscap: data.opscap,
+      syscap: data.syscap,
+      short_description: data.short_description,
+      long_description: data.long_description,
+      start: data.start,
+      stop: data.stop,
+      impact: data.impact,
+      fix_action: data.fix_action,
+      cause: data.cause
+    })
+  }).then((res) => res.json())
+}
+
+/**
+ *
+ * @param {token} token user token
+ * @param {integer} id ID of report being updated
+ * @param {object{user_id, system, title, classification, opscap, syscap, short_description, long_description, start, stop, impact, fix_action, cause}} data } data
+ * @returns
+ */
+export async function EditReport(token, id, data) {
+  return fetch(`${backend}/reports/report/${id}/patch`, {
+    method: "PATCH",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      user_id: data.user_id,
+      system: data.system,
+      title: data.title,
+      classification: data.classification,
+      opscap: data.opscap,
+      syscap: data.syscap,
+      short_description: data.short_description,
+      long_description: data.long_description,
+      start: data.start,
+      stop: data.stop,
+      impact: data.impact,
+      fix_action: data.fix_action,
+      cause: data.cause
+    })
+  }).then((res) => res.json())
+}
