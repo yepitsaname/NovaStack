@@ -2,6 +2,11 @@ import AppContext from "../AppContext";
 import { GetTaskById, EditTask, ArchievedTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
 import { useParams, useNavigate } from "react-router";
 import { useContext, useEffect, useState } from "react";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import dayjs from "dayjs";
 
 export default function TaskItem() {
   const { token } = useContext(AppContext);
@@ -37,6 +42,7 @@ export default function TaskItem() {
     users();
   }, []);
 
+
   async function handleDelete(data) {
     //console.log(data);
     const deleteTasks = await ArchievedTask(token, data[0]);
@@ -53,6 +59,7 @@ export default function TaskItem() {
       due_date: formData.get("due_date"),
       assignee: formData.get("assignee")
     }
+    console.log(data)
     await EditTask(token, id, data);
     setEdit(false);
   }
@@ -92,6 +99,17 @@ export default function TaskItem() {
             return (<option value={elem.status_id}>{elem.status}</option>)
           })}
         </select>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DemoContainer components={["DateTimePicker"]}>
+            <DateTimePicker
+              name="due_date"
+              label={"Due Date/Time"}
+              value={taskData[0].due_date}
+            //onChange={applyEdit()}
+            />
+          </DemoContainer>
+        </LocalizationProvider>
+
         {/* <input type="text" disabled={!edit} name="title" defaultValue={taskData[0].status} /> */}
         <label htmlFor="">Assignee:</label>
         <select name="assignee" defaultValue={taskData[0].assignee_id} disabled={!edit}>
