@@ -75,6 +75,14 @@ form {
     text-align: center;
   }
 
+  .flex-field{
+    display: flex;
+    div {
+      width: min-content;
+      margin-right: 1em;
+    }
+  }
+
 }
 
 .form.component {
