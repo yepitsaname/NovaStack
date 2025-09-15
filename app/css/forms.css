@@ -59,7 +59,6 @@ form {
     border: 0.5px solid var(--border-color);
     border-radius: 20px;
     vertical-align: top;
-    width: 98%;
 
     /* border-color: var(--sub-mask); */
     /* border-radius: 1em; */
@@ -96,8 +95,8 @@ form {
   align-items: center;
 
   input,
-  textarea {
-    width: 80%;
+  textarea, select {
+    /* width: 80%; */
     border-radius: 1ch;
     padding: 1ch;
     background-color: var(--text-bg);

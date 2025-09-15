@@ -1,4 +1,8 @@
 import { useState } from "react";
+import AppContext from "../AppContext";
+import { useContext } from "react";
+import { Navigate } from "react-router-dom";
+
 import {
   Box,
   FormControl,
@@ -27,6 +31,9 @@ const tasksWidgets = [...dashboardWidgets];
 const reportsWidgets = [...dashboardWidgets];
 
 function WidgetForm({ label, widgetList, setWidgetList }) {
+  const { token, user, profile } = useContext(AppContext);
+  if (!token || !user || !profile) return <Navigate to="/login" />
+
   const [selected, setSelected] = useState([]);
   const [submitted, setSubmitted] = useState([]);
 

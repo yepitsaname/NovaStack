@@ -3,13 +3,15 @@ import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router"
 
 import AppContext from "../AppContext";
+import { Navigate } from "react-router-dom";
 
 
 export default function System() {
   const [systems, setSystems] = useState([]);
-  const { token } = useContext(AppContext);
   const navigate = useNavigate();
+  const { token, user, profile } = useContext(AppContext);
 
+  if (!token || !user || !profile) return <Navigate to="/login" />
   const colorMap = {
     Healthy: "green",
     Warning: "yellow",
