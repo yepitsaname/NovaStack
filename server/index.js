@@ -428,7 +428,7 @@ app.patch('/history/:id/patch', verifyToken, async (req, res) => {
 })
 
 app.patch("/user/:username", verifyToken, (req, res) => {
-  if( req.body.hasOwnProperty("password") ) { return res.status(403).send() }
+  if (req.body.hasOwnProperty("password")) { return res.status(403).send() }
   knex("users")
     .update(req.body)
     .where("users.username", "=", req.params.username)
@@ -438,21 +438,126 @@ app.patch("/user/:username", verifyToken, (req, res) => {
 
 app.patch("/user/:username/reset_pass", verifyToken, async (req, res) => {
   const keys = Object.keys(req.body);
-  if(keys.length != 2 || !keys.includes("password") || !keys.includes("current")){ return res.status(400).send() }
+  if (keys.length != 2 || !keys.includes("password") || !keys.includes("current")) { return res.status(400).send() }
 
-  const user = await knex("users").select("password").where("username","=",req.params.username).first()
+  const user = await knex("users").select("password").where("username", "=", req.params.username).first()
   const passwordMatch = await bcrypt.compare(req.body.current, user.password)
 
-  if( !passwordMatch ){ return res.status(400).send("Bad password") }
+  if (!passwordMatch) { return res.status(400).send("Bad password") }
   const saltRounds = 10;
   const salt = await bcrypt.genSalt(saltRounds);
   const passwordHash = await bcrypt.hash(req.body.password, salt);
 
   knex("users")
-    .update({"password": passwordHash})
+    .update({ "password": passwordHash })
     .where("users.username", "=", req.params.username)
     .then((data) => res.status(200).json(data))
     .catch((err) => res.status(400).json(err));
 });
+
+
+//REPORTS
+//ADD
+app.post("/reports/add", verifyToken, async (req, res) => {
+  const data = req.body;
+  try {
+    await knex("reports").insert(data);
+    res.status(200).json({ message: "Report added" })
+  } catch (err) {
+    console.error("ERROR", err)
+    res.status(500).json({ error: "Failed to save report" })
+  }
+
+})
+//EDIT
+app.patch("/reports/report/:id/patch", verifyToken, async (req, res) => {
+  const data = req.body;
+
+  try {
+    await knex("reports").where("report_id", req.params.id).update(data);
+    res.status(200).json({ message: "Report updated" })
+  } catch (err) {
+    console.error("Error", err);
+    res.status(500).json({ error: "Failed to update report" })
+  }
+})
+
+//GET
+app.get("/all/reports", verifyToken, (req, res) => {
+  knex("reports")
+    .join("user_id", "reports.user_id", "users.user_id")
+    .join("system", "reports.system", "mission_systems.system_id")
+    .select(
+      "reports.report_id",
+      "reports.user_id",
+      "users.username",
+      "reports.system",
+      "mission_systems.system_name",
+      "reports.title",
+      "reports.classification",
+      "reports.opscap",
+      "reports.syscap",
+      "reports.short_description",
+      "reports.long_description",
+      "reports.start",
+      "reports.stop",
+      "reports.impact",
+      "reports.fix_action",
+      "reports.cause")
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err))
+})
+
+app.get("/reports/report/:id", verifyToken, (req, res) => {
+  knex("reports")
+    .join("user_id", "reports.user_id", "users.user_id")
+    .join("system", "reports.system", "mission_systems.system_id")
+    .select(
+      "reports.report_id",
+      "reports.user_id",
+      "users.username",
+      "reports.system",
+      "mission_systems.system_name",
+      "reports.title",
+      "reports.classification",
+      "reports.opscap",
+      "reports.syscap",
+      "reports.short_description",
+      "reports.long_description",
+      "reports.start",
+      "reports.stop",
+      "reports.impact",
+      "reports.fix_action",
+      "reports.cause")
+    .where("reports.report_id", req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err))
+})
+
+app.get("reports/user/:id", verifyToken, (req, res) => {
+  knex("reports")
+    .join("user_id", "reports.user_id", "users.user_id")
+    .join("system", "reports.system", "mission_systems.system_id")
+    .select(
+      "reports.report_id",
+      "reports.user_id",
+      "users.username",
+      "reports.system",
+      "mission_systems.system_name",
+      "reports.title",
+      "reports.classification",
+      "reports.opscap",
+      "reports.syscap",
+      "reports.short_description",
+      "reports.long_description",
+      "reports.start",
+      "reports.stop",
+      "reports.impact",
+      "reports.fix_action",
+      "reports.cause")
+    .where("reports.user_id", req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err))
+})
 
 module.exports = app
