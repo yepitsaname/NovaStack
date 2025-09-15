@@ -84,12 +84,17 @@ export default function Report({state}){
         <label htmlFor="impact">Impact</label>
         <input type="text" id="impact" name="impact" value={impact} onChange={event=>setImpact(event.target.value)}/>
         <label htmlFor="description">Description</label>
-        <input type="textarea" id="description" value={long_description} onChange={event=>setLong_description(event.target.value)}/>
+        <textarea id="description" value={long_description} onChange={event=>setLong_description(event.target.value)}/>
       </fieldset>
       <fieldset name="cause and fix">
         <legend>Cause & Resolution</legend>
+        <label htmlFor="cause">Cause</label>
+        <input type="text" id="cause" name="cause" value={cause} onChange={event=>setCause(event.target.value)}/>
+        <label htmlFor="fix_action">Fix Action</label>
+        <input type="text" id="fix_action" name="fix_action" value={fix_action} onChange={event=>setFix_action(event.target.value)}/>
+        <label htmlFor="stop">Estimated Time of Return to Operations</label>
+        <input type="datetime-local" id="stop_time" name="stop time" value={stop} onChange={event=>setStop(event.target.value)}/>
       </fieldset>
-
       <h3 className={"classification " + classification}>{classification}</h3>
     </form>
   )
