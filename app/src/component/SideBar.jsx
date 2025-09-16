@@ -13,7 +13,6 @@ export default function SideBar() {
         <Link to={!token || !user || !profile ? "/login" : "/taskslist"}>Tasks</Link>
         <Link to={!token || !user || !profile ? "/login" : "/reports"}>Reports</Link>
         <Link to={!token || !user || !profile ? "/login" : "/configuration"}>Configuration</Link>
-        <Link to="/view-report">View Report</Link>
       </aside>)}
     </>
   );

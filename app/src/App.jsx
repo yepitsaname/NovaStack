@@ -58,7 +58,6 @@ export default function App() {
       <main className="main-content">
         <SideBar />
         <Routes>
-          <Route path="/view-report" element={<Report />} />
           <Route path="/" element={<Homepage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route element={<PrivateRoute />}>
