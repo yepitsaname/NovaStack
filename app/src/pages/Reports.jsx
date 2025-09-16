@@ -1,58 +1,8 @@
-import { useState, useEffect, useContext } from "react";
-import AppContext from "../AppContext";
-import { Navigate, useNavigate } from "react-router-dom";
-import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Table,
-  TableBody,
-  TableCell,
-  tableCellClasses,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@mui/material";
-import { GetAllReports } from "../../utils/utils";
-
 export default function Reports() {
-  const { token, user, profile } = useContext(AppContext);
-  const [reportData, setReportData] = useState([]);
-  const navigate = useNavigate();
 
-
-  if (!token || !user || !profile) return <Navigate to="/login" />;
-
-  const refetch = async () => {
-    let temp = await GetAllReports(token);
-    setReportData(temp);
-    console.log(temp)
-  };
-
-  useEffect(() => {
-    refetch();
-  }, []);
-
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
-
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-    "&:last-child td, &:last-child th": {
-      border: 0,
-    },
-  }));
 
   return (
+  <div className="dashboard">
     <Box mb={2} p={2} border={0.5} borderRadius={5} borderColor="#edf1f5ff">
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 600 }} aria-label="reports table">
@@ -105,5 +55,6 @@ export default function Reports() {
         </Table>
       </TableContainer>
     </Box>
+  </div>
   );
 }
