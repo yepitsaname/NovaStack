@@ -5,12 +5,12 @@
   --valid-bg-color: rgb(147, 193, 147);
   --border-color: rgb(44, 116, 203);
 
-  .unclassified{
-    color: rgb(0,122,51);
+  .unclassified {
+    color: rgb(0, 122, 51);
   }
 
-  .cui{
-    color: rgb(80,43,133);
+  .cui {
+    color: rgb(80, 43, 133);
   }
 
   background-color: var(--main-bg);
@@ -206,7 +206,79 @@ body {
     }
   }
 }
+
 .color-block {
-  all: unset;             
-  display: inline-block;   
+  all: unset;
+  display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.logo-container {
+  background: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+svg {
+  width: 250px;
+  height: 250px;
+  background: transparent;
+  display: block;
+}
+
+#N-outer,
+#N-inner {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: drawLogo 2s forwards;
+}
+
+#N-inner {
+  animation-delay: 1s;
+}
+
+@keyframes drawLogo {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.dot {
+  opacity: 0;
+  animation: fadeDot 0.5s forwards;
+}
+
+.dot1 {
+  animation-delay: 2s;
+}
+
+.dot2 {
+  animation-delay: 2.3s;
+}
+
+.dot3 {
+  animation-delay: 2.6s;
+}
+
+@keyframes fadeDot {
+  to {
+    opacity: 1;
+  }
 }

@@ -55,7 +55,7 @@ export default function App() {
     >
       <NavBar />
       <Footer />
-      <main className="main-content">
+      <main>
         <SideBar />
         <Routes>
           <Route path="/view-report" element={<Report />} />
