@@ -1,13 +1,11 @@
 
-import { useParams, } from "react-router";
-
 import { useContext, useEffect, useState } from "react";
 import { useParams, } from "react-router";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import "../../css/forms.css";
 
-import { GetTaskById, EditTask, ArchievedTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
+import { GetTaskById, EditTask, ArchivedTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
 import AppContext from "../AppContext";
 
 
@@ -50,7 +48,7 @@ export default function TaskItem() {
   
   async function handleDelete(data) {
 
-    const deleteTasks = await ArchievedTask(token, data[0]);
+    const deleteTasks = await ArchivedTask(token, data[0]);
 
     navigate("/dashboard");
   }
