@@ -66,6 +66,7 @@ export default function App() {
             <Route path="/system" element={<System />} />
             <Route path="/taskslist" element={<Tasks />} />
             <Route path="/reports" element={<Reports />} />
+            <Route path="/reports/:id" element={<Report />} />
             <Route path="/configuration" element={<Configuration />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/taskslist/add" element={<AddTasks />} />

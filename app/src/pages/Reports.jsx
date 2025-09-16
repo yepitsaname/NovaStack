@@ -66,7 +66,6 @@ export default function Reports() {
               <StyledTableCell align="center">Opscap</StyledTableCell>
               <StyledTableCell align="center">Syscap</StyledTableCell>
               <StyledTableCell align="center">Short Description</StyledTableCell>
-              <StyledTableCell align="center">Long Description</StyledTableCell>
               <StyledTableCell align="center">Start</StyledTableCell>
               <StyledTableCell align="center">Stop</StyledTableCell>
               <StyledTableCell align="center">Impact</StyledTableCell>
@@ -78,7 +77,7 @@ export default function Reports() {
             {reportData.map((row) => (
               <StyledTableRow
                 key={row.report_id}
-                onClick={() => navigate(`/report/system/${row.system}`)}
+                onClick={() => navigate(`/reports/${row.report_id}`)}
                 sx={{ cursor: "pointer" }}
               >
                 <StyledTableCell align="center">{row.report_id}</StyledTableCell>
@@ -89,7 +88,6 @@ export default function Reports() {
                 <StyledTableCell align="center">{row.opscap}</StyledTableCell>
                 <StyledTableCell align="center">{row.syscap}</StyledTableCell>
                 <StyledTableCell align="center">{row.short_description}</StyledTableCell>
-                <StyledTableCell align="center">{row.long_description}</StyledTableCell>
                 <StyledTableCell align="center">
                   {new Date(row.start).toLocaleDateString()}
                 </StyledTableCell>
