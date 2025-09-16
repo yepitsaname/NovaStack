@@ -11,7 +11,7 @@ export default function Report({state = "create", report }){
   report = report || {
     classification: "",
     title: "",
-    system: "",
+    system: NaN,
     syscap: "N/A",
     opscap: "N/A",
     short_description: "",
@@ -72,8 +72,11 @@ export default function Report({state = "create", report }){
       fix_action: fix_action,
       cause: cause
     }
-    console.log(payload);
     let submitResult = state == "create" ? await AddReport(token, payload) : await EditReport(token, payload);
+    if( submitResult == 200 ){
+      state = "view";
+      setFormState("view");
+    }
   }
 
   return(
@@ -102,7 +105,7 @@ export default function Report({state = "create", report }){
             <select id="system" defaultValue={system}>
               <option value="">--Select an Option--</option>
               {systems.map(sys=>sys?.system_name)}
-              <option value="none">None</option>
+              <option value={NaN}>None</option>
             </select>
           </div>
           <div>

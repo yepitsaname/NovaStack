@@ -469,6 +469,9 @@ app.patch("/user/:username/reset_pass", verifyToken, async (req, res) => {
 app.post("/reports/add", verifyToken, async (req, res) => {
   const data = req.body;
   try {
+    const user_id = (await knex("users").select("user_id").where("username","=",req.body.username))[0].user_id;
+    delete req.body.username;
+    req.body.user_id = user_id;
     await knex("reports").insert(data);
     res.status(200).json({ message: "Report added" })
   } catch (err) {
