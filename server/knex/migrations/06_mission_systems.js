@@ -7,7 +7,7 @@ exports.up = function (knex) {
     table.increments("system_id");
     table.string("system_name");
     table.integer("status");
-    table.foreign("status").references("system_status.system_id")
+    table.foreign("status").references("system_status.sys_status_id")
   });
 };
 
