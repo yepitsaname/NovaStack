@@ -7,8 +7,7 @@ import { AddReport, EditReport } from "../../utils/utils"
 export default function Report({state = "create", report }){
   const { user, token, systems } = useContext(AppContext)
   const navigate = useNavigate();
-
-  report = report || {
+  const [report_data, setReport_data] = useState(report || {
     classification: "",
     title: "",
     system: NaN,
@@ -21,43 +20,45 @@ export default function Report({state = "create", report }){
     impact: "",
     fix_action: "",
     cause: ""
-  };
+  })
 
+  const [originState, setOriginState] = useState(state);
   const [formState,setFormState] = useState(state);
-  const [classification, setClassification] = useState(report.classification)
-  const [title, setTitle] = useState(report.title);
-  const [system, setSystem] = useState(report.system);
-  const [syscap, setSyscap] = useState(report.syscap);
-  const [opscap, setOpscap] = useState(report.opscap);
-  const [short_description, setShort_description] = useState(report.short_description);
-  const [long_description, setLong_description] = useState(report.long_description);
-  const [start, setStart] = useState(report.start);
-  const [stop, setStop] = useState(report.stop);
-  const [impact, setImpact] = useState(report.impact);
-  const [fix_action, setFix_action] = useState(report.fix_action);
-  const [cause, setCause] = useState(report.cause);
+  const [classification, setClassification] = useState(report_data.classification)
+  const [title, setTitle] = useState(report_data.title);
+  const [system, setSystem] = useState(report_data.system);
+  const [syscap, setSyscap] = useState(report_data.syscap);
+  const [opscap, setOpscap] = useState(report_data.opscap);
+  const [short_description, setShort_description] = useState(report_data.short_description);
+  const [long_description, setLong_description] = useState(report_data.long_description);
+  const [start, setStart] = useState(report_data.start);
+  const [stop, setStop] = useState(report_data.stop);
+  const [impact, setImpact] = useState(report_data.impact);
+  const [fix_action, setFix_action] = useState(report_data.fix_action);
+  const [cause, setCause] = useState(report_data.cause);
 
   const handleEdit = (event)=>{
     event.preventDefault();
+    console.log(state,formState, originState);
     setFormState("edit");
   }
 
   const handleCancel = (event)=>{
     event.preventDefault();
-    if( state == "create" || formState == "view" ) navigate(-1);
+    if( originState == "create" || formState == "view" ) navigate(-1);
 
-    setClassification(report.classification);
-    setTitle(report.title);
-    setSystem(report.system);
-    setSyscap(report.syscap);
-    setOpscap(report.opscap);
-    setShort_description(report.short_description);
-    setLong_description(report.long_description);
-    setStart(report.start);
-    setStop(report.stop);
-    setImpact(report.impact);
-    setFix_action(report.fix_action);
-    setCause(report.cause);
+    setClassification(report_data.classification);
+    setTitle(report_data.title);
+    setSystem(report_data.system);
+    setSyscap(report_data.syscap);
+    setOpscap(report_data.opscap);
+    setShort_description(report_data.short_description);
+    setLong_description(report_data.long_description);
+    setStart(report_data.start);
+    setStop(report_data.stop);
+    setImpact(report_data.impact);
+    setFix_action(report_data.fix_action);
+    setCause(report_data.cause);
     setFormState("view");
   }
 
@@ -79,13 +80,13 @@ export default function Report({state = "create", report }){
       fix_action: fix_action,
       cause: cause
     }
-    let submitResult = state == "create" ? await AddReport(token, payload) : await EditReport(token, payload);
+    console.log(report_data, payload);
+    let submitResult = (originState == "create" ? await AddReport(token, payload) : await EditReport(token, report_data.report_id, payload));
     console.log(submitResult);
     if( submitResult.hasOwnProperty("report_id") ){
-      state = "view";
       setFormState("view");
-      report.report_id = submitResult.report_id[0].report_id;
-      console.log(report);
+      setOriginState("view");
+      setReport_data(Object.assign(report_data, {...payload, report_id: submitResult.report_id[0].report_id}))
     }
   }
 
@@ -114,7 +115,7 @@ export default function Report({state = "create", report }){
             <label htmlFor="system">Impacted System</label>
             <select id="system" defaultValue={system}>
               <option value="">--Select an Option--</option>
-              {systems.map(sys=><option value={sys.system_id}>{sys.system_name}</option>)}
+              {systems.map(sys=><option key={`${sys.system_id}_${sys.system_name}`} value={sys.system_id}>{sys.system_name}</option>)}
               <option value={NaN}>None</option>
             </select>
           </div>
