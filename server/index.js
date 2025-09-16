@@ -463,4 +463,135 @@ app.patch("/user/:username/reset_pass", verifyToken, async (req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+
+//REPORTS
+//ADD
+app.post("/reports/add", verifyToken, async (req, res) => {
+  const data = req.body;
+  try {
+    await knex("reports").insert(data);
+    res.status(200).json({ message: "Report added" })
+  } catch (err) {
+    console.error("ERROR", err)
+    res.status(500).json({ error: "Failed to save report" })
+  }
+
+})
+//EDIT
+app.patch("/reports/report/:id/patch", verifyToken, async (req, res) => {
+  const data = req.body;
+
+  try {
+    await knex("reports").where("report_id", req.params.id).update(data);
+    res.status(200).json({ message: "Report updated" })
+  } catch (err) {
+    console.error("Error", err);
+    res.status(500).json({ error: "Failed to update report" })
+  }
+})
+
+//GET
+app.get("/all/reports", verifyToken, (req, res) => {
+  knex("reports")
+    .join("user_id", "reports.user_id", "users.user_id")
+    .join("system", "reports.system", "mission_systems.system_id")
+    .select(
+      "reports.report_id",
+      "reports.user_id",
+      "users.username",
+      "reports.system",
+      "mission_systems.system_name",
+      "reports.title",
+      "reports.classification",
+      "reports.opscap",
+      "reports.syscap",
+      "reports.short_description",
+      "reports.long_description",
+      "reports.start",
+      "reports.stop",
+      "reports.impact",
+      "reports.fix_action",
+      "reports.cause")
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err))
+})
+
+app.get("/reports/report/:id", verifyToken, (req, res) => {
+  knex("reports")
+    .join("user_id", "reports.user_id", "users.user_id")
+    .join("system", "reports.system", "mission_systems.system_id")
+    .select(
+      "reports.report_id",
+      "reports.user_id",
+      "users.username",
+      "reports.system",
+      "mission_systems.system_name",
+      "reports.title",
+      "reports.classification",
+      "reports.opscap",
+      "reports.syscap",
+      "reports.short_description",
+      "reports.long_description",
+      "reports.start",
+      "reports.stop",
+      "reports.impact",
+      "reports.fix_action",
+      "reports.cause")
+    .where("reports.report_id", req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err))
+})
+
+app.get("reports/user/:id", verifyToken, (req, res) => {
+  knex("reports")
+    .join("user_id", "reports.user_id", "users.user_id")
+    .join("system", "reports.system", "mission_systems.system_id")
+    .select(
+      "reports.report_id",
+      "reports.user_id",
+      "users.username",
+      "reports.system",
+      "mission_systems.system_name",
+      "reports.title",
+      "reports.classification",
+      "reports.opscap",
+      "reports.syscap",
+      "reports.short_description",
+      "reports.long_description",
+      "reports.start",
+      "reports.stop",
+      "reports.impact",
+      "reports.fix_action",
+      "reports.cause")
+    .where("reports.user_id", req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err))
+})
+
+app.get("reports/system/:id", verifyToken, (req, res) => {
+  knex("reports")
+    .join("user_id", "reports.user_id", "users.user_id")
+    .join("system", "reports.system", "mission_systems.system_id")
+    .select(
+      "reports.report_id",
+      "reports.user_id",
+      "users.username",
+      "reports.system",
+      "mission_systems.system_name",
+      "reports.title",
+      "reports.classification",
+      "reports.opscap",
+      "reports.syscap",
+      "reports.short_description",
+      "reports.long_description",
+      "reports.start",
+      "reports.stop",
+      "reports.impact",
+      "reports.fix_action",
+      "reports.cause")
+    .where("reports.system", req.params.id)
+    .then((data) => res.status(200).json(data))
+    .catch((err) => res.status(400).json(err))
+})
+
 module.exports = app

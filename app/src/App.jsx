@@ -16,6 +16,7 @@ import NavBar from "./component/NavBar";
 import SideBar from "./component/SideBar";
 import Footer from "./component/Footer";
 import Login from "./component/Login";
+import Report from "./component/Report"
 
 import AppContext from "./AppContext";
 
@@ -25,6 +26,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [token, setToken] = useState(null);
+  const [systems, setSystems]= useState([])
 
   const PrivateRoute = () => {
     return user && profile && token ? (
@@ -47,6 +49,8 @@ export default function App() {
         setProfile: setProfile,
         token: token,
         setToken: setToken,
+        systems: systems,
+        setSystems:setSystems
       }}
     >
       <NavBar />
@@ -54,6 +58,7 @@ export default function App() {
       <main className="main-content">
         <SideBar />
         <Routes>
+          <Route path="/view-report" element={<Report />} />
           <Route path="/" element={<Homepage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route element={<PrivateRoute />}>

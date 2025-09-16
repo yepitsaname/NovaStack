@@ -1,144 +1,108 @@
-import { Card, CardContent, Typography, Box, Divider, Table, TableBody, TableCell, TableHead, TableRow, ButtonBase } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router"
+
 
 import AppContext from "../AppContext";
 import { Navigate } from "react-router-dom";
+import CapesChart from "../component/CapesChart";
+
 
 
 export default function System() {
-  const [systems, setSystems] = useState([]);
-  const navigate = useNavigate();
-  const { token, user, profile } = useContext(AppContext);
+  const { token, user, profile, systems, setSystems } = useContext(AppContext);
 
   if (!token || !user || !profile) return <Navigate to="/login" />
-  const colorMap = {
-    Healthy: "green",
-    Warning: "yellow",
-    Critical: "red",
-    Maintenance: "white",
-    Special_Case: "magenta",
-    Offline: "black"
-  };
+  
 
-  useEffect(() => {
-    fetch("http://localhost:3000/system/status", {
-      method: "GET",
-      headers: { Authorization: token },
-    })
-      .then((data) => data.json())
-      .then((res) => setSystems(res))
-      .catch((err) => console.log(err));
-  }, [token]);
-
-  const getStopLight = (status) => {
-    if (status == "Healthy") return "Healthy";
-    if (status == "Warning") return "Warning";
-    if (status == "Critical") return "Critical";
-    if (status == "Maintenance") return "Maintenance";
-    if (status == "Special_Case") return "Special_Case";
-    return "Offline";
-  };
-
-
-  const ColorBlock = ({ status, system }) => (
-    <Box
-      onClick={() => handleClick(system)}
-      sx={{
-        width: 80,
-        height: 80,
-        backgroundColor: colorMap[status],
-        border: "2px solid #333",
-        borderRadius: 2,
-        mx: "auto",
-        cursor: "pointer"
-      }}
-    />
-  );
-
-  const handleClick = (sys) => {
-    if (sys.op_capabilities_available || sys.capabilities_available) {
-      navigate('/reports');
-    } else {
-      alert("Could not find data");
-    }
-  };
+  // useEffect(() => {
+  //   GetSystems(token)
+  //     .then((data) => setSystems(data))
+  //     .catch((err) => console.log(err));
+  // }, [token]);
 
   return (
-<div className="dashboard">
-  <div className="box">
-    <div className="card" >
-      <div className="card-content">
-        <table>
-          <thead>
-            <tr>
-              <th colSpan={systems.length} >
-                <h4 >OPSCAP</h4>
-              </th>
-            </tr>
-            <tr>
-              {systems.map((sys) => (
-                <th key={sys.system_id}>
-                  <h6>StarFall: {sys.system_name}</h6>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {systems.map((sys) => (
-                <td key={sys.system_id + "-opscap"} >
-                  <div >
-                    <ColorBlock
-                      status={getStopLight(sys.op_capabilities_available)}
-                      system={sys}
-                    />
-                  </div>
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+//     <div className="dashboard">
+//       <div className="box">
+//         <div className="card" >
+//           <div className="card-content">
+//             <table>
+//               <thead>
+//                 <tr>
+//                   <th colSpan={systems.length} >
+//                     <h4 >OPSCAP</h4>
+//                   </th>
+//                 </tr>
+//                 <tr>
+//                   {systems.map((sys) => (
+//                     <th key={sys.system_id}>
+//                       <h6>StarFall: {sys.system_name}</h6>
+//                     </th>
+//                   ))}
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 <tr>
+//                   {systems.map((sys) => (
+//                     <td key={sys.system_id + "-opscap"} >
+//                       <div >
+//                         <ColorBlock
+//                           status={getStopLight(sys.op_capabilities_available)}
+//                           system={sys}
+//                         />
+//                       </div>
+//                     </td>
+//                   ))}
+//                 </tr>
+//               </tbody>
+//             </table>
+//           </div>
+//         </div>
+//       </div>
 
-  <div className="box" >
-    <div className="card" >
-      <div className="card-content">
-        <table>
-          <thead>
-            <tr>
-              <th colSpan={systems.length} >
-                <h4 >SYSCAP</h4>
-              </th>
-            </tr>
-            <tr>
-              {systems.map((sys) => (
-                <th key={sys.system_id} >
-                  <h6>StarFall: {sys.system_name}</h6>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {systems.map((sys) => (
-                <td key={sys.system_id + "-syscap"} >
-                  <div>
-                    <ColorBlock
-                      status={getStopLight(sys.capabilities_available)}
-                      system={sys}
-                    />
-                  </div>
-                </td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
+//       <div className="box" >
+//         <div className="card" >
+//           <div className="card-content">
+//             <table>
+//               <thead>
+//                 <tr>
+//                   <th colSpan={systems.length} >
+//                     <h4 >SYSCAP</h4>
+//                   </th>
+//                 </tr>
+//                 <tr>
+//                   {systems.map((sys) => (
+//                     <th key={sys.system_id} >
+//                       <h6>StarFall: {sys.system_name}</h6>
+//                     </th>
+//                   ))}
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 <tr>
+//                   {systems.map((sys) => (
+//                     <td key={sys.system_id + "-syscap"} >
+//                       <div>
+//                         <ColorBlock
+//                           status={getStopLight(sys.capabilities_available)}
+//                           system={sys}
+//                         />
+//                       </div>
+//                     </td>
+//                   ))}
+//                 </tr>
+//               </tbody>
+//             </table>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+    <>
+      <CapesChart title="OPSCAP" systems={systems}/>
+      <CapesChart title="SYSCAP" systems={systems}/>
+    </>
+
   );
 }
+
+
+//make each box pull from new table "reports" with seeded data
+//Reports should present the data from the specific box
