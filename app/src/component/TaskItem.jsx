@@ -7,6 +7,7 @@ import "../../css/forms.css";
 import { GetTaskById, EditTask, ArchievedTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
 import AppContext from "../AppContext";
 
+
 export default function TaskItem() {
   
   const { token } = useContext(AppContext);
@@ -15,7 +16,6 @@ export default function TaskItem() {
   const [mission, setMission] = useState([]);
   const [status, setStatus] = useState([]);
   const [userList, setUserList] = useState([]);
-  const [date, setDate] = useState(dayjs())
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -50,17 +50,23 @@ export default function TaskItem() {
     navigate("/dashboard");
   }
 
-  async function applyEdit(formData) {
-    await EditTask(token, id, data);
+  async function applyEdit(e) {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+
     let data = {
       title: formData.get("title"),
       description: formData.get("description"),
       mission_id: formData.get("mission_id"),
       status: formData.get("status"),
-      due_date: dayjs(),
+      due_date: formData.get('due_date') ? dayjs(formData.get('due_date')) : dayjs(),
       assignee: formData.get("assignee")
     }
+
     console.log(data)
+
+    await EditTask(token, id, data);
     navigate("/taskslist")
     setEdit(false);
     
@@ -141,8 +147,7 @@ export default function TaskItem() {
           name="due_date"
           id="due_date"
           disabled={!edit}
-          value={taskData.due_date}
-          onChange={(e) => setDate((f) => ({due_date: dayjs(e.target.value) }))}
+          defaultValue={taskData[0].due_date ? dayjs(taskData[0].due_date).format('YYYY-MM-DDTHH:mm') : ''}
         />
 
         <label htmlFor="assignee">Assignee:</label>

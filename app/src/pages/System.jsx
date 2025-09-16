@@ -65,20 +65,20 @@ export default function System() {
   };
 
   return (
-<>
-  <div className="box" style={{ padding: "16px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-    <div className="card" style={{ marginBottom: "24px", padding: "16px", backgroundColor: "var(--main-comp-mask)" }}>
+<div className="dashboard">
+  <div className="box">
+    <div className="card" >
       <div className="card-content">
         <table>
           <thead>
             <tr>
-              <th colSpan={systems.length} style={{ textAlign: "center" }}>
-                <h4 style={{ textAlign: "center", fontWeight: "bold" }}>OPSCAP</h4>
+              <th colSpan={systems.length} >
+                <h4 >OPSCAP</h4>
               </th>
             </tr>
             <tr>
               {systems.map((sys) => (
-                <th key={sys.system_id} style={{ verticalAlign: "middle", textAlign: "center" }}>
+                <th key={sys.system_id}>
                   <h6>StarFall: {sys.system_name}</h6>
                 </th>
               ))}
@@ -87,8 +87,8 @@ export default function System() {
           <tbody>
             <tr>
               {systems.map((sys) => (
-                <td key={sys.system_id + "-opscap"} style={{ textAlign: "center" }}>
-                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <td key={sys.system_id + "-opscap"} >
+                  <div >
                     <ColorBlock
                       status={getStopLight(sys.op_capabilities_available)}
                       system={sys}
@@ -103,19 +103,19 @@ export default function System() {
     </div>
   </div>
 
-  <div className="box" style={{ padding: "16px", display: "flex", justifyContent: "center", alignItems: "center" }}>
-    <div className="card" style={{ marginBottom: "24px", padding: "16px", backgroundColor: "var(--main-comp-mask)" }}>
+  <div className="box" >
+    <div className="card" >
       <div className="card-content">
         <table>
           <thead>
             <tr>
-              <th colSpan={systems.length} style={{ textAlign: "center" }}>
-                <h4 style={{ textAlign: "center", fontWeight: "bold" }}>SYSCAP</h4>
+              <th colSpan={systems.length} >
+                <h4 >SYSCAP</h4>
               </th>
             </tr>
             <tr>
               {systems.map((sys) => (
-                <th key={sys.system_id} style={{ verticalAlign: "middle", textAlign: "center" }}>
+                <th key={sys.system_id} >
                   <h6>StarFall: {sys.system_name}</h6>
                 </th>
               ))}
@@ -124,8 +124,8 @@ export default function System() {
           <tbody>
             <tr>
               {systems.map((sys) => (
-                <td key={sys.system_id + "-syscap"} style={{ textAlign: "center" }}>
-                  <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <td key={sys.system_id + "-syscap"} >
+                  <div>
                     <ColorBlock
                       status={getStopLight(sys.capabilities_available)}
                       system={sys}
@@ -139,6 +139,6 @@ export default function System() {
       </div>
     </div>
   </div>
-</>
+</div>
   );
 }

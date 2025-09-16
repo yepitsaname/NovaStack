@@ -17,6 +17,7 @@
   justify-content: center;
   transition: transform 0.2s, box-shadow 0.2s;
 }
+
 .task-widget:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
