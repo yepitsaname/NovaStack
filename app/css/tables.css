@@ -21,6 +21,8 @@ table tbody td {
   font-size: 20px;
 }
 
+table tbody td:hover {}
+
 table thead {
   background: rgba(76, 159, 255, 0.302);
 }

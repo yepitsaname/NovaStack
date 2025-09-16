@@ -65,5 +65,5 @@ footer {
   display: flex;
   flex-direction: column;
   margin-inline: auto;
-  justify-content: center;
+  justify-content: flex-start;
 }
