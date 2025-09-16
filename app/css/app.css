@@ -25,7 +25,8 @@ aside {
   display: flex;
   flex-direction: column;
   background-color: var(--aside-bg);
-  max-width: 10vw;
+  max-width: 20vw;
+  height: 100vh;
 
   a {
     justify-self: flex-end;
@@ -50,7 +51,7 @@ footer {
 .main-content {
   overflow-y: scroll;
   scrollbar-width: thin;
-  scrollbar-color: navy rgb(167, 54, 54);
+  scrollbar-color: rgb(0, 0, 0) rgb(164, 195, 235);
 }
 
 @media screen and (max-width: 700px) {
@@ -58,4 +59,11 @@ footer {
     grid-area: side;
     max-width: unset;
   }
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto;
+  justify-content: center;
 }

@@ -4,7 +4,6 @@ import AppContext from "../AppContext";
 import { UpdatePassword, UpdateUser } from "../../utils/utils";
 import Alert from "@mui/material/Alert";
 import { Navigate } from "react-router";
-import { GetUser } from "../../utils/utils";
 export default function Profile() {
   const { user, token, profile, setProfile } = useContext(AppContext);
 

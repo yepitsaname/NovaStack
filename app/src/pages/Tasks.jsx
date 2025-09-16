@@ -8,7 +8,7 @@ export default function Tasks() {
   if (!token || !user || !profile) return <Navigate to="/login" />
   return (
     <>
-      <div>
+      <div className="dashboard">
         <h1>Task Management</h1>
         <TaskListWidget />
       </div>
