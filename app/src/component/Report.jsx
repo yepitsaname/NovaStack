@@ -114,7 +114,7 @@ export default function Report({state = "create", report}){
         <div className="flex-field">
           <div>
             <label htmlFor="system">Impacted System</label>
-            <select id="system" defaultValue={system} disabled={formState=="view"}>
+            <select id="system" value={system} onChange={event=>setSystem(event.target.value)} disabled={formState=="view"}>
               <option value="">--Select an Option--</option>
               {systems.map(sys=><option key={`${sys.system_id}_${sys.system_name}`} value={sys.system_id}>{sys.system_name}</option>)}
               <option value={NaN}>None</option>
