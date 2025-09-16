@@ -26,7 +26,7 @@ aside {
   flex-direction: column;
   background-color: var(--aside-bg);
   max-width: 20vw;
-  height: 100vh;
+
 
   a {
     justify-self: flex-end;
@@ -48,11 +48,6 @@ footer {
   }
 }
 
-.main-content {
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  scrollbar-color: rgb(0, 0, 0) rgb(164, 195, 235);
-}
 
 @media screen and (max-width: 700px) {
   aside {
@@ -64,6 +59,53 @@ footer {
 .dashboard {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   margin-inline: auto;
-  justify-content: center;
+  justify-content: flex-start;
+  width: auto;
+  height: auto;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(0, 0, 0) rgb(164, 195, 235);
+}
+
+.react-grid-layout {
+  position: relative;
+}
+
+.react-grid-item {
+  transition: all 200ms ease;
+  transition-property: left, top;
+  background: rgb(43, 115, 223);
+  overflow: hidden;
+}
+
+
+
+.widget-content {
+  margin: 20px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.widget-header {
+  padding-bottom: 20px;
+  cursor: move;
+}
+
+.widget-header h3 {
+  margin: 0;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.react-grid-item.react-grid-placeholder {
+  background: rgba(11, 12, 80, 0.1);
+  z-index: 2;
+}
+
+.react-grid-item.dragging {
+  transition: none;
+  z-index: 3;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }

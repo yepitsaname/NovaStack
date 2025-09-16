@@ -35,7 +35,7 @@ export default function TaskListWidget({
 
   return (
     <div className="dashbaord">
-      <fieldset>
+      
           <div>
             {!isDashboard && (
               <button onClick={() => navigate("/taskslist/add")}>
@@ -43,7 +43,7 @@ export default function TaskListWidget({
               </button>
             )}
           </div>
-          <div>
+          <div className="table-container">
             <table>
               <thead>
                 <tr>
@@ -54,7 +54,7 @@ export default function TaskListWidget({
                   <th >Assignee</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody >
                 {taskListData.map((row) => (
                   <tr
                   key={row.task_id}
@@ -69,7 +69,7 @@ export default function TaskListWidget({
               </tbody>
             </table>
         </div>
-      </fieldset>
+     
     </div>
   );
 }
