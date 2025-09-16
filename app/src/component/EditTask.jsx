@@ -1,7 +1,0 @@
-export default function EditTask() {
-  return (
-    <div>
-      <p className="date-time"></p>
-    </div>
-  );
-}

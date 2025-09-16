@@ -1,12 +1,7 @@
 import { useState, useContext, useEffect } from "react";
-import { Box, Button, TextField, Select, MenuItem } from "@mui/material";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { useNavigate } from "react-router-dom";
-//import { SelectChangeEvent } from "@mui/material/Select";
 import AppContext from "../AppContext";
+import "../../css/forms.css";
 import { AddTask, GetAllMissions, GetAllStatus, GetAllUsers } from "../../utils/utils";
 
 import dayjs from "dayjs";
@@ -53,15 +48,11 @@ export default function AddTasks() {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
 
-  const handleDateChange = (dateTime) => {
-    setForm((f) => ({ ...f, due_date: dateTime }));
-  };
-
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     const dataToSend = {
       ...form,
-      due_date: form.due_date.toISOString(),
+      due_date: dayjs(e.target.value),
     };
     console.log(dataToSend);
     const add = await AddTask(token, dataToSend);
@@ -77,104 +68,105 @@ export default function AddTasks() {
   };
 
   return (
-    <Box sx={{ margin: 10, padding: 2 }}>
-      <form onSubmit={handleFormSubmit}>
-        <TextField
-          name="title"
-          label="Title"
-          value={form.title}
-          onChange={handleInputChange}
-          fullWidth
-          sx={{ mb: 2, input: { color: "#22C55E" } }}
-          InputLabelProps={{ sx: { color: "#A855F7" } }}
-        />
-        <Select
-          name="mission_id"
-          label="Mission"
-          value={form.mission_id}
-          onChange={handleInputChange}
-          fullWidth
-          sx={{ mb: 2, input: { color: "#22C55E" } }}
-          InputLabelProps={{
-            sx: { color: "#A855F7" },
-          }}
-        >
-          {mission.map((elem, key) => {
-            return (
-              <MenuItem value={elem.mission_id}>{elem.mission_name}</MenuItem>
-            )
-          })}
+    <div className="form component">
+      <form onSubmit={handleFormSubmit} >
+        <fieldset>
+          <label htmlFor="title" >
+            Title
+          </label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={form.title}
+            onChange={handleInputChange}
+            required
+          />
+        
+       
+          <label htmlFor="mission_id">
+            Mission
+          </label>
+          <select
+            id="mission_id"
+            name="mission_id"
+            value={form.mission_id}
+            onChange={handleInputChange}
+            
+            required
+          >
+            <option value="">Select Mission</option>
+            {mission.map((elem) => (
+              <option key={elem.mission_id} value={elem.mission_id}>
+                {elem.mission_name}
+              </option>
+            ))}
+          </select>
+        
+          <label htmlFor="description" >
+            Description
+          </label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            value={form.description}
+            onChange={handleInputChange}
+            
+            required
+          />
+      
+          <label htmlFor="status" >
+            Status
+          </label>
+          <select
+            id="status"
+            name="status"
+            value={form.status}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="">Select Status</option>
+            {status.map((elem) => (
+              <option key={elem.status_id} value={elem.status_id}>
+                {elem.status}
+              </option>
+            ))}
+          </select>
+        
+          <label htmlFor="due_date" >
+            Due Date/Time
+          </label>
+          <input
+            type="datetime-local"
+            id="due_date"
+            name="due_date"
+            value={form.due_date.format("YYYY-MM-DDTHH:mm")}
+            onChange={(e) => setForm((f) => ({ ...f, due_date: dayjs(e.target.value) }))}
+          />
 
-        </Select>
-
-        <TextField
-          name="description"
-          label="Description"
-          value={form.description}
-          onChange={handleInputChange}
-          fullWidth
-          sx={{ mb: 2, input: { color: "#22C55E" } }}
-          InputLabelProps={{
-            sx: {
-              color: "#A855F7",
-            },
-          }}
-        />
-        <Select
-          name="status"
-          label="Status"
-          value={form.status}
-          onChange={handleInputChange}
-          fullWidth
-          sx={{ mb: 2, input: { color: "#22C55E" } }}
-          InputLabelProps={{
-            sx: {
-              color: "#A855F7",
-            },
-          }}
-        >
-          {status.map((elem, key) => {
-            return (
-              <MenuItem value={elem.status_id}>{elem.status}</MenuItem>
-            )
-          })}
-
-        </Select>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DemoContainer components={["DateTimePicker"]}>
-            <DateTimePicker
-              label={"Due Date/Time"}
-              value={form.due_date}
-              onChange={handleDateChange}
-            />
-          </DemoContainer>
-        </LocalizationProvider>
-
-        <Select
-          name="assignee"
-          label="Assignee"
-          value={form.assignee}
-          onChange={handleInputChange}
-          fullWidth
-          sx={{ mb: 2, input: { color: "#22C55E" } }}
-          InputLabelProps={{
-            sx: {
-              color: "#A855F7",
-            },
-          }}
-        >
-          {userList.map((elem, key) => {
-            return (
-              <MenuItem value={elem.user_id}>{elem.username}</MenuItem>
-            )
-          })}
-
-        </Select>
-
-        <Button type="submit" variant="contained" fullWidth>
+          <label htmlFor="assignee">
+            Assignee
+          </label>
+          <select
+            id="assignee"
+            name="assignee"
+            value={form.assignee}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="">Select Assignee</option>
+            {userList.map((elem) => (
+              <option key={elem.user_id} value={elem.user_id}>
+                {elem.username}
+              </option>
+            ))}
+          </select>
+        <button type="submit">
           Submit
-        </Button>
+        </button>
+        </fieldset>
       </form>
-    </Box>
+    </div>
   );
 }

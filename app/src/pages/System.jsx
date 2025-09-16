@@ -20,10 +20,86 @@ export default function System() {
   // }, [token]);
 
   return (
+//     <div className="dashboard">
+//       <div className="box">
+//         <div className="card" >
+//           <div className="card-content">
+//             <table>
+//               <thead>
+//                 <tr>
+//                   <th colSpan={systems.length} >
+//                     <h4 >OPSCAP</h4>
+//                   </th>
+//                 </tr>
+//                 <tr>
+//                   {systems.map((sys) => (
+//                     <th key={sys.system_id}>
+//                       <h6>StarFall: {sys.system_name}</h6>
+//                     </th>
+//                   ))}
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 <tr>
+//                   {systems.map((sys) => (
+//                     <td key={sys.system_id + "-opscap"} >
+//                       <div >
+//                         <ColorBlock
+//                           status={getStopLight(sys.op_capabilities_available)}
+//                           system={sys}
+//                         />
+//                       </div>
+//                     </td>
+//                   ))}
+//                 </tr>
+//               </tbody>
+//             </table>
+//           </div>
+//         </div>
+//       </div>
+
+//       <div className="box" >
+//         <div className="card" >
+//           <div className="card-content">
+//             <table>
+//               <thead>
+//                 <tr>
+//                   <th colSpan={systems.length} >
+//                     <h4 >SYSCAP</h4>
+//                   </th>
+//                 </tr>
+//                 <tr>
+//                   {systems.map((sys) => (
+//                     <th key={sys.system_id} >
+//                       <h6>StarFall: {sys.system_name}</h6>
+//                     </th>
+//                   ))}
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 <tr>
+//                   {systems.map((sys) => (
+//                     <td key={sys.system_id + "-syscap"} >
+//                       <div>
+//                         <ColorBlock
+//                           status={getStopLight(sys.capabilities_available)}
+//                           system={sys}
+//                         />
+//                       </div>
+//                     </td>
+//                   ))}
+//                 </tr>
+//               </tbody>
+//             </table>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
     <>
       <CapesChart title="OPSCAP" systems={systems}/>
       <CapesChart title="SYSCAP" systems={systems}/>
     </>
+
   );
 }
 

@@ -1,4 +1,4 @@
-import "../../css/card.css"; // keep this path for your tree
+import "../../css/app.css"; // keep this path for your tree
 import TaskListWidget from "../component/TasklistWidget";
 import AppContext from "../AppContext";
 import { useContext } from "react";
@@ -11,7 +11,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div>
+      <div className="dashboard">
         <h1>Mission Control Dashboard</h1>
         <p>Welcome back, {user}. Your systems are operational</p>
         <div className="dashboard-grid">

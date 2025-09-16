@@ -3,32 +3,16 @@ import AppContext from "../AppContext";
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 
-import {
-  Box,
-  FormControl,
-  FormGroup,
-  FormControlLabel,
-  FormLabel,
-  Checkbox,
-  Button,
-  Typography,
-  Divider,
-} from "@mui/material";
-
 const dashboardWidgets = [
-  "systemHealth",
-  "pendingTasks",
-  "currentTasks",
-  "recentActivity",
-  "realTimeEvents",
-  "sycapsTrends",
-  "systemAvailability",
-  "taskCompletionAnalytics",
+  "OPSCAP",
+  "SYSCAP",
+  "Task List",
+  "Report List"
 ];
 
-const systemWidgets = [...dashboardWidgets];
-const tasksWidgets = [...dashboardWidgets];
-const reportsWidgets = [...dashboardWidgets];
+// const systemWidgets = [...dashboardWidgets];
+// const tasksWidgets = [...dashboardWidgets];
+// const reportsWidgets = [...dashboardWidgets];
 
 function WidgetForm({ label, widgetList, setWidgetList }) {
   const { token, user, profile } = useContext(AppContext);
@@ -57,95 +41,88 @@ function WidgetForm({ label, widgetList, setWidgetList }) {
   };
 
   return (
-    <Box mb={2} p={2} border={0.5} borderRadius={5} borderColor="#2c74cb">
-      <form onSubmit={handleSubmit}>
-        <FormControl component="fieldset" fullWidth>
-          <FormLabel component="legend" sx={{ mb: 1, color: "#a1d4d4" }}>
+    <div >
+      <form onSubmit={handleSubmit} className="form component">
+        <fieldset >
+          <legend >
             {label}
-          </FormLabel>
-
-          <FormGroup row>
+          </legend>
+          <div >
             {widgetList.map((widget) => (
-              <FormControlLabel
-                key={widget}
-                control={
-                  <Checkbox
-                    checked={selected.includes(widget)}
-                    onChange={handleChange}
-                    value={widget}
-                    color="primary"
-                  />
-                }
-                label={widget}
-              />
+              <label key={widget} >
+                <input
+                  type="checkbox"
+                  checked={selected.includes(widget)}
+                  onChange={handleChange}
+                  value={widget}
+                  style={{ marginRight: '5px' }}
+                />
+                {widget}
+              </label>
             ))}
-          </FormGroup>
-
-          <Box sx={{ mt: 2 }}>
-            <Button
+          </div>
+          <div >
+            <button
               type="submit"
-              variant="outlined"
-              color="primary"
-              sx={{ mr: 1 }}
             >
               Submit
-            </Button>
-
-            <Button variant="outlined" onClick={handleClear}>
+            </button>
+            <button
+              type="button"
+              onClick={handleClear}
+            >
               Clear
-            </Button>
-          </Box>
-        </FormControl>
+            </button>
+          </div>
+        </fieldset>
       </form>
-
       {submitted.length > 0 && (
-        <Box mt={2}>
-          <Typography variant="body2">
+        <div >
+          <span>
             <b>Submitted:</b> {submitted.join(", ")}
-          </Typography>
-        </Box>
+          </span>
+        </div>
       )}
-    </Box>
+    </div>
   );
 }
 export default function Configuration() {
   const [dashboardList, setDashboardList] = useState([]);
-  const [systemList, setSystemList] = useState([]);
-  const [tasksList, setTasksList] = useState([]);
-  const [reportList, setReportList] = useState([]);
+  // const [systemList, setSystemList] = useState([]);
+  // const [tasksList, setTasksList] = useState([]);
+  // const [reportList, setReportList] = useState([]);
 
-  console.log(dashboardList, systemList, tasksList, reportList);
+  // console.log(dashboardList, systemList, tasksList, reportList);
 
   return (
-    <Box sx={{ maxWidth: 800, mx: "auto", mt: 4, p: 0 }}>
-      <Typography variant="h4" gutterBottom>
-        Configuration
-      </Typography>
-      <Divider />
+<div className="dashboard">
+  <h4 >
+    Configuration
+  </h4>
+  <WidgetForm
+    label="Dashboard Config"
+    widgetList={dashboardWidgets}
+    setWidgetList={setDashboardList}
+  />
 
-      <WidgetForm
-        label="Dashboard Config"
-        widgetList={dashboardWidgets}
-        setWidgetList={setDashboardList}
-      />
+  {/* <WidgetForm
+    label="System Config"
+    widgetList={systemWidgets}
+    setWidgetList={setSystemList}
+  />
 
-      <WidgetForm
-        label="System Config"
-        widgetList={systemWidgets}
-        setWidgetList={setSystemList}
-      />
+  <WidgetForm
+    label="Tasks Config"
+    widgetList={tasksWidgets}
+    setWidgetList={setTasksList}
+  />
 
-      <WidgetForm
-        label="Tasks Config"
-        widgetList={tasksWidgets}
-        setWidgetList={setTasksList}
-      />
+  <WidgetForm
+    label="Reports Config"
+    widgetList={reportsWidgets}
+    setWidgetList={setReportList}
+  /> */}
+</div>
 
-      <WidgetForm
-        label="Reports Config"
-        widgetList={reportsWidgets}
-        setWidgetList={setReportList}
-      />
-    </Box>
   );
 }

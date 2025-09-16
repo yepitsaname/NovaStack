@@ -327,7 +327,7 @@ export async function EditTask(token, taskID, data) {
  * @param {integer} taskID ID of task being altered
  * @returns returns fetch data
  */
-export async function ArchievedTask(token, data) {
+export async function ArchivedTask(token, data) {
   console.log(data.status);
   return fetch(`${backend}/tasks/${data.task_id}/archive`, {
     method: "PATCH",
@@ -427,6 +427,19 @@ export async function GetReportById(token, id) {
  */
 export async function GetReportByUser(token, userId) {
   return fetch(`${backend}/reports/user/${userId}`, {
+    method: "GET",
+    headers: { Authorization: token },
+  }).then((res) => res.json())
+}
+
+/**
+ *
+ * @param {token} token
+ * @param {integer} userId ID of system associated with the report
+ * @returns array with multiple entries: report_id, user_id, username, system, system_name, title, classification, opscap, syscap, short_description, long_description, start, stop, impact, fix_action, cause
+ */
+export async function GetReportBySystem(token, userId) {
+  return fetch(`${backend}/reports/system/${userId}`, {
     method: "GET",
     headers: { Authorization: token },
   }).then((res) => res.json())
