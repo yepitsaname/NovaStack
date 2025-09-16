@@ -80,9 +80,8 @@ export default function Report({state = "create", report }){
       fix_action: fix_action,
       cause: cause
     }
-    console.log(report_data, payload);
+
     let submitResult = (originState == "create" ? await AddReport(token, payload) : await EditReport(token, report_data.report_id, payload));
-    console.log(submitResult);
     if( submitResult.hasOwnProperty("report_id") ){
       setFormState("view");
       setOriginState("view");
@@ -96,24 +95,24 @@ export default function Report({state = "create", report }){
       <fieldset name="basic information">
         <legend>Basic Information</legend>
         <label htmlFor="classification">Classification</label>
-        <select defaultValue={classification} onChange={event=>setClassification(event.target.value)}>
+        <select defaultValue={classification} onChange={event=>setClassification(event.target.value)} disabled={formState=="view"}>
           <option value="">--Select an Option--</option>
           <option value="unclassified">Unclassified</option>
           <option value="cui">CUI</option>
         </select>
         <label htmlFor="title">Title</label>
-        <input type="text" id="title" name="title" value={title} onChange={event=>setTitle(event.target.value)}/>
+        <input type="text" id="title" name="title" value={title} onChange={event=>setTitle(event.target.value)} disabled={formState=="view"}/>
         <label htmlFor="start_time">Time of Event</label>
-        <input type="datetime-local" id="start_time" name="start time" value={start} onChange={event=>setStart(event.target.value)}/>
+        <input type="datetime-local" id="start_time" name="start time" value={start} onChange={event=>setStart(event.target.value)} disabled={formState=="view"}/>
         <label htmlFor="short_description" >Short Description</label>
-        <input type="text" id="short_description" name="short description" value={short_description} onChange={event=>setShort_description(event.target.value)}/>
+        <input type="text" id="short_description" name="short description" value={short_description} onChange={event=>setShort_description(event.target.value)} disabled={formState=="view"}/>
       </fieldset>
       <fieldset name="event details">
         <legend>Event Details</legend>
         <div className="flex-field">
           <div>
             <label htmlFor="system">Impacted System</label>
-            <select id="system" defaultValue={system}>
+            <select id="system" defaultValue={system} disabled={formState=="view"}>
               <option value="">--Select an Option--</option>
               {systems.map(sys=><option key={`${sys.system_id}_${sys.system_name}`} value={sys.system_id}>{sys.system_name}</option>)}
               <option value={NaN}>None</option>
@@ -121,7 +120,7 @@ export default function Report({state = "create", report }){
           </div>
           <div>
             <label htmlFor="opscap">OPSCAP</label>
-            <select id="opscap" defaultValue={opscap} onChange={event=>setOpscap(event.target.value)}>
+            <select id="opscap" defaultValue={opscap} onChange={event=>setOpscap(event.target.value)} disabled={formState=="view"}>
               <option value="N/A">N/A</option>
               <option value="Warning">Warning</option>
               <option value="Critical">Red</option>
@@ -130,7 +129,7 @@ export default function Report({state = "create", report }){
           </div>
           <div>
             <label htmlFor="syscap">SYSCAP</label>
-            <select id="syscap" defaultValue={syscap}>
+            <select id="syscap" defaultValue={syscap} disabled={formState=="view"}>
               <option value="N/A">N/A</option>
               <option value="Warning">Yellow</option>
               <option value="Critical">Red</option>
@@ -141,18 +140,18 @@ export default function Report({state = "create", report }){
           </div>
         </div>
         <label htmlFor="impact">Impact</label>
-        <input type="text" id="impact" name="impact" value={impact} onChange={event=>setImpact(event.target.value)}/>
+        <input type="text" id="impact" name="impact" value={impact} onChange={event=>setImpact(event.target.value)} disabled={formState=="view"}/>
         <label htmlFor="description">Description</label>
-        <textarea id="description" value={long_description} onChange={event=>setLong_description(event.target.value)}/>
+        <textarea id="description" value={long_description} onChange={event=>setLong_description(event.target.value)} disabled={formState=="view"}/>
       </fieldset>
       <fieldset name="cause and fix">
         <legend>Cause & Resolution</legend>
         <label htmlFor="cause">Cause</label>
-        <input type="text" id="cause" name="cause" value={cause} onChange={event=>setCause(event.target.value)}/>
+        <input type="text" id="cause" name="cause" value={cause} onChange={event=>setCause(event.target.value)} disabled={formState=="view"}/>
         <label htmlFor="fix_action">Fix Action</label>
-        <input type="text" id="fix_action" name="fix_action" value={fix_action} onChange={event=>setFix_action(event.target.value)}/>
+        <input type="text" id="fix_action" name="fix_action" value={fix_action} onChange={event=>setFix_action(event.target.value)} disabled={formState=="view"}/>
         <label htmlFor="stop">Estimated Time of Return to Operations</label>
-        <input type="datetime-local" id="stop_time" name="stop time" value={stop} onChange={event=>setStop(event.target.value)}/>
+        <input type="datetime-local" id="stop_time" name="stop time" value={stop} onChange={event=>setStop(event.target.value)} disabled={formState=="view"}/>
       </fieldset>
       <div>
         {formState == "create" || formState == "edit" ? (<>
