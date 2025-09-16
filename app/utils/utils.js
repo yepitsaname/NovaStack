@@ -439,7 +439,6 @@ export async function GetReportByUser(token, userId) {
  * @returns Success/fail codes
  */
 export async function AddReport(token, data) {
-  console.log("post");
   return fetch(`${backend}/reports/add`, {
     method: "POST",
     headers: {
@@ -472,7 +471,6 @@ export async function AddReport(token, data) {
  * @returns
  */
 export async function EditReport(token, id, data) {
-  console.log("patch")
   return fetch(`${backend}/reports/report/${id}/patch`, {
     method: "PATCH",
     headers: {
