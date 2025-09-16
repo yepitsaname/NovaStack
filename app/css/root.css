@@ -212,73 +212,70 @@ body {
   display: inline-block;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.logo-container {
-  background: #f7f7f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
-
 svg {
-  width: 250px;
-  height: 250px;
-  background: transparent;
-  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-#N-outer,
-#N-inner {
-  stroke-dasharray: 200;
-  stroke-dashoffset: 200;
-  animation: drawLogo 2s forwards;
+.logo-stroke {
+  stroke: #09D8FF;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: drawLine 10s forwards;
 }
 
-#N-inner {
-  animation-delay: 1s;
+.l1 {
+  animation-delay: 0s;
 }
 
-@keyframes drawLogo {
+.l2 {
+  animation-delay: 0.4s;
+}
+
+.l3 {
+  animation-delay: 0.8s;
+}
+
+@keyframes drawLine {
   to {
     stroke-dashoffset: 0;
   }
 }
 
-.dot {
+.logo-dot {
+  fill: #09D8FF;
   opacity: 0;
-  animation: fadeDot 0.5s forwards;
+  filter: drop-shadow(0 0 8px #09D8FF);
+  animation: showDot 0.5s forwards;
 }
 
 .dot1 {
-  animation-delay: 2s;
+  animation-delay: 5.0s;
 }
 
 .dot2 {
-  animation-delay: 2.3s;
+  animation-delay: 5.1s;
 }
 
 .dot3 {
-  animation-delay: 2.6s;
+  animation-delay: 5.2s;
 }
 
-@keyframes fadeDot {
+@keyframes showDot {
   to {
     opacity: 1;
   }
+}
+
+.logo-container {
+  background: var(--main-bg);
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
 }
