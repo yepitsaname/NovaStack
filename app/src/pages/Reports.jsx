@@ -77,7 +77,9 @@ export default function Reports() {
             {reportData.map((row) => (
               <StyledTableRow
                 key={row.report_id}
-                onClick={() => navigate(`/reports/${row.report_id}`)}
+                onClick={() => navigate(`/reports/${row.report_id}`,
+                  {state: {formState: "view", report: row}}
+                )}
                 sx={{ cursor: "pointer" }}
               >
                 <StyledTableCell align="center">{row.report_id}</StyledTableCell>

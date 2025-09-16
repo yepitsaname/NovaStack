@@ -1,13 +1,14 @@
 import { useState, useContext } from "react";
 import AppContext from "../AppContext";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { AddReport, EditReport } from "../../utils/utils"
 
 //state "view", "edit", "create"
-export default function Report({state = "create", report }){
+export default function Report({state = "create", report}){
   const { user, token, systems } = useContext(AppContext)
+  const locationState = useLocation().state;
   const navigate = useNavigate();
-  const [report_data, setReport_data] = useState(report || {
+  const [report_data, setReport_data] = useState(locationState?.report || report || {
     classification: "",
     title: "",
     system: NaN,
@@ -22,8 +23,8 @@ export default function Report({state = "create", report }){
     cause: ""
   })
 
-  const [originState, setOriginState] = useState(state);
-  const [formState,setFormState] = useState(state);
+  const [originState, setOriginState] = useState(locationState?.formState || state);
+  const [formState,setFormState] = useState(locationState?.formState || state);
   const [classification, setClassification] = useState(report_data.classification)
   const [title, setTitle] = useState(report_data.title);
   const [system, setSystem] = useState(report_data.system);
