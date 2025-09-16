@@ -11,10 +11,10 @@ export default function TaskListWidget({
   isDashboard = false,
   isCurrent = false,
 }) {
-  const [taskListData, setTaskListData] = useState([]);
+  
+const [taskListData, setTaskListData] = useState([]);
   const { token } = useContext(AppContext);
   const navigate = useNavigate();
-
   const refetch = async () => {
     const tasks = async () => {
       let temp = await GetAllTasks(token);
