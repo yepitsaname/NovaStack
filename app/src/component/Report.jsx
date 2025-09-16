@@ -40,7 +40,6 @@ export default function Report({state = "create", report}){
 
   const handleEdit = (event)=>{
     event.preventDefault();
-    console.log(state,formState, originState);
     setFormState("edit");
   }
 
@@ -83,10 +82,12 @@ export default function Report({state = "create", report}){
     }
 
     let submitResult = (originState == "create" ? await AddReport(token, payload) : await EditReport(token, report_data.report_id, payload));
-    if( submitResult.hasOwnProperty("report_id") ){
+    if( submitResult?.message == "Report added" || submitResult?.message == "Report updated" ){
       setFormState("view");
       setOriginState("view");
-      setReport_data(Object.assign(report_data, {...payload, report_id: submitResult.report_id[0].report_id}))
+      submitResult?.report_id ?
+        setReport_data(Object.assign(report_data, {...payload, report_id: submitResult.report_id[0].report_id})) :
+        setReport_data(Object.assign(report_data, {...payload}))
     }
   }
 
