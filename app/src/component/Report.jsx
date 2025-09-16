@@ -55,8 +55,8 @@ export default function Report({state = "create", report}){
     setOpscap(report_data.opscap);
     setShort_description(report_data.short_description);
     setLong_description(report_data.long_description);
-    setStart(report_data.start);
-    setStop(report_data.stop);
+    setStart(report_data.start.substring(0,report_data.start.length - 1));
+    setStop(report_data.stop.substring(0,report_data.stop.length - 1));
     setImpact(report_data.impact);
     setFix_action(report_data.fix_action);
     setCause(report_data.cause);
