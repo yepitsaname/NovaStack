@@ -8,13 +8,13 @@ import {
     TableHead,
     TableRow,
     Paper,
-    Box,
-    Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 import AppContext from "../AppContext";
-import { GetReportBySystem } from "../../utils/utils";
+import { GetReportBySystem } from "../../utils/utils"; // assuming you want this
+
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -30,38 +30,46 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     "&:nth-of-type(odd)": {
         backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
     "&:last-child td, &:last-child th": {
         border: 0,
     },
 }));
 
-// if (!taskListData.length) return <div>Loading</div>;
 export default function SystemReport() {
-    const { token, user, profile, systems, setSystems } = useContext(AppContext);
     const [reportData, setReportData] = useState([]);
+    const { token } = useContext(AppContext);
     const navigate = useNavigate();
 
-
     const refetch = async () => {
-        const tasks = async () => {
-            let temp = await GetReportBySystem(token);
-            setReportData(temp);
-            console.log(temp)
-        };
-        tasks();
-    }
+        let temp = await GetReportBySystem(token);
+        setReportData(temp);
+    };
+
     useEffect(() => {
-        refetch()
+        refetch();
     }, []);
 
-
+    if (!reportData.length) return <div>Loading...</div>;
+    if (!token || !user || !profile) return <Navigate to="/login" />
 
     return (
-        <div>SystemReport</div>
-    )
+        <TableContainer component={Paper}>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <StyledTableCell>ID</StyledTableCell>
+                        <StyledTableCell>Report</StyledTableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {reportData.map((row, idx) => (
+                        <StyledTableRow key={idx}>
+                            <StyledTableCell>{row.id}</StyledTableCell>
+                            <StyledTableCell>{row.name}</StyledTableCell>
+                        </StyledTableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+    );
 }
-
-
-//all reports is in reports page
-//system report shows all reports for specific system
