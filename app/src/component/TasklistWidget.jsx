@@ -30,44 +30,45 @@ export default function TaskListWidget({
 
   const formatDate = (dateString) => {
     const date = dayjs(dateString);
-    return date.format('MM/DD/YYYY') ;
+    return date.format('MM/DD/YYYY');
   };
 
   return (
     <div className="dashbaord">
       <fieldset>
-          <div>
-            {!isDashboard && (
-              <button onClick={() => navigate("/taskslist/add")}>
-                Add
-              </button>
-            )}
-          </div>
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th >Tasks</th>
-                  <th >Mission</th>
-                  <th >Status</th>
-                  <th >Date</th>
-                  <th >Assignee</th>
-                </tr>
-              </thead>
-              <tbody>
-                {taskListData.map((row) => (
-                  <tr
+        <div>
+          {!isDashboard && (
+            <button onClick={() => navigate("/taskslist/add")}>
+              Add
+            </button>
+          )}
+        </div>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th >Tasks</th>
+                <th >Mission</th>
+                <th >Status</th>
+                <th >Date</th>
+                <th >Assignee</th>
+              </tr>
+            </thead>
+            <tbody>
+              {taskListData.map((row) => (
+                <tr
                   key={row.task_id}
+                  style={{ cursor: "pointer" }}
                   onClick={() => navigate(`/taskslist/${row.task_id}`)}>
-                    <td >{row.title}</td>
-                    <td >{row.mission}</td>
-                    <td >{row.status}</td>
-                    <td >{formatDate(row.due_date)}</td>
-                    <td >{row.assignee}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  <td >{row.title}</td>
+                  <td >{row.mission}</td>
+                  <td >{row.status}</td>
+                  <td >{formatDate(row.due_date)}</td>
+                  <td >{row.assignee}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </fieldset>
     </div>
