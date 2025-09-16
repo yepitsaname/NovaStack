@@ -114,7 +114,7 @@ export default function Report({state = "create", report }){
             <label htmlFor="system">Impacted System</label>
             <select id="system" defaultValue={system}>
               <option value="">--Select an Option--</option>
-              {systems.map(sys=>sys?.system_name)}
+              {systems.map(sys=><option value={sys.system_id}>{sys.system_name}</option>)}
               <option value={NaN}>None</option>
             </select>
           </div>
