@@ -16,8 +16,8 @@ export default function Report({state = "create", report}){
     opscap: "N/A",
     short_description: "",
     long_description: "",
-    start: "",
-    stop: "",
+    start: "Z",
+    stop: "Z",
     impact: "",
     fix_action: "",
     cause: ""
@@ -32,8 +32,8 @@ export default function Report({state = "create", report}){
   const [opscap, setOpscap] = useState(report_data.opscap);
   const [short_description, setShort_description] = useState(report_data.short_description);
   const [long_description, setLong_description] = useState(report_data.long_description);
-  const [start, setStart] = useState(report_data.start);
-  const [stop, setStop] = useState(report_data.stop);
+  const [start, setStart] = useState(report_data.start.substring(0,report_data.start.length - 1));
+  const [stop, setStop] = useState(report_data.stop.substring(0,report_data.stop.length - 1));
   const [impact, setImpact] = useState(report_data.impact);
   const [fix_action, setFix_action] = useState(report_data.fix_action);
   const [cause, setCause] = useState(report_data.cause);
@@ -96,7 +96,7 @@ export default function Report({state = "create", report}){
       <fieldset name="basic information">
         <legend>Basic Information</legend>
         <label htmlFor="classification">Classification</label>
-        <select defaultValue={classification} onChange={event=>setClassification(event.target.value)} disabled={formState=="view"}>
+        <select value={classification} onChange={event=>setClassification(event.target.value)} disabled={formState=="view"}>
           <option value="">--Select an Option--</option>
           <option value="unclassified">Unclassified</option>
           <option value="cui">CUI</option>
@@ -121,7 +121,7 @@ export default function Report({state = "create", report}){
           </div>
           <div>
             <label htmlFor="opscap">OPSCAP</label>
-            <select id="opscap" defaultValue={opscap} onChange={event=>setOpscap(event.target.value)} disabled={formState=="view"}>
+            <select id="opscap" value={opscap} onChange={event=>setOpscap(event.target.value)} disabled={formState=="view"}>
               <option value="N/A">N/A</option>
               <option value="Warning">Warning</option>
               <option value="Critical">Red</option>
@@ -130,7 +130,7 @@ export default function Report({state = "create", report}){
           </div>
           <div>
             <label htmlFor="syscap">SYSCAP</label>
-            <select id="syscap" defaultValue={syscap} disabled={formState=="view"}>
+            <select id="syscap" value={syscap} disabled={formState=="view"}>
               <option value="N/A">N/A</option>
               <option value="Warning">Yellow</option>
               <option value="Critical">Red</option>
