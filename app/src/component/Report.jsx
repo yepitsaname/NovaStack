@@ -37,8 +37,15 @@ export default function Report({state = "create", report }){
   const [fix_action, setFix_action] = useState(report.fix_action);
   const [cause, setCause] = useState(report.cause);
 
-  const handleCancel = ()=>{
-    if( state == "create" || state == "view" ) navigate(-1);
+  const handleEdit = (event)=>{
+    event.preventDefault();
+    setFormState("edit");
+  }
+
+  const handleCancel = (event)=>{
+    event.preventDefault();
+    if( state == "create" || formState == "view" ) navigate(-1);
+
     setClassification(report.classification);
     setTitle(report.title);
     setSystem(report.system);
@@ -73,9 +80,12 @@ export default function Report({state = "create", report }){
       cause: cause
     }
     let submitResult = state == "create" ? await AddReport(token, payload) : await EditReport(token, payload);
-    if( submitResult == 200 ){
+    console.log(submitResult);
+    if( submitResult.hasOwnProperty("report_id") ){
       state = "view";
       setFormState("view");
+      report.report_id = submitResult.report_id[0].report_id;
+      console.log(report);
     }
   }
 
@@ -145,11 +155,11 @@ export default function Report({state = "create", report }){
       </fieldset>
       <div>
         {formState == "create" || formState == "edit" ? (<>
-          <button type="submit" form="report-form">Save</button>
-          <button type="button" onClick={()=>{handleCancel()}}>Cancel</button>
+          <button type="submit" form="report-form">Submit Report</button>
+          <button type="button" onClick={(event)=>{handleCancel(event)}}>Cancel</button>
         </>):(<>
-          <button type="button" onClick={()=>{setFormState("edit")}}>Edit</button>
-          <button type="button" onClick={()=>{handleCancel()}}>Go Back</button>
+          <button type="button" onClick={(event)=>{handleEdit(event)}}>Edit</button>
+          <button type="button" onClick={(event)=>{handleCancel(event)}}>Go Back</button>
         </>)}
       </div>
       <h3 className={"classification " + classification}>{classification}</h3>

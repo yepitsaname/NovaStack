@@ -472,8 +472,8 @@ app.post("/reports/add", verifyToken, async (req, res) => {
     const user_id = (await knex("users").select("user_id").where("username","=",req.body.username))[0].user_id;
     delete req.body.username;
     req.body.user_id = user_id;
-    await knex("reports").insert(data);
-    res.status(200).json({ message: "Report added" })
+    const report_id = await knex("reports").insert([data], ["report_id"]);
+    res.status(200).json({ message: "Report added", report_id: report_id })
   } catch (err) {
     console.error("ERROR", err)
     res.status(500).json({ error: "Failed to save report" })
