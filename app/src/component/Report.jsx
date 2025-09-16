@@ -130,7 +130,7 @@ export default function Report({state = "create", report}){
           </div>
           <div>
             <label htmlFor="syscap">SYSCAP</label>
-            <select id="syscap" value={syscap} disabled={formState=="view"}>
+            <select id="syscap" value={syscap} onChange={event=>setSyscap(event.target.value)} disabled={formState=="view"}>
               <option value="N/A">N/A</option>
               <option value="Warning">Yellow</option>
               <option value="Critical">Red</option>
