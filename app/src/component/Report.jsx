@@ -1,15 +1,19 @@
-import { useState, useContext } from "react"
+import { useState, useContext } from "react";
 import AppContext from "../AppContext";
+import { useNavigate } from "react-router";
+import { AddReport, EditReport } from "../../utils/utils"
 
 //state "view", "edit", "create"
-export default function Report({state}){
-  const { systems } = useContext(AppContext)
-  const [report, setReport] = useState({
-    classification: "unclassified",
+export default function Report({state = "create", report }){
+  const { user, token, systems } = useContext(AppContext)
+  const navigate = useNavigate();
+
+  report = report || {
+    classification: "",
     title: "",
     system: "",
-    syscap: "",
-    opscap: "",
+    syscap: "N/A",
+    opscap: "N/A",
     short_description: "",
     long_description: "",
     start: "",
@@ -17,22 +21,63 @@ export default function Report({state}){
     impact: "",
     fix_action: "",
     cause: ""
-  });
-  const [classification, setClassification] = useState(report.classification || "")
-  const [title, setTitle] = useState(report.title || "");
-  const [system, setSystem] = useState(report.system || "");
-  const [syscap, setSyscap] = useState(report.syscap || "");
-  const [opscap, setOpscap] = useState(report.opscap || "");
-  const [short_description, setShort_description] = useState(report.short_description || "");
-  const [long_description, setLong_description] = useState(report.long_description || "");
-  const [start, setStart] = useState(report.start || "");
-  const [stop, setStop] = useState(report.stop || "");
-  const [impact, setImpact] = useState(report.impact || "");
-  const [fix_action, setFix_action] = useState(report.fix_action || "");
-  const [cause, setCause] = useState(report.cause || "");
+  };
+
+  const [formState,setFormState] = useState(state);
+  const [classification, setClassification] = useState(report.classification)
+  const [title, setTitle] = useState(report.title);
+  const [system, setSystem] = useState(report.system);
+  const [syscap, setSyscap] = useState(report.syscap);
+  const [opscap, setOpscap] = useState(report.opscap);
+  const [short_description, setShort_description] = useState(report.short_description);
+  const [long_description, setLong_description] = useState(report.long_description);
+  const [start, setStart] = useState(report.start);
+  const [stop, setStop] = useState(report.stop);
+  const [impact, setImpact] = useState(report.impact);
+  const [fix_action, setFix_action] = useState(report.fix_action);
+  const [cause, setCause] = useState(report.cause);
+
+  const handleCancel = ()=>{
+    if( state == "create" || state == "view" ) navigate(-1);
+    setClassification(report.classification);
+    setTitle(report.title);
+    setSystem(report.system);
+    setSyscap(report.syscap);
+    setOpscap(report.opscap);
+    setShort_description(report.short_description);
+    setLong_description(report.long_description);
+    setStart(report.start);
+    setStop(report.stop);
+    setImpact(report.impact);
+    setFix_action(report.fix_action);
+    setCause(report.cause);
+    setFormState("view");
+  }
+
+  const saveReport = async (event)=>{
+    event.preventDefault();
+    // Some validation logic here
+    const payload = {
+      username: user,
+      system: system,
+      title: title,
+      classification: classification,
+      opscap: opscap,
+      syscap: syscap,
+      short_description: short_description,
+      long_description: long_description,
+      start: start,
+      stop: stop,
+      impact: impact,
+      fix_action: fix_action,
+      cause: cause
+    }
+    console.log(payload);
+    let submitResult = state == "create" ? await AddReport(token, payload) : await EditReport(token, payload);
+  }
 
   return(
-    <form className="form component">
+    <form className="form component" onSubmit={saveReport} id="report-form">
       <h3 className={"classification " + classification}>{classification}</h3>
       <fieldset name="basic information">
         <legend>Basic Information</legend>
@@ -62,8 +107,8 @@ export default function Report({state}){
           </div>
           <div>
             <label htmlFor="opscap">OPSCAP</label>
-            <select id="opscap" defaultValue={opscap}>
-              <option value="">N/A</option>
+            <select id="opscap" defaultValue={opscap} onChange={event=>setOpscap(event.target.value)}>
+              <option value="N/A">N/A</option>
               <option value="Warning">Warning</option>
               <option value="Critical">Red</option>
               <option value="Offline">Offline</option>
@@ -72,7 +117,7 @@ export default function Report({state}){
           <div>
             <label htmlFor="syscap">SYSCAP</label>
             <select id="syscap" defaultValue={syscap}>
-              <option value="">N/A</option>
+              <option value="N/A">N/A</option>
               <option value="Warning">Yellow</option>
               <option value="Critical">Red</option>
               <option value="Maintenance">Maintenance</option>
@@ -95,6 +140,15 @@ export default function Report({state}){
         <label htmlFor="stop">Estimated Time of Return to Operations</label>
         <input type="datetime-local" id="stop_time" name="stop time" value={stop} onChange={event=>setStop(event.target.value)}/>
       </fieldset>
+      <div>
+        {formState == "create" || formState == "edit" ? (<>
+          <button type="submit" form="report-form">Save</button>
+          <button type="button" onClick={()=>{handleCancel()}}>Cancel</button>
+        </>):(<>
+          <button type="button" onClick={()=>{setFormState("edit")}}>Edit</button>
+          <button type="button" onClick={()=>{handleCancel()}}>Go Back</button>
+        </>)}
+      </div>
       <h3 className={"classification " + classification}>{classification}</h3>
     </form>
   )
