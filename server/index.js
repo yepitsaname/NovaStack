@@ -493,8 +493,8 @@ app.patch("/reports/report/:id/patch", verifyToken, async (req, res) => {
 //GET
 app.get("/all/reports", verifyToken, (req, res) => {
   knex("reports")
-    .join("user_id", "reports.user_id", "users.user_id")
-    .join("system", "reports.system", "mission_systems.system_id")
+    .join("users", "reports.user_id", "users.user_id")
+    .join("mission_systems", "reports.system", "mission_systems.system_id")
     .select(
       "reports.report_id",
       "reports.user_id",
@@ -518,8 +518,8 @@ app.get("/all/reports", verifyToken, (req, res) => {
 
 app.get("/reports/report/:id", verifyToken, (req, res) => {
   knex("reports")
-    .join("user_id", "reports.user_id", "users.user_id")
-    .join("system", "reports.system", "mission_systems.system_id")
+    .join("users", "reports.user_id", "users.user_id")
+    .join("mission_systems", "reports.system", "mission_systems.system_id")
     .select(
       "reports.report_id",
       "reports.user_id",
@@ -544,8 +544,8 @@ app.get("/reports/report/:id", verifyToken, (req, res) => {
 
 app.get("reports/user/:id", verifyToken, (req, res) => {
   knex("reports")
-    .join("user_id", "reports.user_id", "users.user_id")
-    .join("system", "reports.system", "mission_systems.system_id")
+    .join("users", "reports.user_id", "users.user_id")
+    .join("mission_systems", "reports.system", "mission_systems.system_id")
     .select(
       "reports.report_id",
       "reports.user_id",
@@ -570,8 +570,8 @@ app.get("reports/user/:id", verifyToken, (req, res) => {
 
 app.get("reports/system/:id", verifyToken, (req, res) => {
   knex("reports")
-    .join("user_id", "reports.user_id", "users.user_id")
-    .join("system", "reports.system", "mission_systems.system_id")
+    .join("users", "reports.user_id", "users.user_id")
+    .join("mission_systems", "reports.system", "mission_systems.system_id")
     .select(
       "reports.report_id",
       "reports.user_id",

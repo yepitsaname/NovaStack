@@ -30,12 +30,11 @@ export default function TaskListWidget({
 
   const formatDate = (dateString) => {
     const date = dayjs(dateString);
-    return date.format('MM/DD/YYYY') ;
+    return date.format('MM/DD/YYYY');
   };
 
   return (
     <div className="dashbaord">
-      
           <div>
             {!isDashboard && (
               <button onClick={() => navigate("/taskslist/add")}>
@@ -57,17 +56,20 @@ export default function TaskListWidget({
               <tbody >
                 {taskListData.map((row) => (
                   <tr
+
+
                   key={row.task_id}
+                  style={{ cursor: "pointer" }}
                   onClick={() => navigate(`/taskslist/${row.task_id}`)}>
-                    <td >{row.title}</td>
-                    <td >{row.mission}</td>
-                    <td >{row.status}</td>
-                    <td >{formatDate(row.due_date)}</td>
-                    <td >{row.assignee}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  <td >{row.title}</td>
+                  <td >{row.mission}</td>
+                  <td >{row.status}</td>
+                  <td >{formatDate(row.due_date)}</td>
+                  <td >{row.assignee}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
      
     </div>
