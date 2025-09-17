@@ -469,7 +469,7 @@ app.patch("/user/:username/reset_pass", verifyToken, async (req, res) => {
 app.post("/reports/add", verifyToken, async (req, res) => {
   const data = req.body;
   try {
-    const user_id = (await knex("users").select("user_id").where("username","=",req.body.username))[0].user_id;
+    const user_id = (await knex("users").select("user_id").where("username", "=", req.body.username))[0].user_id;
     delete req.body.username;
     req.body.user_id = user_id;
 
@@ -486,7 +486,7 @@ app.patch("/reports/report/:id/patch", verifyToken, async (req, res) => {
   const data = req.body;
 
   try {
-    const user_id = (await knex("users").select("user_id").where("username","=",req.body.username))[0].user_id;
+    const user_id = (await knex("users").select("user_id").where("username", "=", req.body.username))[0].user_id;
     delete req.body.username;
     req.body.user_id = user_id;
 
@@ -500,6 +500,7 @@ app.patch("/reports/report/:id/patch", verifyToken, async (req, res) => {
 
 //GET
 app.get("/all/reports", verifyToken, (req, res) => {
+  console.log("all reports called")
   knex("reports")
     .join("users", "reports.user_id", "users.user_id")
     .join("mission_systems", "reports.system", "mission_systems.system_id")
@@ -525,6 +526,7 @@ app.get("/all/reports", verifyToken, (req, res) => {
 })
 
 app.get("/reports/report/:id", verifyToken, (req, res) => {
+  console.log("report by id called")
   knex("reports")
     .join("users", "reports.user_id", "users.user_id")
     .join("mission_systems", "reports.system", "mission_systems.system_id")
@@ -550,7 +552,8 @@ app.get("/reports/report/:id", verifyToken, (req, res) => {
     .catch((err) => res.status(400).json(err))
 })
 
-app.get("reports/user/:id", verifyToken, (req, res) => {
+app.get("/reports/user/:id", verifyToken, (req, res) => {
+  console.log("report by user called")
   knex("reports")
     .join("users", "reports.user_id", "users.user_id")
     .join("mission_systems", "reports.system", "mission_systems.system_id")
@@ -576,7 +579,8 @@ app.get("reports/user/:id", verifyToken, (req, res) => {
     .catch((err) => res.status(400).json(err))
 })
 
-app.get("reports/system/:id", verifyToken, (req, res) => {
+app.get("/reports/system/:id", verifyToken, (req, res) => {
+  console.log("report by system called")
   knex("reports")
     .join("users", "reports.user_id", "users.user_id")
     .join("mission_systems", "reports.system", "mission_systems.system_id")

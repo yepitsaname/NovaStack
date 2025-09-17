@@ -1,3 +1,4 @@
+
 import Logo from "../component/Logo";
 
 export default function Homepage() {
@@ -5,5 +6,6 @@ export default function Homepage() {
     <div className="homepage">
       <Logo/>
     </div>
+
   );
 }
