@@ -55,6 +55,8 @@ export default function SystemReport() {
 
   return (
     <div className="dashboard">
+      <h1>Reports</h1>
+      <div> <button onClick={() => navigate("/reports/new")}>Add</button></div>
       <Box mb={2} p={2} border={0.5} borderRadius={5} borderColor="#edf1f5ff">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 600 }} aria-label="reports table">
