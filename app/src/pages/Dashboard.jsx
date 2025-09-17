@@ -25,19 +25,19 @@ export default function Dashboard() {
   const defaultLayouts = useMemo(
     () => ({
       lg: [
-        { i: "tasklist", x: 0, y: 0, w: 10, h: 10, minW: 6, minH: 4 },
-        { i: "opscap", x: 0, y: 10, w: 5, h: 5, minW: 4, minH: 3 },
-        { i: "syscap", x: 0, y: 16, w: 5, h: 5, minW: 4, minH: 3 },
+        { i: "tasklist", x: 0, y: 0, w: 11, h: 12, minW: 6, minH: 4 },
+        { i: "opscap", x: 0, y: 10, w: 5, h: 9, minW: 4, minH: 3 },
+        { i: "syscap", x: 0, y: 16, w: 5, h: 9, minW: 4, minH: 3 },
       ],
       md: [
-        { i: "tasklist", x: 0, y: 0, w: 10, h: 10, minW: 5, minH: 4 },
-        { i: "opscap", x: 0, y: 10, w: 4, h: 6, minW: 4, minH: 3 },
-        { i: "syscap", x: 0, y: 16, w: 4, h: 6, minW: 4, minH: 3 },
+        { i: "tasklist", x: 0, y: 0, w: 9, h: 9, minW: 5, minH: 4 },
+        { i: "opscap", x: 0, y: 10, w: 9, h: 9, minW: 4, minH: 3 },
+        { i: "syscap", x: 0, y: 16, w: 9, h: 9, minW: 4, minH: 3 },
       ],
       sm: [
-        { i: "tasklist", x: 0, y: 0, w: 8, h: 10, minW: 4, minH: 4 },
-        { i: "opscap", x: 0, y: 10, w: 8, h: 6, minW: 4, minH: 3 },
-        { i: "syscap", x: 0, y: 16, w: 8, h: 6, minW: 4, minH: 3 },
+        { i: "tasklist", x: 0, y: 0, w: 4, h: 9, minW: 1, minH: 1 },
+        { i: "opscap", x: 0, y: 10, w: 4, h: 9, minW: 1, minH: 1 },
+        { i: "syscap", x: 0, y: 16, w: 4, h: 9, minW: 1, minH: 1 },
       ],
     }),
     []
@@ -69,8 +69,8 @@ export default function Dashboard() {
         isDraggable
         isResizable
         draggableHandle=".widget-header"
-        margin={[15, 15]}
-        containerPadding={[15, 15]}
+        margin={[10, 10]}
+        containerPadding={[0, 0]}
         useCSSTransforms
         measureBeforeMount={false}
         onLayoutChange={handleLayoutChange}
@@ -88,16 +88,16 @@ export default function Dashboard() {
 
         <div key="opscap" className="widget-content">
           <div className="widget-header">
-            <h3>OPSCAP Analytics</h3>
-            <CapesChart title="OPSCAP" systems={systems} />
+            <h3>OPSCAP Analytics</h3> 
           </div>
+          <CapesChart title="OPSCAP" systems={systems} />
         </div>
 
         <div key="syscap" className="widget-content">
           <div className="widget-header">
             <h3>SYSCAP Overview</h3>
-            <CapesChart title="SYSCAP" systems={systems} />
           </div>
+          <CapesChart title="SYSCAP" systems={systems} />
         </div>
       </ResponsiveGridLayout>
     </div>

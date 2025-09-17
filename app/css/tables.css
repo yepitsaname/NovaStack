@@ -8,35 +8,35 @@
 table {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--form-font);
-  border: 3px solid #233791;
+  border: 3px solid var(--aside);
   background-color: var(--form-bg);
-  /*#111c4d*/
   width: 100%;
-  text-align: left;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
+  height: 100vh;
+  text-align: center;
+  border-radius: 3px;
+  margin: 0px;
+  padding: 20px;
+
 }
 
 table td,
 table th {
-  border-top: 5px solid #233791;
+  border-top: 5px solid var(--main-comp-mask);
   padding: 6px 4px;
-  transition: all 0.3s ease;
 }
 
 table tbody tr {
-  transition: all 0.3s ease;
   cursor: pointer;
   color: var(--form-font);
 }
 
 table tbody tr:nth-child(2n + 1) {
-  background-color: rgba(32, 66, 105, 0.302);
+  background-color: var(--main-comp-mask);
 }
 
 table tbody tr:hover {
-  background-color: rgba(76, 159, 255, 0.45) !important;
+  background-color: var(--main-comp-mask) !important;
+  transform: scale(1.02);
 }
 
 
@@ -50,7 +50,7 @@ table tbody tr:hover {
 }
 
 table thead {
-  background: rgba(76, 159, 255, 0.302);
+  background: var(--main-bg);
   position: sticky;
   top: 0;
   z-index: 100;

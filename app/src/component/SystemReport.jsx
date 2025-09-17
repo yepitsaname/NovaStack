@@ -10,6 +10,8 @@ export default function SystemReport() {
   const navigate = useNavigate();
   const { id } = useParams();
 
+  if (!token || !user || !profile) return <Navigate to="/login" />;
+  
   const refetch = async () => {
     const temp = await GetReportBySystem(token, id);
     setReportData(temp);
@@ -20,8 +22,8 @@ export default function SystemReport() {
 
   }, []);
 
-  if (!token || !user || !profile) return <Navigate to="/login" />;
-  if (!reportData.length) return <div>Loading...</div>;
+ 
+  if (!reportData.length) return <div>No reports found for this system.</div>;
 
   return (
     <div className="dashboard">
