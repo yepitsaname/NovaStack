@@ -3,15 +3,15 @@ import { useNavigate } from "react-router"
 import { GetSystemStatus } from "../../utils/utils";
 import AppContext from "../AppContext";
 
-export default function CapesChart({title, systems, isOps=false}) {
+export default function CapesChart({ title, systems, isOps = false }) {
   const { token } = useContext(AppContext);
   const navigate = useNavigate();
   const [stopLight, setStopLight] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     GetSystemStatus(token)
-    .then(data => setStopLight(data));
-  },[])
+      .then(data => setStopLight(data));
+  }, [])
 
   const getStopLight = (status) => {
     return stopLight.find(element => element.sys_status_id == status)?.color;
@@ -50,8 +50,8 @@ export default function CapesChart({title, systems, isOps=false}) {
           <table>
             <thead>
               <tr>
-                <th 
-                  colSpan={systems.length} 
+                <th
+                  colSpan={systems.length}
                 >
                   <h4>
 
@@ -61,8 +61,8 @@ export default function CapesChart({title, systems, isOps=false}) {
               </tr>
               <tr>
                 {systems.map((sys) => (
-                  <th 
-                    key={sys.system_id} 
+                  <th
+                    key={sys.system_id}
                   >
                     <h6>
                       StarFall: {sys.system_name}

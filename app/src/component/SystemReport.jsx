@@ -1,113 +1,86 @@
 import { useEffect, useState, useContext } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  tableCellClasses,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Box,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Navigate } from "react-router-dom";
 import AppContext from "../AppContext";
 import { GetReportBySystem } from "../../utils/utils";
 
-
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
 
 export default function SystemReport() {
   const [reportData, setReportData] = useState([]);
   const { token, user, profile } = useContext(AppContext);
   const navigate = useNavigate();
   const { id } = useParams();
+
+  if (!token || !user || !profile) return <Navigate to="/login" />;
+  
   const refetch = async () => {
-    let temp = await GetReportBySystem(token, id);
-    setReportData(temp)
+    const temp = await GetReportBySystem(token, id);
+    setReportData(temp);
   };
 
   useEffect(() => {
     refetch();
+
   }, []);
 
-  if (!reportData.length) return <div>Loading...</div>;
-  if (!token || !user || !profile) return <Navigate to="/login" />
+ 
+  if (!reportData.length) return <div>No reports found for this system.</div>;
 
   return (
     <div className="dashboard">
-      <h1>Reports</h1>
-      <div> <button onClick={() => navigate("/reports/new")}>Add</button></div>
-      <Box mb={2} p={2} border={0.5} borderRadius={5} borderColor="#edf1f5ff">
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 600 }} aria-label="reports table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell align="center">Report ID</StyledTableCell>
-                <StyledTableCell align="center">User ID</StyledTableCell>
-                <StyledTableCell align="center">System ID</StyledTableCell>
-                <StyledTableCell align="center">Title</StyledTableCell>
-                <StyledTableCell align="center">Classification</StyledTableCell>
-                <StyledTableCell align="center">Opscap</StyledTableCell>
-                <StyledTableCell align="center">Syscap</StyledTableCell>
-                <StyledTableCell align="center">Short Description</StyledTableCell>
-                <StyledTableCell align="center">Start</StyledTableCell>
-                <StyledTableCell align="center">Stop</StyledTableCell>
-                <StyledTableCell align="center">Impact</StyledTableCell>
-                <StyledTableCell align="center">Fix Action</StyledTableCell>
-                <StyledTableCell align="center">Cause</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
+      <div>
+        <div >
+          <table >
+            <thead>
+              <tr>
+                <th>Report ID</th>
+                <th>User ID</th>
+                <th>System ID</th>
+                <th>Title</th>
+                <th>Classification</th>
+                <th>Opscap</th>
+                <th>Syscap</th>
+                <th>Short Description</th>
+                <th>Start</th>
+                <th>Stop</th>
+                <th>Impact</th>
+                <th>Fix Action</th>
+                <th>Cause</th>
+              </tr>
+            </thead>
+            <tbody>
               {reportData.map((row, idx) => (
-                <StyledTableRow key={idx}
-                  onClick={() => navigate(`/reports/${row.report_id}`,
-                    { state: { formState: "view", report: row } }
-                  )}
-                  sx={{ cursor: "pointer" }}
+                <tr
+                  key={idx}
+                  className="tr clickable"
+                  onClick={() =>
+                    navigate(`/reports/${row.report_id}`, {
+                      state: { formState: "view", report: row },
+                    })
+                  }
                 >
-                  <StyledTableCell align="center">{row.report_id}</StyledTableCell>
-                  <StyledTableCell align="center">{row.user_id}</StyledTableCell>
-                  <StyledTableCell align="center">{row.system}</StyledTableCell>
-                  <StyledTableCell align="center">{row.title}</StyledTableCell>
-                  <StyledTableCell align="center">{row.classification}</StyledTableCell>
-                  <StyledTableCell align="center">{row.opscap}</StyledTableCell>
-                  <StyledTableCell align="center">{row.syscap}</StyledTableCell>
-                  <StyledTableCell align="center">{row.short_description}</StyledTableCell>
-                  <StyledTableCell align="center">
-                    {new Date(row.start).toLocaleDateString()}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">
-                    {new Date(row.stop).toLocaleDateString()}
-                  </StyledTableCell>
-                  <StyledTableCell align="center">{row.impact}</StyledTableCell>
-                  <StyledTableCell align="center">{row.fix_action}</StyledTableCell>
-                  <StyledTableCell align="center">{row.cause}</StyledTableCell>
-                </StyledTableRow>
+                  <td>{row.report_id}</td>
+                  <td>{row.user_id}</td>
+                  <td>{row.system}</td>
+                  <td>{row.title}</td>
+                  <td>{row.classification}</td>
+                  <td>{row.opscap}</td>
+                  <td>{row.syscap}</td>
+                  <td>{row.short_description}</td>
+                  <td>
+                    {row.start ? new Date(row.start).toLocaleDateString() : ""}
+                  </td>
+                  <td>
+                    {row.stop ? new Date(row.stop).toLocaleDateString() : ""}
+                  </td>
+                  <td>{row.impact}</td>
+                  <td>{row.fix_action}</td>
+                  <td>{row.cause}</td>
+                </tr>
               ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }

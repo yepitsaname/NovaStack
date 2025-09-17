@@ -10,7 +10,7 @@ import AppContext from "../AppContext";
 
 
 export default function TaskItem() {
-
+  
   const { token } = useContext(AppContext);
   const [taskData, setTaskData] = useState([]);
   const [edit, setEdit] = useState(false)
@@ -45,7 +45,7 @@ export default function TaskItem() {
   }, []);
 
 
-
+  
   async function handleDelete(data) {
 
     const deleteTasks = await ArchivedTask(token, data[0]);
@@ -70,9 +70,9 @@ export default function TaskItem() {
     console.log(data)
 
     await EditTask(token, id, data);
-    navigate("/taskslist")
+    navigate(-1)
     setEdit(false);
-
+    
   }
   function enableEdit() {
     setEdit(true)
@@ -85,95 +85,98 @@ export default function TaskItem() {
     <div className="form component">
       <fieldset>
         <div>
-          <button type="button" onClick={enableEdit}>
-            Edit
-          </button>
-          <button type="button" onClick={() => handleDelete(taskData)}>
-            Delete
-          </button>
+        <button type="button" onClick={enableEdit}>
+          Edit
+        </button>
+        <button type="button" onClick={() => handleDelete(taskData)}>
+          Delete
+        </button>
+        <button type="button" onClick={() => navigate(-1)}>
+          Return
+        </button>
         </div>
 
       </fieldset>
 
 
-      <form onSubmit={applyEdit}>
+      <form  onSubmit={applyEdit}>
         <fieldset>
-          <label htmlFor="title">Task Name:</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            disabled={!edit}
-            defaultValue={taskData[0].title}
-          />
+        <label htmlFor="title">Task Name:</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          disabled={!edit}
+          defaultValue={taskData[0].title}
+        />
 
-          <label htmlFor="description">Description:</label>
-          <input
-            type="text"
-            name="description"
-            id="description"
-            disabled={!edit}
-            defaultValue={taskData[0].description}
-          />
+        <label htmlFor="description">Description:</label>
+        <input
+          type="text"
+          name="description"
+          id="description"
+          disabled={!edit}
+          defaultValue={taskData[0].description}
+        />
 
-          <label htmlFor="mission_id">Mission:</label>
-          <select
-            name="mission_id"
-            id="mission_id"
-            defaultValue={taskData[0].mission_id}
-            disabled={!edit}
-          >
-            {mission.map((elem) => (
-              <option key={elem.mission_id} value={elem.mission_id}>
-                {elem.mission_name}
-              </option>
-            ))}
-          </select>
+        <label htmlFor="mission_id">Mission:</label>
+        <select
+          name="mission_id"
+          id="mission_id"
+          defaultValue={taskData[0].mission_id}
+          disabled={!edit}
+        >
+          {mission.map((elem) => (
+            <option key={elem.mission_id} value={elem.mission_id}>
+              {elem.mission_name}
+            </option>
+          ))}
+        </select>
 
-          <label htmlFor="status">Status:</label>
-          <select
-            name="status"
-            id="status"
-            defaultValue={taskData[0].status_id}
-            disabled={!edit}
-          >
-            {status.map((elem) => (
-              <option key={elem.status_id} value={elem.status_id}>
-                {elem.status}
-              </option>
-            ))}
-          </select>
+        <label htmlFor="status">Status:</label>
+        <select
+          name="status"
+          id="status"
+          defaultValue={taskData[0].status_id}
+          disabled={!edit}
+        >
+          {status.map((elem) => (
+            <option key={elem.status_id} value={elem.status_id}>
+              {elem.status}
+            </option>
+          ))}
+        </select>
 
-          <label htmlFor="due_date">Due Date/Time:</label>
-          <input
-            type="datetime-local"
-            name="due_date"
-            id="due_date"
-            disabled={!edit}
-            defaultValue={taskData[0].due_date ? dayjs(taskData[0].due_date).format('YYYY-MM-DDTHH:mm') : ''}
-          />
+        <label htmlFor="due_date">Due Date/Time:</label>
+        <input
+          type="datetime-local"
+          name="due_date"
+          id="due_date"
+          disabled={!edit}
+          defaultValue={taskData[0].due_date ? dayjs(taskData[0].due_date).format('YYYY-MM-DDTHH:mm') : ''}
+        />
 
-          <label htmlFor="assignee">Assignee:</label>
-          <select
-            name="assignee"
-            id="assignee"
-            defaultValue={taskData[0].assignee_id}
-            disabled={!edit}
-          >
-            {userList.map((elem) => (
-              <option className="dropdown" key={elem.user_id} value={elem.user_id}>
-                {elem.username}
-              </option>
-            ))}
-          </select>
+        <label htmlFor="assignee">Assignee:</label>
+        <select
+          name="assignee"
+          id="assignee"
+          defaultValue={taskData[0].assignee_id}
+          disabled={!edit}
+        >
+          {userList.map((elem) => (
+            <option key={elem.user_id} value={elem.user_id}>
+              {elem.username}
+            </option>
+          ))}
+        </select>
 
-          <button
-            type="submit"
-            disabled={!edit}
-            hidden={!edit}
-          >
-            Save
-          </button>
+        <button
+          type="submit"
+          disabled={!edit}
+          hidden={!edit}
+        >
+          Save
+        </button>
         </fieldset>
       </form>
     </div>

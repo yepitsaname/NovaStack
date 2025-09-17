@@ -63,6 +63,11 @@ footer {
   width: 100vw;
 }
 
+.content-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .dashboard {
   display: flex;
   flex-direction: column;
@@ -101,7 +106,7 @@ footer {
 .react-grid-item {
   transition: all 200ms ease;
   transition-property: left, top;
-  background: rgb(43, 115, 223);
+  background: var(--head-foot-bg);
   overflow: hidden;
 }
 
@@ -109,29 +114,24 @@ footer {
 
 .widget-content {
   margin: 20px;
-  padding: 5px;
-  border-radius: 10px;
+  padding: 0px;
+  border-radius: 5px;
+  background-color: var(--aside-bg);
 }
 
 .widget-header {
-  padding-bottom: 20px;
+  padding: 30px;
   cursor: move;
+  background-color: var(--aside-bg);
 }
 
 .widget-header h3 {
   margin: 0;
-  font-size: 1.1em;
-  color: #333;
+  font-size: 2.5em;
+  color: var(--text);
 }
 
 .react-grid-item.react-grid-placeholder {
   background: rgba(11, 12, 80, 0.1);
   z-index: 2;
-}
-
-.react-grid-item.dragging {
-  transition: none;
-  z-index: 3;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-
 }

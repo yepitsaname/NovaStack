@@ -12,7 +12,7 @@ export default function TaskListWidget({
   isCurrent = false,
 }) {
   const [taskListData, setTaskListData] = useState([]);
-  const { token } = useContext(AppContext);
+  const { token} = useContext(AppContext);
   const navigate = useNavigate();
 
   const refetch = async () => {
@@ -26,12 +26,12 @@ export default function TaskListWidget({
     refetch()
   }, []);
 
-  if (!taskListData.length) return <div>Loading</div>;
-
   const formatDate = (dateString) => {
     const date = dayjs(dateString);
     return date.format('MM/DD/YYYY');
   };
+
+  if (!taskListData.length) return <div>Loading</div>;
 
   return (
     <div className="dashbaord">
@@ -56,8 +56,6 @@ export default function TaskListWidget({
               <tbody >
                 {taskListData.map((row) => (
                   <tr
-
-
                   key={row.task_id}
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate(`/taskslist/${row.task_id}`)}>
@@ -71,7 +69,6 @@ export default function TaskListWidget({
             </tbody>
           </table>
         </div>
-     
     </div>
   );
 }
