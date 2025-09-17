@@ -18,7 +18,7 @@ export default function CapesChart({title, systems, isOps=false}) {
   };
 
   const handleClick = (sys) => {
-    if (sys.op_capabilities_available || sys.capabilities_available) {
+    if (sys.ops_status || sys.sys_status) {
       navigate('/reports');
     } else {
       alert("Could not find data");
