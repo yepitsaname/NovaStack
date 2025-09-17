@@ -10,14 +10,15 @@
     text-transform: uppercase;
     width: 100%;
   }
-  .unclassified{
-    color: rgb(255,255,255);
-    background-color: rgb(0,122,51);
+
+  .unclassified {
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 122, 51);
   }
 
-  .cui{
-    color: rgb(255,255,255);
-    background-color: rgb(80,43,133)
+  .cui {
+    color: rgb(255, 255, 255);
+    background-color: rgb(80, 43, 133)
   }
 
   background-color: var(--main-bg);
@@ -213,7 +214,76 @@ body {
     }
   }
 }
+
 .color-block {
-  all: unset;             
-  display: inline-block;   
+  all: unset;
+  display: inline-block;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+}
+
+.logo-stroke {
+  stroke: #09D8FF;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: drawLine 10s forwards;
+}
+
+.l1 {
+  animation-delay: 0s;
+}
+
+.l2 {
+  animation-delay: 0.4s;
+}
+
+.l3 {
+  animation-delay: 0.8s;
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.logo-dot {
+  fill: #09D8FF;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px #09D8FF);
+  animation: showDot 0.5s forwards;
+}
+
+.dot1 {
+  animation-delay: 5.0s;
+}
+
+.dot2 {
+  animation-delay: 5.1s;
+}
+
+.dot3 {
+  animation-delay: 5.2s;
+}
+
+@keyframes showDot {
+  to {
+    opacity: 1;
+  }
+}
+
+.logo-container {
+  background: var(--main-bg);
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+
 }
