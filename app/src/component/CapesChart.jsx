@@ -45,36 +45,16 @@ export default function CapesChart({title, systems}) {
   );
 
   return (
-    <div style={{ 
-      padding: 16, 
-      display: "flex", 
-      justifyContent: "center", 
-      alignItems: "center" 
-    }}>
-      <div style={{ 
-        marginBottom: 24, 
-        padding: 16, 
-        backgroundColor: "var(--main-comp-mask)",
-        borderRadius: 8,
-        boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
-      }}>
+    <div className="dashboard">
+      <div>
         <div>
-          <table style={{ borderCollapse: "collapse", width: "100%" }}>
+          <table>
             <thead>
               <tr>
                 <th 
                   colSpan={systems.length} 
-                  style={{ 
-                    textAlign: 'center',
-                    padding: 12,
-                    borderBottom: "1px solid #ddd"
-                  }}
                 >
-                  <h4 style={{ 
-                    margin: 0, 
-                    fontWeight: "bold",
-                    fontSize: "2rem"
-                  }}>
+                  <h4>
                     {title}
                   </h4>
                 </th>
@@ -83,17 +63,8 @@ export default function CapesChart({title, systems}) {
                 {systems.map((sys) => (
                   <th 
                     key={sys.system_id} 
-                    style={{ 
-                      textAlign: "center",
-                      verticalAlign: "middle",
-                      padding: 12,
-                      borderBottom: "1px solid #ddd"
-                    }}
                   >
-                    <h6 style={{ 
-                      margin: 0,
-                      fontSize: "1.25rem"
-                    }}>
+                    <h6>
                       StarFall: {sys.system_name}
                     </h6>
                   </th>

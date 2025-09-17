@@ -68,10 +68,9 @@ export default function Dashboard() {
         rowHeight={60}
         isDraggable
         isResizable
-        resizeHandles={["se"]}
         draggableHandle=".widget-header"
         margin={[15, 15]}
-        containerPadding={[0, 0]}
+        containerPadding={[15, 15]}
         useCSSTransforms
         measureBeforeMount={false}
         onLayoutChange={handleLayoutChange}
