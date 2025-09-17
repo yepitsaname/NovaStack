@@ -178,6 +178,7 @@ export async function GetAllStatus(token) {
     headers: { Authorization: token }
   }).then((res) => res.json());
 }
+
 /**
  *
  * @param {integer} id ID of the mission being queried
@@ -191,6 +192,11 @@ export async function GetMissionByID(id, token) {
   }).then((res) => res.json());
 }
 
+/**
+ *
+ * @param {Token} token context token provided upon login
+ * @returns returns list of all possible statuses
+ */
 export async function GetSystemStatus(token) {
   return fetch("http://localhost:3000/system/status", {
     method: "GET",
@@ -221,10 +227,6 @@ export async function GetTaskByMission(id, token) {
     headers: { Authorization: token },
   }).then((res) => res.json());
 }
-
-// export function GetSystemStatus(id) {
-//   return fetch(`${backend}/mission/${id}/systems`).then((res) => res.json());
-// };
 
 /**
  *

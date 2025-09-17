@@ -6,6 +6,7 @@ exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex('mission').del()
   await knex('mission').insert([
-    { mission_name: "Space_Control", systems: 1 }
+    { mission_name: "Space_Control", systems: {0: 0, 1: 1, 2: 2, 3: 3, 4: 4} },
+    { mission_name: "Space_Watch", systems: {0: 5, 1: 6, 2: 7, 3: 8, 4: 9} }
   ]);
 };
