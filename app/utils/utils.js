@@ -191,7 +191,7 @@ export async function GetMissionByID(id, token) {
   }).then((res) => res.json());
 }
 
-export async function GetSystems(token) {
+export async function GetSystemStatus(token) {
   return fetch("http://localhost:3000/system/status", {
     method: "GET",
     headers: { Authorization: token },
