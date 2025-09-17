@@ -11,7 +11,7 @@ import Reports from "./pages/Reports";
 import Signup from "./pages/Signup";
 import TaskItem from "./component/TaskItem";
 import AddTasks from "./component/AddTask";
-
+import SystemReport from "./component/SystemReport";
 import NavBar from "./component/NavBar";
 import SideBar from "./component/SideBar";
 import Footer from "./component/Footer";
@@ -26,7 +26,7 @@ export default function App() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [token, setToken] = useState(null);
-  const [systems, setSystems]= useState([])
+  const [systems, setSystems] = useState([])
 
   const PrivateRoute = () => {
     return user && profile && token ? (
@@ -50,7 +50,7 @@ export default function App() {
         token: token,
         setToken: setToken,
         systems: systems,
-        setSystems:setSystems
+        setSystems: setSystems
       }}
     >
       <NavBar />
@@ -67,6 +67,7 @@ export default function App() {
             <Route path="/taskslist" element={<Tasks />} />
             <Route path="/reports" element={<Reports />} />
             <Route path="/reports/:id" element={<Report />} />
+            <Route path="/reports/system/:id" element={<SystemReport />} />
             <Route path="/configuration" element={<Configuration />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/taskslist/add" element={<AddTasks />} />

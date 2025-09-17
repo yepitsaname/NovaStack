@@ -2,9 +2,9 @@ import { Box, Card, CardContent, Table, TableHead, TableCell, Typography, TableR
 import { useNavigate } from "react-router"
 
 
-export default function CapesChart({title, systems}) {
-      const navigate = useNavigate();
-    const getStopLight = (status) => {
+export default function CapesChart({ title, systems }) {
+  const navigate = useNavigate();
+  const getStopLight = (status) => {
     if (status == "Healthy") return "Healthy";
     if (status == "Warning") return "Warning";
     if (status == "Critical") return "Critical";
@@ -22,12 +22,13 @@ export default function CapesChart({title, systems}) {
   };
   const handleClick = (sys) => {
     if (sys.op_capabilities_available || sys.capabilities_available) {
-      navigate('/reports');
+      navigate(`/reports/system/${sys.system_id}`)
+      return;
     } else {
       alert("Could not find data");
     }
   };
-
+  //GetReportBySystem
   const ColorBlock = ({ status, system }) => (
     <Box
       onClick={() => handleClick(system)}
@@ -42,43 +43,43 @@ export default function CapesChart({title, systems}) {
       }}
     />
   );
-    return (
-         <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
-        <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)" }}>
-          <CardContent>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell colSpan={systems.length} sx={{ textAlign: 'center' }}>
-                    <Typography variant="h4" align="center" fontWeight={"bold"}>{title}</Typography>
+  return (
+    <Box sx={{ p: 2 }} display="flex" justifyContent="center" alignItems="center">
+      <Card sx={{ mb: 3, p: 2, backgroundColor: "var(--main-comp-mask)" }}>
+        <CardContent>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell colSpan={systems.length} sx={{ textAlign: 'center' }}>
+                  <Typography variant="h4" align="center" fontWeight={"bold"}>{title}</Typography>
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                {systems.map((sys) => (
+                  <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
+                    <Typography variant="h6">StarFall: {sys.system_name}</Typography>
                   </TableCell>
-                </TableRow>
-                <TableRow>
-                  {systems.map((sys) => (
-                    <TableCell key={sys.system_id} align="center" sx={{ verticalAlign: "middle" }}>
-                      <Typography variant="h6">StarFall: {sys.system_name}</Typography>
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableHead>
+                ))}
+              </TableRow>
+            </TableHead>
 
-              <TableBody>
-                <TableRow>
-                  {systems.map((sys) => (
-                    <TableCell key={sys.system_id + "-" + title} align="center">
-                      <Box display="flex" justifyContent="center" alignItems="center">
-                        <ColorBlock
-                          status={getStopLight(sys.op_capabilities_available)}
-                          system={sys}
-                        />
-                      </Box>
-                    </TableCell>
-                  ))}
-                </TableRow>
-              </TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      </Box>
-    )
+            <TableBody>
+              <TableRow>
+                {systems.map((sys) => (
+                  <TableCell key={sys.system_id + "-" + title} align="center">
+                    <Box display="flex" justifyContent="center" alignItems="center">
+                      <ColorBlock
+                        status={getStopLight(sys.op_capabilities_available)}
+                        system={sys}
+                      />
+                    </Box>
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </Box>
+  )
 }
