@@ -55,10 +55,9 @@ export default function App() {
     >
       <NavBar />
       <Footer />
-      <main className="main-content">
+      <main>
         <SideBar />
         <Routes>
-          <Route path="/view-report" element={<Report />} />
           <Route path="/" element={<Homepage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route element={<PrivateRoute />}>

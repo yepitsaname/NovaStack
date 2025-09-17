@@ -459,7 +459,7 @@ export async function AddReport(token, data) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      user_id: data.user_id,
+      username: data.username,
       system: data.system,
       title: data.title,
       classification: data.classification,
@@ -491,7 +491,7 @@ export async function EditReport(token, id, data) {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      user_id: data.user_id,
+      username: data.username,
       system: data.system,
       title: data.title,
       classification: data.classification,

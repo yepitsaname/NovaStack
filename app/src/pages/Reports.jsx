@@ -53,6 +53,7 @@ export default function Reports() {
   }));
 
   return (
+  <div className="dashboard">
     <Box mb={2} p={2} border={0.5} borderRadius={5} borderColor="#edf1f5ff">
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 600 }} aria-label="reports table">
@@ -77,7 +78,9 @@ export default function Reports() {
             {reportData.map((row) => (
               <StyledTableRow
                 key={row.report_id}
-                onClick={() => navigate(`/reports/${row.report_id}`)}
+                onClick={() => navigate(`/reports/${row.report_id}`,
+                  {state: {formState: "view", report: row}}
+                )}
                 sx={{ cursor: "pointer" }}
               >
                 <StyledTableCell align="center">{row.report_id}</StyledTableCell>
@@ -103,5 +106,6 @@ export default function Reports() {
         </Table>
       </TableContainer>
     </Box>
+  </div>
   );
 }

@@ -35,28 +35,29 @@ export default function TaskListWidget({
 
   return (
     <div className="dashbaord">
-      <fieldset>
-        <div>
-          {!isDashboard && (
-            <button onClick={() => navigate("/taskslist/add")}>
-              Add
-            </button>
-          )}
-        </div>
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th >Tasks</th>
-                <th >Mission</th>
-                <th >Status</th>
-                <th >Date</th>
-                <th >Assignee</th>
-              </tr>
-            </thead>
-            <tbody>
-              {taskListData.map((row) => (
-                <tr
+          <div>
+            {!isDashboard && (
+              <button onClick={() => navigate("/taskslist/add")}>
+                Add
+              </button>
+            )}
+          </div>
+          <div className="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th >Tasks</th>
+                  <th >Mission</th>
+                  <th >Status</th>
+                  <th >Date</th>
+                  <th >Assignee</th>
+                </tr>
+              </thead>
+              <tbody >
+                {taskListData.map((row) => (
+                  <tr
+
+
                   key={row.task_id}
                   style={{ cursor: "pointer" }}
                   onClick={() => navigate(`/taskslist/${row.task_id}`)}>
@@ -70,7 +71,7 @@ export default function TaskListWidget({
             </tbody>
           </table>
         </div>
-      </fieldset>
+     
     </div>
   );
 }
