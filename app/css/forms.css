@@ -2,6 +2,7 @@ form {
   background-color: var(--form-bg);
   position: relative;
 
+
   a.hyperlink {
     background-color: unset;
     border: unset;
@@ -23,6 +24,7 @@ form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
 
   .header {
     width: 100%;
@@ -48,6 +50,7 @@ form {
   max-width: 600px;
   justify-self: center;
 
+
   fieldset {
     padding-block: 0.35em 0.625em;
     padding-inline: 0.75em;
@@ -69,14 +72,16 @@ form {
     max-width: 600px;
     min-width: 400px;
     justify-self: center;
+
   }
 
   legend {
     text-align: center;
   }
 
-  .flex-field{
+  .flex-field {
     display: flex;
+
     div {
       width: min-content;
       margin-right: 1em;
@@ -89,6 +94,7 @@ form {
   flex-direction: column;
   min-width: 400px;
   max-width: 600px;
+
 
   margin-block: 1em;
   margin-inline: auto;
@@ -113,6 +119,7 @@ form {
     border-style: unset;
     border: 1px solid black;
     position: relative;
+    color: var(--form-font);
   }
 
   input::-webkit-outer-spin-button,
@@ -139,6 +146,7 @@ form {
     width: 80%;
     position: relative;
     text-align: left;
+
   }
 
   .tooltip {
