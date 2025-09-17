@@ -550,7 +550,7 @@ app.get("/reports/report/:id", verifyToken, (req, res) => {
     .catch((err) => res.status(400).json(err))
 })
 
-app.get("reports/user/:id", verifyToken, (req, res) => {
+app.get("/reports/user/:id", verifyToken, (req, res) => {
   knex("reports")
     .join("users", "reports.user_id", "users.user_id")
     .join("mission_systems", "reports.system", "mission_systems.system_id")
@@ -576,7 +576,8 @@ app.get("reports/user/:id", verifyToken, (req, res) => {
     .catch((err) => res.status(400).json(err))
 })
 
-app.get("reports/system/:id", verifyToken, (req, res) => {
+app.get("/reports/system/:id", verifyToken, (req, res) => {
+  console.log("report By System Call")
   knex("reports")
     .join("users", "reports.user_id", "users.user_id")
     .join("mission_systems", "reports.system", "mission_systems.system_id")
