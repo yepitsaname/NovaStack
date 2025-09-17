@@ -17,7 +17,7 @@ export default function SystemReport() {
 
   useEffect(() => {
     refetch();
-   
+
   }, []);
 
   if (!token || !user || !profile) return <Navigate to="/login" />;
