@@ -57,7 +57,9 @@ footer {
 }
 
 .homepage {
-  display: flex;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 25% 75%;
   width: 100vw;
 }
 
@@ -73,6 +75,12 @@ footer {
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: rgb(0, 0, 0) rgb(164, 195, 235);
+}
+
+.home-text {
+  width: 100%;
+  height: 75%;
+  justify-content: space-evenly;
 }
 
 .react-grid-layout {
