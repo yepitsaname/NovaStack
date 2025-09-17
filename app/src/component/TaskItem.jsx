@@ -70,7 +70,7 @@ export default function TaskItem() {
     console.log(data)
 
     await EditTask(token, id, data);
-    navigate("/taskslist")
+    navigate(-1)
     setEdit(false);
     
   }
@@ -90,6 +90,9 @@ export default function TaskItem() {
         </button>
         <button type="button" onClick={() => handleDelete(taskData)}>
           Delete
+        </button>
+        <button type="button" onClick={() => navigate(-1)}>
+          Return
         </button>
         </div>
 
