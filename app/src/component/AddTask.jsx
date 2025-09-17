@@ -82,8 +82,8 @@ export default function AddTasks() {
             onChange={handleInputChange}
             required
           />
-        
-       
+
+
           <label htmlFor="mission_id">
             Mission
           </label>
@@ -92,7 +92,7 @@ export default function AddTasks() {
             name="mission_id"
             value={form.mission_id}
             onChange={handleInputChange}
-            
+
             required
           >
             <option value="">Select Mission</option>
@@ -102,7 +102,7 @@ export default function AddTasks() {
               </option>
             ))}
           </select>
-        
+
           <label htmlFor="description" >
             Description
           </label>
@@ -112,10 +112,10 @@ export default function AddTasks() {
             name="description"
             value={form.description}
             onChange={handleInputChange}
-            
+
             required
           />
-      
+
           <label htmlFor="status" >
             Status
           </label>
@@ -133,7 +133,7 @@ export default function AddTasks() {
               </option>
             ))}
           </select>
-        
+
           <label htmlFor="due_date" >
             Due Date/Time
           </label>
@@ -162,9 +162,9 @@ export default function AddTasks() {
               </option>
             ))}
           </select>
-        <button type="submit">
-          Submit
-        </button>
+          <button type="submit">
+            Submit
+          </button>
         </fieldset>
       </form>
     </div>

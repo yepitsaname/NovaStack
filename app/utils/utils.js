@@ -178,6 +178,7 @@ export async function GetAllStatus(token) {
     headers: { Authorization: token }
   }).then((res) => res.json());
 }
+
 /**
  *
  * @param {integer} id ID of the mission being queried
@@ -191,7 +192,25 @@ export async function GetMissionByID(id, token) {
   }).then((res) => res.json());
 }
 
-export async function GetSystems(token) {
+/**
+ *
+ * @param {integer} id ID of the mission being queried
+ * @param {Token} token context token provided upon login
+ * @returns returns list of systems associated with a mission
+ */
+export async function GetMissionSystemsByID(id, token) {
+  return fetch(`${backend}/mission/${id}/systems`, {
+    method: "GET",
+    headers: { Authorization: token },
+  }).then((res) => res.json());
+}
+
+/**
+ *
+ * @param {Token} token context token provided upon login
+ * @returns returns list of all possible statuses
+ */
+export async function GetSystemStatus(token) {
   return fetch("http://localhost:3000/system/status", {
     method: "GET",
     headers: { Authorization: token },
@@ -221,10 +240,6 @@ export async function GetTaskByMission(id, token) {
     headers: { Authorization: token },
   }).then((res) => res.json());
 }
-
-// export function GetSystemStatus(id) {
-//   return fetch(`${backend}/mission/${id}/systems`).then((res) => res.json());
-// };
 
 /**
  *
@@ -435,11 +450,11 @@ export async function GetReportByUser(token, userId) {
 /**
  *
  * @param {token} token
- * @param {integer} userId ID of system associated with the report
+ * @param {integer} system_Id ID of system associated with the report
  * @returns array with multiple entries: report_id, user_id, username, system, system_name, title, classification, opscap, syscap, short_description, long_description, start, stop, impact, fix_action, cause
  */
-export async function GetReportBySystem(token, userId) {
-  return fetch(`${backend}/reports/system/${userId}`, {
+export async function GetReportBySystem(token, system_Id) {
+  return fetch(`${backend}/reports/system/${system_Id}`, {
     method: "GET",
     headers: { Authorization: token },
   }).then((res) => res.json())
