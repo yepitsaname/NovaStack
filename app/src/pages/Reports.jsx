@@ -26,7 +26,6 @@ export default function Reports() {
   const refetch = async () => {
     let temp = await GetAllReports(token);
     setReportData(temp);
-    console.log(temp)
   };
 
   useEffect(() => {

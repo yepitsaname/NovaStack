@@ -2,11 +2,11 @@
 
 exports.up = function (knex, Promise) {
   return knex.schema.createTable("system_status", (table) => {
-    table.increments("system_id");
-    table.string("system_name");
-    table.string("system_status");
-    table.string("capabilities_available");
-    table.string("op_capabilities_available");
+    table.increments("sys_status_id");
+    table.string("sys_status_name");
+    table.boolean("ops_cap");
+    table.boolean("sys_cap");
+    table.string("color");
   });
 };
 
