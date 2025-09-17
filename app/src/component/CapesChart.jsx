@@ -28,24 +28,9 @@ export default function CapesChart({title, systems}) {
       alert("Could not find data");
     }
   };
-
-  const ColorBlock = ({ status, system }) => (
-    <div
-      onClick={() => handleClick(system)}
-      style={{
-        width: 80,
-        height: 80,
-        backgroundColor: colorMap[status],
-        border: "2px solid #333",
-        borderRadius: 8,
-        margin: "0 auto",
-        cursor: "pointer"
-      }}
-    />
-  );
-
+  
   return (
-    <div className="dashboard">
+    <div className="content-container">
       <div>
         <div>
           <table>

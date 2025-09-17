@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import AppContext from "../AppContext";
 import { GetAllTasks } from "../../utils/utils";
@@ -12,7 +12,7 @@ export default function TaskListWidget({
   isCurrent = false,
 }) {
   const [taskListData, setTaskListData] = useState([]);
-  const { token } = useContext(AppContext);
+  const { token, profile } = useContext(AppContext);
   const navigate = useNavigate();
 
   const refetch = async () => {
@@ -26,12 +26,27 @@ export default function TaskListWidget({
     refetch()
   }, []);
 
-  if (!taskListData.length) return <div>Loading</div>;
-
   const formatDate = (dateString) => {
     const date = dayjs(dateString);
     return date.format('MM/DD/YYYY');
   };
+
+  const assigneeTaskName = profile?.name?.trim()?.toLowerCase();
+  const assigneeTaskId = profile?.id;
+
+  const filterTask = useMemo(() => {
+    if(!isDashboard) return taskListData;
+    if(assigneeTaskId != null && taskListData?.[0]?.assignee_id != null){
+      return taskListData.filter((task) => task.assignee_id === assigneeTaskId)
+    }
+    if (assigneeTaskName) {
+      return taskListData.filter((t) => String(t.assignee || "")
+        .trim()
+        .toLowerCase() === assigneeTaskName);
+    }
+  },[isDashboard, taskListData, assigneeTaskId])
+
+  if (!taskListData.length) return <div>Loading</div>;
 
   return (
     <div className="dashbaord">
