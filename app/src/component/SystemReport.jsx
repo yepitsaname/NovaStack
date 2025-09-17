@@ -26,10 +26,10 @@ export default function SystemReport() {
   if (!reportData.length) return <div>No reports found for this system.</div>;
 
   return (
-    <div className="dashboard">
+    <div >
       <div>
         <div >
-          <table >
+          <table className="tb-system-report">
             <thead>
               <tr>
                 <th>Report ID</th>
