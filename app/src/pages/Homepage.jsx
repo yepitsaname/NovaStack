@@ -1,3 +1,6 @@
+import { ReactTyped } from "react-typed";
+
+const text = "Mission Statement:<br/>With NovaStack, every team — from frontline operators to HQ — sees exactly what matters most, in a system that feels like it was built just for them."
 export default function Homepage() {
   return (
     <>
@@ -15,8 +18,13 @@ export default function Homepage() {
         </svg>
 
       </div >
-      <div className="mission-statement">
-
+      <div className="mission-statement" width="50%">
+        <p align="left">
+          <ReactTyped
+            startWhenVisible
+            strings={[text]}
+            typeSpeed={1} />
+        </p>
       </div>
     </>
   );
