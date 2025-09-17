@@ -53,27 +53,30 @@ export default function Reports() {
 
   return (
     <div className="dashboard">
-      <Box className="form table" mb={2} p={2} border={0.5} borderRadius={5} borderColor="#edf1f5ff">
+      <h1>Reports</h1>
+      <div> <button onClick={() => navigate("/reports/new")}>Add</button></div>
+
+      <Box mb={2} p={2} border={0.5} borderRadius={5} borderColor="#edf1f5ff">
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 600 }} aria-label="reports table" className="report-table">
-            <TableHead className="report-table header">
-              <TableRow className="report-table row">
-                <StyledTableCell align="center" className="report-table style-head">Report ID</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">User ID</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">System ID</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">Title</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">Classification</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">Opscap</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">Syscap</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">Short Description</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">Start</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">Stop</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">Impact</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">Fix Action</StyledTableCell>
-                <StyledTableCell align="center" className="report-table style-head">Cause</StyledTableCell>
+          <Table sx={{ minWidth: 600 }} aria-label="reports table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell align="center">Report ID</StyledTableCell>
+                <StyledTableCell align="center">User ID</StyledTableCell>
+                <StyledTableCell align="center">System ID</StyledTableCell>
+                <StyledTableCell align="center">Title</StyledTableCell>
+                <StyledTableCell align="center">Classification</StyledTableCell>
+                <StyledTableCell align="center">Opscap</StyledTableCell>
+                <StyledTableCell align="center">Syscap</StyledTableCell>
+                <StyledTableCell align="center">Short Description</StyledTableCell>
+                <StyledTableCell align="center">Start</StyledTableCell>
+                <StyledTableCell align="center">Stop</StyledTableCell>
+                <StyledTableCell align="center">Impact</StyledTableCell>
+                <StyledTableCell align="center">Fix Action</StyledTableCell>
+                <StyledTableCell align="center">Cause</StyledTableCell>
               </TableRow>
             </TableHead>
-            <TableBody className="report-table body">
+            <TableBody>
               {reportData.map((row) => (
                 <StyledTableRow
                   key={row.report_id}
@@ -81,25 +84,24 @@ export default function Reports() {
                     { state: { formState: "view", report: row } }
                   )}
                   sx={{ cursor: "pointer" }}
-                  className="report-table style-row"
                 >
-                  <StyledTableCell align="center" className="report-table style-cell">{row.report_id}</StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">{row.user_id}</StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">{row.system}</StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">{row.title}</StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">{row.classification}</StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">{row.opscap}</StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">{row.syscap}</StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">{row.short_description}</StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">
+                  <StyledTableCell align="center">{row.report_id}</StyledTableCell>
+                  <StyledTableCell align="center">{row.user_id}</StyledTableCell>
+                  <StyledTableCell align="center">{row.system}</StyledTableCell>
+                  <StyledTableCell align="center">{row.title}</StyledTableCell>
+                  <StyledTableCell align="center">{row.classification}</StyledTableCell>
+                  <StyledTableCell align="center">{row.opscap}</StyledTableCell>
+                  <StyledTableCell align="center">{row.syscap}</StyledTableCell>
+                  <StyledTableCell align="center">{row.short_description}</StyledTableCell>
+                  <StyledTableCell align="center">
                     {new Date(row.start).toLocaleDateString()}
                   </StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">
+                  <StyledTableCell align="center">
                     {new Date(row.stop).toLocaleDateString()}
                   </StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">{row.impact}</StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">{row.fix_action}</StyledTableCell>
-                  <StyledTableCell align="center" className="report-table style-cell">{row.cause}</StyledTableCell>
+                  <StyledTableCell align="center">{row.impact}</StyledTableCell>
+                  <StyledTableCell align="center">{row.fix_action}</StyledTableCell>
+                  <StyledTableCell align="center">{row.cause}</StyledTableCell>
                 </StyledTableRow>
               ))}
             </TableBody>
