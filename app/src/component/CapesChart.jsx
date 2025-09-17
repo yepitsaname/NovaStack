@@ -17,14 +17,16 @@ export default function CapesChart({title, systems, isOps=false}) {
     return stopLight.find(element => element.sys_status_id == status)?.color;
   };
 
+
   const handleClick = (sys) => {
     if (sys.ops_status || sys.sys_status) {
-      navigate('/reports');
+      navigate(`/reports/system/${sys.system_id}`)
+      return;
     } else {
       alert("Could not find data");
     }
   };
-
+  //GetReportBySystem
   const ColorBlock = ({ status, system }) => (
     <div
       onClick={() => handleClick(system)}
