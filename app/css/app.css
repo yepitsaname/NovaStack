@@ -59,7 +59,7 @@ footer {
 .homepage {
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: 25% 75%;
+  grid-template-rows: 75% 25%;
   width: 100vw;
 }
 
