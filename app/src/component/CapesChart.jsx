@@ -3,34 +3,18 @@ import { useNavigate } from "react-router"
 import { GetSystemStatus } from "../../utils/utils";
 import AppContext from "../AppContext";
 
-export default function CapesChart({title, systems}) {
+export default function CapesChart({title, systems, isOps=false}) {
   const { token } = useContext(AppContext);
   const navigate = useNavigate();
-  const [stopLight, setStopLight] = useState(null);
+  const [stopLight, setStopLight] = useState([]);
 
   useEffect(()=>{
     GetSystemStatus(token)
     .then(data => setStopLight(data));
   },[])
 
-  console.log(stopLight);
-
   const getStopLight = (status) => {
-    if (status == "Healthy") return "Healthy";
-    if (status == "Warning") return "Warning";
-    if (status == "Critical") return "Critical";
-    if (status == "Maintenance") return "Maintenance";
-    if (status == "Special_Case") return "Special_Case";
-    return "Offline";
-  };
-
-  const colorMap = {
-    Healthy: "green",
-    Warning: "yellow",
-    Critical: "red",
-    Maintenance: "white",
-    Special_Case: "magenta",
-    Offline: "black"
+    return stopLight.find(element => element.sys_status_id == status)?.color;
   };
 
   const handleClick = (sys) => {
@@ -47,7 +31,7 @@ export default function CapesChart({title, systems}) {
       style={{
         width: 80,
         height: 80,
-        backgroundColor: colorMap[status],
+        backgroundColor: status,
         border: "2px solid #333",
         borderRadius: 8,
         margin: "0 auto",
@@ -116,13 +100,10 @@ export default function CapesChart({title, systems}) {
             <tbody>
               <tr>
                 {systems.map((sys) => (
-                  <td
-                    key={sys.system_id + "-" + title}
-
-                  >
+                  <td key={sys.system_id + "-" + title} >
                     <div>
                       <ColorBlock
-                        status={getStopLight(sys.op_capabilities_available)}
+                        status={getStopLight(isOps ? sys.ops_status : sys.sys_status)}
                         system={sys}
                       />
                     </div>
