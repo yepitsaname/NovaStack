@@ -77,6 +77,17 @@ footer {
   scrollbar-color: rgb(0, 0, 0) rgb(164, 195, 235);
 }
 
+.dropdown {
+  border-radius: 1ch;
+  padding: 1ch;
+  background-color: var(--text-bg);
+  resize: none;
+  border-style: unset;
+  border: 1px solid black;
+  position: relative;
+  color: var(--form-font);
+}
+
 .home-text {
   width: 100%;
   height: 75%;

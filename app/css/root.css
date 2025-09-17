@@ -122,7 +122,7 @@ html[theme="dark"] {
   --hover-mask: rgba(120, 110, 151, 0.1);
   --click-mask: rgba(90, 80, 121, 0.5);
   --text: rgb(161, 212, 212);
-  --text-bg: rgba(208, 255, 164, 0.125);
+  --text-bg: rgba(112, 115, 129, 0.125);
   --link: rgb(18, 199, 223);
   --heading-one: rgb(54, 134, 226);
   --heading-two: rgb(46, 122, 209);

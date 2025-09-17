@@ -57,7 +57,7 @@ export default function Reports() {
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 600 }} aria-label="reports table" className="report-table">
             <TableHead className="report-table header">
-              <TableRow className="report-table row">
+              <TableRow className="report-table style-row">
                 <StyledTableCell align="center" className="report-table style-head">Report ID</StyledTableCell>
                 <StyledTableCell align="center" className="report-table style-head">User ID</StyledTableCell>
                 <StyledTableCell align="center" className="report-table style-head">System ID</StyledTableCell>
