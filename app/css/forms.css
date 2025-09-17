@@ -110,7 +110,8 @@ form {
 
   input,
   textarea,
-  select {
+  select,
+  option {
     /* width: 80%; */
     border-radius: 1ch;
     padding: 1ch;
@@ -192,9 +193,11 @@ form {
   justify-content: center;
   align-items: center;
 
+
   input,
   textarea,
-  select {
+  select,
+  option {
     /* width: 80%; */
     border-radius: 1ch;
     padding: 1ch;
@@ -206,9 +209,6 @@ form {
     color: var(--form-font);
   }
 
-  select option {
-    background-color: var(--text-bg);
-  }
 
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -220,10 +220,12 @@ form {
     text-align: center;
     -moz-appearance: textfield;
     appearance: textfield;
+
   }
 
   input::placeholder {
     text-align: left;
+
   }
 
   textarea {
@@ -243,6 +245,7 @@ form {
     right: 0;
     font-style: italic;
     opacity: 0.8;
+
   }
 
   .tooltip-text {
@@ -255,12 +258,15 @@ form {
     z-index: 1;
     font-style: italic;
     opacity: 0.6;
+
   }
 
   .tooltip:hover~.tooltip-text {
     visibility: visible;
   }
 }
+
+
 
 .error {
   background-color: var(--error-bg-color) !important;
@@ -347,28 +353,28 @@ form {
   transition: all 0.3s ease;
 }
 
-.report-table.body tr {
+.report-table.style-row {
   transition: all 0.3s ease;
   cursor: pointer;
   color: var(--form-font);
 }
 
-.report-table.body tr:nth-child(2n + 1) {
+.report-table.style-row:nth-child(2n + 1) {
   background-color: rgba(32, 66, 105, 0.302);
 }
 
-.report-table.body tr:hover {
+.report-table.style-row:hover {
   background-color: rgba(76, 159, 255, 0.45) !important;
   transform: scale(1.02);
 }
 
 
-.report-table.body td {
+.report-table.style-cell {
   font-size: 20px;
   color: var(--form-font);
 }
 
-.report-table.body tr:hover {
+.report-table.style-row:hover {
   background-color: var(--hover-mask);
 }
 
@@ -379,8 +385,8 @@ form {
   z-index: 100;
 }
 
-.report-table.header th {
-  font-size: 30px;
+.report-table.style-head {
+  font-size: 20px;
   font-weight: bold;
   color: var(--form-font);
   text-align: left;
