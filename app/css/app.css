@@ -4,6 +4,7 @@ nav {
   width: 100%;
   background-color: var(--head-foot-bg);
 
+
   a {
     justify-self: flex-end;
   }
@@ -11,6 +12,9 @@ nav {
   h1 {
     flex-grow: 2;
     text-align: left;
+    font-family: toxigenesis;
+    display: flex;
+    align-items: center;
   }
 
 }
