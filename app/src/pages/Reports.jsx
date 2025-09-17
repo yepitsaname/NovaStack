@@ -76,6 +76,6 @@ export default function Reports() {
           </table>
         </div>
       </div>
-      </div>
+    </div>
   );
 }
