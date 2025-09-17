@@ -8,15 +8,14 @@ import CapesChart from "../component/CapesChart";
 
 
 export default function System() {
-  const { token, user, profile, systems, setSystems } = useContext(AppContext);
+  const { token, user, profile, systems } = useContext(AppContext);
 
   if (!token || !user || !profile) return <Navigate to="/login" />
-  
 
   return (
     <>
-      <CapesChart title="OPSCAP" systems={systems}/>
-      <CapesChart title="SYSCAP" systems={systems}/>
+      <CapesChart title="OPSCAP" systems={systems} isOps={true}/>
+      <CapesChart title="SYSCAP" systems={systems} />
     </>
 
   );
