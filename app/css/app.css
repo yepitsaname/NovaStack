@@ -69,7 +69,7 @@ footer {
   flex-grow: 1;
   margin-inline: auto;
   justify-content: flex-start;
-
+  color: var(--form-font);
   width: auto;
   height: auto;
   overflow-y: scroll;
