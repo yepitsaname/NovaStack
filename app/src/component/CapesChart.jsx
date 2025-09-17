@@ -1,34 +1,51 @@
-import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router"
-import { GetSystemStatus } from "../../utils/utils";
-import AppContext from "../AppContext";
 
-export default function CapesChart({title, systems, isOps=false}) {
-  const { token } = useContext(AppContext);
+export default function CapesChart({title, systems}) {
   const navigate = useNavigate();
-  const [stopLight, setStopLight] = useState([]);
-
-  useEffect(()=>{
-    GetSystemStatus(token)
-    .then(data => setStopLight(data));
-  },[])
-
+  
   const getStopLight = (status) => {
-    return stopLight.find(element => element.sys_status_id == status)?.color;
+    if (status == "Healthy") return "Healthy";
+    if (status == "Warning") return "Warning";
+    if (status == "Critical") return "Critical";
+    if (status == "Maintenance") return "Maintenance";
+    if (status == "Special_Case") return "Special_Case";
+    return "Offline";
   };
-
-
+  
+  const colorMap = {
+    Healthy: "green",
+    Warning: "yellow",
+    Critical: "red",
+    Maintenance: "white",
+    Special_Case: "magenta",
+    Offline: "black"
+  };
+  
   const handleClick = (sys) => {
-    if (sys.ops_status || sys.sys_status) {
-      navigate(`/reports/system/${sys.system_id}`)
-      return;
+    if (sys.op_capabilities_available || sys.capabilities_available) {
+      navigate('/reports');
     } else {
       alert("Could not find data");
     }
   };
-  
+
+  const ColorBlock = ({ status, system }) => (
+    <div
+      onClick={() => handleClick(system)}
+      style={{
+        width: 80,
+        height: 80,
+        backgroundColor: colorMap[status],
+        border: "2px solid #333",
+        borderRadius: 8,
+        margin: "0 auto",
+        cursor: "pointer"
+      }}
+    />
+  );
+
   return (
-    <div className="content-container">
+    <div className="content">
       <div>
         <div>
           <table>
@@ -38,7 +55,6 @@ export default function CapesChart({title, systems, isOps=false}) {
                   colSpan={systems.length} 
                 >
                   <h4>
-
                     {title}
                   </h4>
                 </th>
@@ -59,10 +75,13 @@ export default function CapesChart({title, systems, isOps=false}) {
             <tbody>
               <tr>
                 {systems.map((sys) => (
-                  <td key={sys.system_id + "-" + title} >
+                  <td 
+                    key={sys.system_id + "-" + title} 
+
+                  >
                     <div>
                       <ColorBlock
-                        status={getStopLight(isOps ? sys.ops_status : sys.sys_status)}
+                        status={getStopLight(sys.op_capabilities_available)}
                         system={sys}
                       />
                     </div>
