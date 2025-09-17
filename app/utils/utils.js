@@ -194,6 +194,19 @@ export async function GetMissionByID(id, token) {
 
 /**
  *
+ * @param {integer} id ID of the mission being queried
+ * @param {Token} token context token provided upon login
+ * @returns returns list of systems associated with a mission
+ */
+export async function GetMissionSystemsByID(id, token) {
+  return fetch(`${backend}/mission/${id}/systems`, {
+    method: "GET",
+    headers: { Authorization: token },
+  }).then((res) => res.json());
+}
+
+/**
+ *
  * @param {Token} token context token provided upon login
  * @returns returns list of all possible statuses
  */

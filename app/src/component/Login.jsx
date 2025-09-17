@@ -3,7 +3,7 @@ import "../../css/forms.css";
 import { useNavigate } from "react-router";
 import { useContext, useEffect, useState } from "react";
 import AppContext from "../AppContext";
-import { GetUser, GetUsersByRole, UserLogin, GetSystems } from "../../utils/utils";
+import { GetUser, GetUsersByRole, UserLogin, GetMissionSystemsByID } from "../../utils/utils";
 
 export default function Login() {
   const { user, setUser, setToken, setProfile, setSystems } = useContext(AppContext);
@@ -22,7 +22,7 @@ export default function Login() {
     if (res.token) {
       let profile = (await GetUser(username, res.token))[0]
       let roles = await GetUsersByRole(profile.user_id, res.token)
-      let systems = await GetSystems(res.token)
+      let systems = await GetMissionSystemsByID(1, res.token)
       setUser(username);
       setToken(res.token);
       setProfile({
