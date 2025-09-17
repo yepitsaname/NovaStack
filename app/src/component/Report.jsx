@@ -64,6 +64,7 @@ export default function Report({state = "create", report}){
 
   const saveReport = async (event)=>{
     event.preventDefault();
+    navigate(-1)
     // Some validation logic here
     const payload = {
       username: user,
@@ -161,7 +162,7 @@ export default function Report({state = "create", report}){
           <button type="button" onClick={(event)=>{handleCancel(event)}}>Cancel</button>
         </>):(<>
           <button type="button" onClick={(event)=>{handleEdit(event)}}>Edit</button>
-          <button type="button" onClick={(event)=>{handleCancel(event)}}>Go Back</button>
+          <button type="button" onClick={(event)=>{handleCancel(event)}}>Return</button>
         </>)}
       </div>
       <h3 className={"classification " + classification}>{classification}</h3>
