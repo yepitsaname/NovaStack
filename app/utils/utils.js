@@ -435,7 +435,7 @@ export async function GetReportByUser(token, userId) {
 /**
  *
  * @param {token} token
- * @param {integer} userId ID of system associated with the report
+ * @param {integer} system_Id ID of system associated with the report
  * @returns array with multiple entries: report_id, user_id, username, system, system_name, title, classification, opscap, syscap, short_description, long_description, start, stop, impact, fix_action, cause
  */
 export async function GetReportBySystem(token, system_Id) {

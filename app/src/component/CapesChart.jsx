@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router"
 
-export default function CapesChart({title, systems}) {
+export default function CapesChart({ title, systems }) {
   const navigate = useNavigate();
-  
   const getStopLight = (status) => {
     if (status == "Healthy") return "Healthy";
     if (status == "Warning") return "Warning";
@@ -11,7 +10,7 @@ export default function CapesChart({title, systems}) {
     if (status == "Special_Case") return "Special_Case";
     return "Offline";
   };
-  
+
   const colorMap = {
     Healthy: "green",
     Warning: "yellow",
@@ -20,15 +19,16 @@ export default function CapesChart({title, systems}) {
     Special_Case: "magenta",
     Offline: "black"
   };
-  
+
   const handleClick = (sys) => {
     if (sys.op_capabilities_available || sys.capabilities_available) {
-      navigate('/reports');
+      navigate(`/reports/system/${sys.system_id}`)
+      return;
     } else {
       alert("Could not find data");
     }
   };
-
+  //GetReportBySystem
   const ColorBlock = ({ status, system }) => (
     <div
       onClick={() => handleClick(system)}
@@ -45,15 +45,15 @@ export default function CapesChart({title, systems}) {
   );
 
   return (
-    <div style={{ 
-      padding: 16, 
-      display: "flex", 
-      justifyContent: "center", 
-      alignItems: "center" 
+    <div style={{
+      padding: 16,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
     }}>
-      <div style={{ 
-        marginBottom: 24, 
-        padding: 16, 
+      <div style={{
+        marginBottom: 24,
+        padding: 16,
         backgroundColor: "var(--main-comp-mask)",
         borderRadius: 8,
         boxShadow: "0 2px 4px rgba(0,0,0,0.1)"
@@ -62,16 +62,16 @@ export default function CapesChart({title, systems}) {
           <table style={{ borderCollapse: "collapse", width: "100%" }}>
             <thead>
               <tr>
-                <th 
-                  colSpan={systems.length} 
-                  style={{ 
+                <th
+                  colSpan={systems.length}
+                  style={{
                     textAlign: 'center',
                     padding: 12,
                     borderBottom: "1px solid #ddd"
                   }}
                 >
-                  <h4 style={{ 
-                    margin: 0, 
+                  <h4 style={{
+                    margin: 0,
                     fontWeight: "bold",
                     fontSize: "2rem"
                   }}>
@@ -81,16 +81,16 @@ export default function CapesChart({title, systems}) {
               </tr>
               <tr>
                 {systems.map((sys) => (
-                  <th 
-                    key={sys.system_id} 
-                    style={{ 
+                  <th
+                    key={sys.system_id}
+                    style={{
                       textAlign: "center",
                       verticalAlign: "middle",
                       padding: 12,
                       borderBottom: "1px solid #ddd"
                     }}
                   >
-                    <h6 style={{ 
+                    <h6 style={{
                       margin: 0,
                       fontSize: "1.25rem"
                     }}>
@@ -104,8 +104,8 @@ export default function CapesChart({title, systems}) {
             <tbody>
               <tr>
                 {systems.map((sys) => (
-                  <td 
-                    key={sys.system_id + "-" + title} 
+                  <td
+                    key={sys.system_id + "-" + title}
 
                   >
                     <div>
