@@ -53,29 +53,6 @@ export default function SystemReport() {
   if (!reportData.length) return <div>Loading...</div>;
   if (!token || !user || !profile) return <Navigate to="/login" />
 
-
-  //   return (
-  //     <TableContainer component={Paper}>
-  //       <Table>
-  //         <TableHead>
-  //           <TableRow>
-  //             <StyledTableCell>ID</StyledTableCell>
-  //             <StyledTableCell>Report</StyledTableCell>
-  //           </TableRow>
-  //         </TableHead>
-  //         <TableBody>
-  //           {reportData.map((row, idx) => (
-  //             <StyledTableRow key={idx}>
-  //               <StyledTableCell>{row.id}</StyledTableCell>
-  //               <StyledTableCell>{row.name}</StyledTableCell>
-  //             </StyledTableRow>
-  //           ))}
-  //         </TableBody>
-  //       </Table>
-  //     </TableContainer>
-  //   );
-  // }
-
   return (
     <div className="dashboard">
       <Box mb={2} p={2} border={0.5} borderRadius={5} borderColor="#edf1f5ff">
