@@ -13,7 +13,7 @@ table {
   width: 100%;
   height: 100vh;
   text-align: center;
-  border-radius: 3px;
+  border-radius: 5px;
   margin: 0px;
   padding: 20px;
 
@@ -21,8 +21,8 @@ table {
 
 table td,
 table th {
-  border-top: 5px solid var(--main-comp-mask);
-  padding: 6px 4px;
+  border: 1px solid black;
+  padding: 10px 5px;
 }
 
 table tbody tr {
@@ -36,7 +36,6 @@ table tbody tr:nth-child(2n + 1) {
 
 table tbody tr:hover {
   background-color: var(--main-comp-mask) !important;
-  transform: scale(1.02);
 }
 
 
@@ -62,4 +61,33 @@ table thead th {
   color: var(--form-font);
   text-align: left;
   text-shadow: var(--text-shadow);
+}
+
+.tb-system {
+  color: var(--form-font);
+  border: 3px solid var(--aside);
+  background-color: var(--form-bg);
+  width: 50vw;
+  height: 50px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 0px;
+  padding: 20px;
+}
+
+tb-system-report {
+  color: var(--form-font);
+  border: 3px solid var(--aside);
+  background-color: var(--form-bg);
+  width: 50vw;
+  height: 50px;
+  text-align: center;
+  border-radius: 5px;
+  margin: 0px;
+  padding: 20px;
+}
+
+sy-container {
+  display: flex;
+  flex-direction: column;
 }
