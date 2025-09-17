@@ -57,8 +57,9 @@ table thead {
 }
 
 table thead th {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   color: var(--form-font);
   text-align: left;
+  text-shadow: var(--text-shadow);
 }

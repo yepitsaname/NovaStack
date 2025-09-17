@@ -228,6 +228,31 @@ form {
 
   }
 
+  input:disabled {
+    background-color: var(--text-disabled);
+  }
+
+  select:disabled {
+    background-color: var(--text-disabled);
+  }
+
+  textarea:disabled {
+    background-color: var(--text-disabled);
+
+  }
+
+  input:enabled {
+    background-color: var(--text-bg);
+  }
+
+  select:enabled {
+    background-color: var(--text-bg);
+  }
+
+  textarea:enabled {
+    background-color: var(--text-bg);
+  }
+
   textarea {
     field-sizing: content;
   }
