@@ -91,6 +91,8 @@ html[theme="light"] {
   --main-bg: rgb(241, 245, 249);
   --head-foot-bg: rgb(222, 234, 255);
   --aside-bg: rgb(227, 232, 240);
+  --form-bg: rgb(215, 220, 241);
+  --form-font: rgb(31, 17, 223);
   --main-comp-mask: rgba(26, 52, 26, 0.3);
   --sub-mask: rgba(100, 116, 139, 0.2);
   --button-mask: rgba(40, 71, 30, 0.1);
@@ -98,7 +100,7 @@ html[theme="light"] {
   --click-mask: rgba(83, 90, 114, 0.5);
   --text: rgb(30, 30, 60);
   --text-bg: rgba(2, 132, 199, 0.1);
-  --link: rgb(39, 180, 91);
+  --link: rgb(100, 39, 180);
   --heading-one: rgb(44, 116, 203);
   --heading-two: rgb(35, 115, 174);
   --heading-three: rgb(24, 114, 186);
@@ -113,14 +115,15 @@ html[theme="dark"] {
   --head-foot-bg: rgb(10, 15, 35);
   --aside-bg: rgb(15, 25, 50);
   --form-bg: rgb(10, 15, 35);
+  --form-font: rgb(11, 232, 255);
   --main-comp-mask: rgba(76, 159, 255, 0.302);
   --sub-mask: rgba(160, 174, 192, 0.176);
   --button-mask: rgba(255, 255, 255, 0.1);
   --hover-mask: rgba(120, 110, 151, 0.1);
   --click-mask: rgba(90, 80, 121, 0.5);
   --text: rgb(161, 212, 212);
-  --text-bg: rgba(208, 255, 164, 0.125);
-  --link: rgb(208, 255, 164);
+  --text-bg: rgba(112, 115, 129, 0.125);
+  --link: rgb(18, 199, 223);
   --heading-one: rgb(54, 134, 226);
   --heading-two: rgb(46, 122, 209);
   --heading-three: rgb(34, 110, 197);
@@ -220,14 +223,27 @@ body {
   display: inline-block;
 }
 
+
+
+.logo-container {
+  background: var(--main-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+}
+
+
 svg {
-  width: 100%;
-  height: 100%;
+  width: 600px;
+  height: 600px;
+
 }
 
 .logo-stroke {
   stroke: #09D8FF;
-  stroke-width: 7;
+  stroke-width: 10;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
@@ -277,13 +293,4 @@ svg {
   to {
     opacity: 1;
   }
-}
-
-.logo-container {
-  background: var(--main-bg);
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-
 }

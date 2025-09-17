@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import {useContext } from "react";
 
 
 import AppContext from "../AppContext";
@@ -20,7 +20,3 @@ export default function System() {
 
   );
 }
-
-
-//make each box pull from new table "reports" with seeded data
-//Reports should present the data from the specific box
