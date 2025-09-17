@@ -26,6 +26,7 @@
 
   h1 {
     color: var(--heading-one);
+    font-size: ;
   }
 
   h2 {
@@ -220,14 +221,27 @@ body {
   display: inline-block;
 }
 
+
+
+.logo-container {
+  background: var(--main-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: auto;
+}
+
+
 svg {
-  width: 100%;
-  height: 100%;
+  width: 600px;
+  height: 600px;
+
 }
 
 .logo-stroke {
   stroke: #09D8FF;
-  stroke-width: 7;
+  stroke-width: 10;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
@@ -277,13 +291,4 @@ svg {
   to {
     opacity: 1;
   }
-}
-
-.logo-container {
-  background: var(--main-bg);
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-
 }

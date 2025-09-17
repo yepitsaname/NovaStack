@@ -56,6 +56,11 @@ footer {
   }
 }
 
+.homepage {
+  display: flex;
+  width: 100vw;
+}
+
 .dashboard {
   display: flex;
   flex-direction: column;
