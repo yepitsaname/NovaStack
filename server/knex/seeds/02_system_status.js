@@ -6,11 +6,11 @@ exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex("system_status").del();
   await knex("system_status").insert([
-    { sys_status_name: "full mission capable", ops_cap: true, sys_cap: true, color: "green"},
-    { sys_status_name: "partial mission capable", ops_cap: true, sys_cap: true, color: "yellow"},
-    { sys_status_name: "non-mission capable", ops_cap: true, sys_cap: true, color: "red"},
-    { sys_status_name: "asi", ops_cap: true, sys_cap: true, color: "white"},
-    { sys_status_name: "other", ops_cap: true, sys_cap: true, color: "magenta"},
-    { sys_status_name: "offline", ops_cap: true, sys_cap: true, color: "black"}
+    { sys_status_name: "FMC", ops_cap: true, sys_cap: true, color: "green"},
+    { sys_status_name: "PMC", ops_cap: true, sys_cap: true, color: "yellow"},
+    { sys_status_name: "NMC", ops_cap: true, sys_cap: true, color: "red"},
+    { sys_status_name: "ASI", ops_cap: true, sys_cap: true, color: "white"},
+    { sys_status_name: "Other", ops_cap: true, sys_cap: true, color: "magenta"},
+    { sys_status_name: "Offline", ops_cap: true, sys_cap: true, color: "black"}
   ]);
 };
