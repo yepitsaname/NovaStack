@@ -38,21 +38,22 @@ export default function Login() {
   }
 
   return (
-    <form className="form component" action={login}>
-      <label htmlFor="username">Username</label>
+    <form className="form component" id="login" action={login}>
+      <h2>Login</h2>
+      {/* <label htmlFor="username" style={{ textAlign: "center" }}>Username</label> */}
       <input name="username" type="text" placeholder="Username" /> <br />
-      <label htmlFor="password">Password</label>
+      {/* <label htmlFor="password" style={{ textAlign: "center" }}>Password</label> */}
       <input name="password" type="password" placeholder="Password" /> <br />
-      <div className="remember-me">
+      {/* <div className="remember-me">
+        <label style={{ textAlign: "center" }}>Remember Me</label>
         <input type="checkbox" />
-        <label>Remember Me</label>
-      </div>
+      </div> */}
       <div>
         <button type="submit">submit</button>
       </div>
       <Link to="/register" className="hyperlink">
         Create An Account
       </Link>
-    </form>
+    </form >
   );
 }
