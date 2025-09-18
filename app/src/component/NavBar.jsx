@@ -19,8 +19,8 @@ export default function NavBar() {
       {user ? (
         <>
           <p>🔔</p>
-          <Link to="/profile">{user}</Link>
-          <Link to="/login" onClick={() => { logout() }}>Logout</Link>
+          <Link to="/profile" className="nav-btn">{user}</Link>
+          <Link to="/login" onClick={() => { logout() }} className="nav-btn">Logout</Link>
         </>
       ) : (
         <>

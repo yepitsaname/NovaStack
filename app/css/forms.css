@@ -48,15 +48,13 @@ form {
   justify-self: center;
 
   fieldset {
-    padding-block: 0.35em 0.625em;
-    padding-inline: 0.75em;
     min-inline-size: min-content;
-    margin-inline: 2px;
+
     position: relative;
     width: 10vw;
-    margin-block: 20px;
+
     border: 0.5px solid var(--border-color);
-    border-radius: 20px;
+    border-radius: 5px;
     vertical-align: top;
 
     /* border-color: var(--sub-mask); */
@@ -162,7 +160,7 @@ form {
     opacity: 0.6;
   }
 
-  .tooltip:hover ~ .tooltip-text {
+  .tooltip:hover~.tooltip-text {
     visibility: visible;
   }
 }
@@ -183,8 +181,6 @@ form {
   color: var(--form-font);
   justify-content: center;
   align-items: center;
-
-  scrollbar-color: rgb(0, 0, 0) rgb(164, 195, 235);
 
   input,
   textarea,
@@ -271,7 +267,7 @@ form {
     opacity: 0.6;
   }
 
-  .tooltip:hover ~ .tooltip-text {
+  .tooltip:hover~.tooltip-text {
     visibility: visible;
   }
 }
@@ -290,7 +286,7 @@ form {
   display: none;
 }
 
-#toggle-form:checked ~ .collapsible {
+#toggle-form:checked~.collapsible {
   display: block;
 }
 
