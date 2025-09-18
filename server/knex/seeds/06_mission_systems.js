@@ -6,11 +6,11 @@ exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex('mission_systems').del()
   await knex('mission_systems').insert([
-    { system_name: 'SV 1', ops_status: 1, sys_status: 1 },
-    { system_name: 'SV 2', ops_status: 1, sys_status: 1 },
-    { system_name: 'SV 3', ops_status: 1, sys_status: 1 },
-    { system_name: 'SV 4', ops_status: 1, sys_status: 1 },
-    { system_name: 'SV 5', ops_status: 1, sys_status: 1 },
+    { system_name: 'SV 1', ops_status: 1, sys_status: 5 },
+    { system_name: 'SV 2', ops_status: 2, sys_status: 1 },
+    { system_name: 'SV 3', ops_status: 3, sys_status: 3 },
+    { system_name: 'SV 4', ops_status: 4, sys_status: 4 },
+    { system_name: 'SV 5', ops_status: 6, sys_status: 6 },
     { system_name: 'GBR 1', ops_status: 1, sys_status: 1 },
     { system_name: 'GBR 2', ops_status: 1, sys_status: 1 },
     { system_name: 'GBR 3', ops_status: 1, sys_status: 1 },
