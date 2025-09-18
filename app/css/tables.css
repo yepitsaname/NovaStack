@@ -16,7 +16,6 @@ table {
   border-radius: 5px;
   margin: 0px;
   padding: 0px;
-
 }
 
 table td {
@@ -37,10 +36,10 @@ table tbody tr:nth-child(2n + 1) {
 }
 
 table tbody tr:hover {
-  background-color: var(--main-comp-mask) ;
+  background-color: var(--main-comp-mask);
 }
 
-.caps-table{
+.caps-table {
   table tbody tr:hover {
     cursor: unset;
     background-color: var(--hover-mask);
@@ -49,6 +48,9 @@ table tbody tr:hover {
   table tbody td:hover {
     cursor: pointer;
     background-color: var(--main-comp-mask);
+  }
+  table thead th {
+    text-align: center;
   }
 }
 
@@ -68,7 +70,7 @@ table thead th {
   font-size: 25px;
   font-weight: bold;
   color: var(--form-font);
-  text-align: left;
+  text-align: center;
   text-shadow: var(--text-shadow);
 }
 
@@ -84,7 +86,6 @@ table thead th {
   padding: 10px;
 }
 
-
 .th-system {
   justify-items: center;
   padding: 0px;
@@ -92,7 +93,6 @@ table thead th {
   h4 {
     font-size: xx-large;
   }
-
 }
 
 .tb-system-report {

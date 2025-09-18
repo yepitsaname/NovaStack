@@ -2,7 +2,6 @@ form {
   background-color: var(--form-bg);
   position: relative;
 
-
   a.hyperlink {
     background-color: unset;
     border: unset;
@@ -18,13 +17,11 @@ form {
   }
 }
 
-
 .component {
   /* background-color: var(--sub-mask); */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
 
   .header {
     width: 100%;
@@ -50,7 +47,6 @@ form {
   max-width: 600px;
   justify-self: center;
 
-
   fieldset {
     padding-block: 0.35em 0.625em;
     padding-inline: 0.75em;
@@ -72,7 +68,6 @@ form {
     max-width: 600px;
     min-width: 400px;
     justify-self: center;
-
   }
 
   legend {
@@ -87,14 +82,12 @@ form {
       margin-right: 1em;
     }
   }
-
 }
 
 .form.table {
   flex-direction: column;
   min-width: 600px;
   max-width: 1200px;
-
 
   margin-block: 1em;
   margin-inline: auto;
@@ -147,7 +140,6 @@ form {
     width: 80%;
     position: relative;
     text-align: left;
-
   }
 
   .tooltip {
@@ -170,7 +162,7 @@ form {
     opacity: 0.6;
   }
 
-  .tooltip:hover~.tooltip-text {
+  .tooltip:hover ~ .tooltip-text {
     visibility: visible;
   }
 }
@@ -179,7 +171,6 @@ form {
   flex-direction: column;
   min-width: 400px;
   max-width: 600px;
-
 
   margin-block: 0px;
   margin-inline: auto;
@@ -208,9 +199,7 @@ form {
     border: 1px solid black;
     position: relative;
     color: var(--form-font);
-
   }
-
 
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -222,12 +211,10 @@ form {
     text-align: center;
     -moz-appearance: textfield;
     appearance: textfield;
-
   }
 
   input::placeholder {
     text-align: left;
-
   }
 
   input:disabled {
@@ -240,7 +227,6 @@ form {
 
   textarea:disabled {
     background-color: var(--text-disabled);
-
   }
 
   input:enabled {
@@ -263,7 +249,6 @@ form {
     width: 80%;
     position: relative;
     text-align: left;
-
   }
 
   .tooltip {
@@ -272,7 +257,6 @@ form {
     right: 0;
     font-style: italic;
     opacity: 0.8;
-
   }
 
   .tooltip-text {
@@ -285,15 +269,12 @@ form {
     z-index: 1;
     font-style: italic;
     opacity: 0.6;
-
   }
 
-  .tooltip:hover~.tooltip-text {
+  .tooltip:hover ~ .tooltip-text {
     visibility: visible;
   }
 }
-
-
 
 .error {
   background-color: var(--error-bg-color) !important;
@@ -305,12 +286,11 @@ form {
   border-color: var(--valid-color) !important;
 }
 
-
 #toggle-form.collapsible {
   display: none;
 }
 
-#toggle-form:checked~.collapsible {
+#toggle-form:checked ~ .collapsible {
   display: block;
 }
 
@@ -341,7 +321,6 @@ form {
   display: grid;
   align-content: center;
   justify-content: center;
-
 }
 
 .signupError {
