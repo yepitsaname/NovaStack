@@ -10,13 +10,9 @@ export default function Reports() {
 
   if (!token || !user || !profile) return <Navigate to="/login" />;
 
-  const refetch = async () => {
-    const temp = await GetAllReports(token);
-    setReportData(temp);
-  };
-
   useEffect(() => {
-    refetch();
+    GetAllReports(token).then(temp => setReportData(temp))
+
   }, []);
 
   const handleRowClick = (row) => {

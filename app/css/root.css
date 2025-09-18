@@ -301,3 +301,7 @@ svg {
     opacity: 1;
   }
 }
+
+.nav-btn {
+  align-self: center;
+}
