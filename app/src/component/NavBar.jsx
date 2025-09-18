@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AppContext from "../AppContext";
 
 export default function NavBar() {
-  const { user, setUser, setToken } = useContext(AppContext);
+  const { user, setUser, setProfile, setToken } = useContext(AppContext);
   const navigate = useNavigate()
   const logout = () => {
     setUser(null);
