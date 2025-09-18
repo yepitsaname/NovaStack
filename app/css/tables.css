@@ -88,7 +88,7 @@ table thead th {
   color: var(--form-font);
   border: 3px solid var(--aside);
   background-color: var(--form-bg);
-  width: 4vw;
+  width: max-content;
   height: 50px;
   text-align: center;
   border-radius: 5px;
