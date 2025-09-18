@@ -43,44 +43,36 @@ export default function CapesChart({ title, systems, isOps = false }) {
   );
 
   return (
-
-    <div >
-          <table className="tb-system">
-            <thead>
-              <tr>
-                <th colSpan={systems.length} className="th-system">
-                  <h4 >
-                    {title}
-                  </h4>
-                </th>
-              </tr>
-              <tr>
-                {systems.map((sys) => (
-                  <th
-                    key={sys.system_id}
-                  >
-                    <h6 >
-                      SF: {sys.system_name}
-                    </h6>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                {systems.map((sys) => (
-                  <td key={sys.system_id + "-" + title} className="tdSystem" >
-                    <div>
-                      <ColorBlock
-                        status={getStopLight(isOps ? sys.ops_status : sys.sys_status)}
-                        system={sys}
-                      />
-                    </div>
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+    <div className="caps-table">
+      <table className="tb-system">
+        <thead>
+          <tr>
+            <th colSpan={systems.length} className="th-system">
+              <h4 > {title} </h4>
+            </th>
+          </tr>
+          <tr>
+            {systems.map((sys) => (
+              <th key={sys.system_id}>
+                <h6 > SF: {sys.system_name} </h6>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {systems.map((sys) => (
+              <td key={sys.system_id + "-" + title} className="tdSystem" >
+                <div>
+                  <ColorBlock
+                    status={getStopLight(isOps ? sys.ops_status : sys.sys_status)}
+                    system={sys} />
+                </div>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
     </div>
   )
 }

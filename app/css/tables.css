@@ -37,9 +37,20 @@ table tbody tr:nth-child(2n + 1) {
 }
 
 table tbody tr:hover {
-  background-color: var(--main-comp-mask) !important;
+  background-color: var(--main-comp-mask) ;
 }
 
+.caps-table{
+  table tbody tr:hover {
+    cursor: unset;
+    background-color: var(--hover-mask);
+  }
+
+  table tbody td:hover {
+    cursor: pointer;
+    background-color: var(--main-comp-mask);
+  }
+}
 
 table tbody td {
   font-size: 20px;
