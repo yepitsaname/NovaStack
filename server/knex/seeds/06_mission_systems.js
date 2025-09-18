@@ -6,15 +6,15 @@ exports.seed = async function (knex) {
   // Deletes ALL existing entries
   await knex('mission_systems').del()
   await knex('mission_systems').insert([
-    { system_name: 'sv 1', ops_status: 3, sys_status: 3 },
-    { system_name: 'sv 2', ops_status: 1, sys_status: 1 },
-    { system_name: 'sv 3', ops_status: 1, sys_status: 1 },
-    { system_name: 'sv bus', ops_status: 2, sys_status: 1 },
-    { system_name: 'sv payload', ops_status: 2, sys_status: 2 },
-    { system_name: 'radar 1', ops_status: 1, sys_status: 1 },
-    { system_name: 'radar 2', ops_status: 1, sys_status: 1 },
-    { system_name: 'radar 3', ops_status: 1, sys_status: 1 },
-    { system_name: 'radar watch', ops_status: 1, sys_status: 1 },
-    { system_name: 'radar ', ops_status: 1, sys_status: 1 },
+    { system_name: 'SV 1', ops_status: 1, sys_status: 1 },
+    { system_name: 'SV 2', ops_status: 1, sys_status: 1 },
+    { system_name: 'SV 3', ops_status: 1, sys_status: 1 },
+    { system_name: 'SV 4', ops_status: 1, sys_status: 1 },
+    { system_name: 'SV 5', ops_status: 1, sys_status: 1 },
+    { system_name: 'GBR 1', ops_status: 1, sys_status: 1 },
+    { system_name: 'GBR 2', ops_status: 1, sys_status: 1 },
+    { system_name: 'GBR 3', ops_status: 1, sys_status: 1 },
+    { system_name: 'GBR 4', ops_status: 1, sys_status: 1 },
+    { system_name: 'GBR 5', ops_status: 1, sys_status: 1 },
   ]);
 };
