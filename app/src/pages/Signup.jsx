@@ -72,7 +72,7 @@ export default function Signup() {
   }
 
   return (
-    <div className="signup">
+    <div className="form component">
 
       <div className="signupTitle">
         <h1>Register</h1>
