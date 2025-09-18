@@ -72,29 +72,30 @@ export default function Signup() {
   }
 
   return (
-    <div className="form component">
+    // <div className="signup">
 
-      <div className="signupTitle">
+    //   <div className="signupTitle">
+    //     <h1>Register</h1>
+    //   </div>
+    //   <div className="signupForm">
+    <>
+      <form className="form component" id="signUp" action={Register}>
         <h1>Register</h1>
-      </div>
-      <div className="signupForm">
+        {/* <label>First Name: </label> */}
+        <input name="firstName" type="text" placeholder="First Name" /> <br />
+        {/* <label>Last Name: </label> */}
+        <input name="lastName" type="text" placeholder="Last Name" /><br />
+        {/* <label>Email: </label> */}
+        <input name="email" type="text" placeholder="Email" /><br />
+        {/* <label>Username: </label> */}
+        <input name="username" type="text" placeholder="Username" /> <br />
+        {/* <label>Password: </label> */}
+        <input name="pass1" type="password" placeholder="Password" /><br />
+        {/* <label>Re-enter Password: </label> */}
+        <input name="pass2" type="password" placeholder="Re-Enter Password" /><br />
+        <button type="submit">Register</button>
+      </form>
 
-        <form className="form signUp" action={Register}>
-          <label>First Name: </label>
-          <input name="firstName" type="text" /> <br />
-          <label>Last Name: </label>
-          <input name="lastName" type="text" /><br />
-          <label>Email: </label>
-          <input name="email" type="text" /><br />
-          <label>Username: </label>
-          <input name="username" type="text" /> <br />
-          <label>Password: </label>
-          <input name="pass1" type="password" /><br />
-          <label>Re-enter Password: </label>
-          <input name="pass2" type="password" /><br />
-          <button type="submit">Register</button>
-        </form>
-      </div>
 
       <div className="signupError">
         {passAlert && (
@@ -108,6 +109,7 @@ export default function Signup() {
           </Alert>
         )}
       </div>
-    </div>
+    </>
+    // </div>
   )
 }

@@ -314,16 +314,22 @@ form {
   grid-column: 2/2;
   grid-row: 2/2;
   height: 75%;
-  width: 75%;
+  width: 80%;
   align-self: center;
   align-content: center;
   justify-self: center;
 }
 
-.signUp {
+#signUp {
   display: grid;
+  width: 500px;
   align-content: center;
   justify-content: center;
+  justify-items: center;
+
+  input {
+    width: 450px;
+  }
 }
 
 .signupError {
