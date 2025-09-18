@@ -118,6 +118,11 @@ export default function Report({state = "create", report}){
             <select id="system" value={system} onChange={event=>setSystem(event.target.value)} disabled={formState=="view"}>
               <option value="">--Select an Option--</option>
               {systems.map(sys=><option key={`${sys.system_id}_${sys.system_name}`} value={sys.system_id}>{sys.system_name}</option>)}
+              <option value="5">GBR 1</option>
+              <option value="6">GBR 1</option>
+              <option value="7">GBR 1</option>
+              <option value="8">GBR 1</option>
+              <option value="9">GBR 1</option>
               <option value={NaN}>None</option>
             </select>
           </div>
@@ -125,20 +130,24 @@ export default function Report({state = "create", report}){
             <label htmlFor="opscap">OPSCAP</label>
             <select id="opscap" value={opscap} onChange={event=>setOpscap(event.target.value)} disabled={formState=="view"}>
               <option value="N/A">N/A</option>
-              <option value="Warning">Warning</option>
-              <option value="Critical">Red</option>
+              <option value="FMC">FMC</option>
+              <option value="PMC">PMC</option>
+              <option value="NMC">NMC</option>
+              <option value="ASI">ASI</option>
               <option value="Offline">Offline</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           <div>
             <label htmlFor="syscap">SYSCAP</label>
             <select id="syscap" value={syscap} onChange={event=>setSyscap(event.target.value)} disabled={formState=="view"}>
               <option value="N/A">N/A</option>
-              <option value="Warning">Yellow</option>
-              <option value="Critical">Red</option>
-              <option value="Maintenance">Maintenance</option>
-              <option value="Special_Case">Other</option>
+              <option value="FMC">FMC</option>
+              <option value="PMC">PMC</option>
+              <option value="NMC">NMC</option>
+              <option value="ASI">ASI</option>
               <option value="Offline">Offline</option>
+              <option value="Other">Other</option>
             </select>
           </div>
         </div>
