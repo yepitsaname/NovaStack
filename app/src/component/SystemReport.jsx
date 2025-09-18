@@ -12,13 +12,9 @@ export default function SystemReport() {
 
   if (!token || !user || !profile) return <Navigate to="/login" />;
 
-  const refetch = async () => {
-    const temp = await GetReportBySystem(token, id);
-    setReportData(temp);
-  };
 
   useEffect(() => {
-    refetch();
+    GetReportBySystem(token, id).then(temp => setReportData(temp))
 
   }, []);
 
