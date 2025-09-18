@@ -15,10 +15,9 @@ export default function NavBar() {
   return (
     <nav>
       <img src="src/assets/NovaStack_Logo.png" onClick={() => navigate("/")} />
-      <h1 onClick={() => navigate("/")}>NovaStack</h1>
+      <h1 onClick={() => navigate("/")}>NOVAStack</h1>
       {user ? (
         <>
-          <p>🔔</p>
           <Link to="/profile" className="nav-btn">{user}</Link>
           <Link to="/login" onClick={() => { logout() }} className="nav-btn">Logout</Link>
         </>

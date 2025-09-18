@@ -58,9 +58,9 @@ footer {
 
 .homepage {
   display: grid;
+  width: 100%;
   grid-template-columns: 100%;
-  grid-template-rows: 75% 25%;
-  width: 100vw;
+  grid-template-rows: 70% 20%;
 }
 
 .content-container {
@@ -150,4 +150,16 @@ footer {
   justify-content: center;
   align-items: center;
   width: 90vw;
+}
+
+h1.nova{
+  color: #94edff;
+  font-size: 60px;
+  margin-block: 0;
+}
+
+h2.nova{
+  margin-block: 0;
+  color: #79d8eb;
+  font-size: xx-large;
 }
