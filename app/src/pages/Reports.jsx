@@ -26,14 +26,12 @@ export default function Reports() {
   };
 
   return (
-    <div className="dashboard">
-      <div>
-        <div>
+    <div className="reports-list">
+
           <table >
             <thead>
               <tr>
                 <th>Report ID</th>
-                <th>User ID</th>
                 <th>System ID</th>
                 <th>Title</th>
                 <th>Classification</th>
@@ -54,7 +52,6 @@ export default function Reports() {
                   onClick={() => handleRowClick(row)}
                 >
                   <td>{row.report_id}</td>
-                  <td>{row.user_id}</td>
                   <td>{row.system}</td>
                   <td>{row.title}</td>
                   <td>{row.classification}</td>
@@ -74,8 +71,6 @@ export default function Reports() {
               ))}
             </tbody>
           </table>
-        </div>
-      </div>
     </div>
   );
 }

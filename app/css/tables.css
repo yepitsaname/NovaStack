@@ -1,28 +1,30 @@
 .table-container {
-  max-height: 700px;
-  overflow-y: auto;
-  overflow-x: auto;
-
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: auto;
 }
 
 table {
   font-family: Arial, Helvetica, sans-serif;
   color: var(--form-font);
-  border: 3px solid var(--aside);
   background-color: var(--form-bg);
-  width: 100%;
+  width: 84vw;
   height: 100vh;
   text-align: center;
   border-radius: 5px;
   margin: 0px;
-  padding: 20px;
+  padding: 0px;
 
 }
 
-table td,
+table td {
+  padding: 10px;
+}
+
 table th {
-  border: 1px solid black;
-  padding: 10px 5px;
+  padding: 0px;
 }
 
 table tbody tr {
@@ -31,7 +33,7 @@ table tbody tr {
 }
 
 table tbody tr:nth-child(2n + 1) {
-  background-color: var(--main-comp-mask);
+  background-color: var(--hover-mask);
 }
 
 table tbody tr:hover {
@@ -44,10 +46,6 @@ table tbody td {
   color: var(--form-font);
 }
 
-table tbody tr:hover {
-  background-color: var(--hover-mask);
-}
-
 table thead {
   background: var(--main-bg);
   position: sticky;
@@ -56,7 +54,7 @@ table thead {
 }
 
 table thead th {
-  font-size: 20px;
+  font-size: 25px;
   font-weight: bold;
   color: var(--form-font);
   text-align: left;
@@ -67,19 +65,30 @@ table thead th {
   color: var(--form-font);
   border: 3px solid var(--aside);
   background-color: var(--form-bg);
-  width: 50vw;
+  width: 42vw;
   height: 50px;
   text-align: center;
   border-radius: 5px;
-  margin: 0px;
-  padding: 20px;
+  margin: 20px;
+  padding: 10px;
 }
 
-tb-system-report {
+
+.th-system {
+  justify-items: center;
+  padding: 0px;
+
+  h4 {
+    font-size: xx-large;
+  }
+
+}
+
+.tb-system-report {
   color: var(--form-font);
   border: 3px solid var(--aside);
   background-color: var(--form-bg);
-  width: 50vw;
+  width: 4vw;
   height: 50px;
   text-align: center;
   border-radius: 5px;
@@ -87,7 +96,9 @@ tb-system-report {
   padding: 20px;
 }
 
-sy-container {
+.sy-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  margin: 20px;
+  padding: 10px;
 }
