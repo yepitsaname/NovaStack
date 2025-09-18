@@ -49,6 +49,7 @@ table tbody tr:hover {
     cursor: pointer;
     background-color: var(--main-comp-mask);
   }
+
   table thead th {
     text-align: center;
   }
@@ -109,7 +110,9 @@ table thead th {
 
 .sy-container {
   display: flex;
+  width: 100vw;
   flex-direction: row;
+  justify-content: center;
   margin: 20px;
   padding: 10px;
 }
