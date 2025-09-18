@@ -102,3 +102,12 @@ table thead th {
   margin: 20px;
   padding: 10px;
 }
+
+.tb-report {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  align-items: center;
+}

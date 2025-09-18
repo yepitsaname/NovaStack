@@ -26,7 +26,7 @@ export default function SystemReport() {
   if (!reportData.length) return <div>No reports found for this system.</div>;
 
   return (
-    <div className="dashboard">
+    <div className="tb-report">
       <h1>Reports</h1>
       <div> <button onClick={() => navigate("/reports/new")}>Add</button></div>
       <table className="tb-system-report">
