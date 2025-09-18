@@ -13,10 +13,10 @@ export default function System() {
   if (!token || !user || !profile) return <Navigate to="/login" />
 
   return (
-    <>
+    <div className="sy-container">
       <CapesChart title="OPSCAP" systems={systems} isOps={true}/>
       <CapesChart title="SYSCAP" systems={systems} />
-    </>
+    </div>
 
   );
 }

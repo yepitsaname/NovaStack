@@ -45,15 +45,11 @@ export default function CapesChart({ title, systems, isOps = false }) {
   return (
 
     <div >
-      <div>
-        <div className="sy-container">
           <table className="tb-system">
             <thead>
               <tr>
-                <th
-                  colSpan={systems.length}
-                >
-                  <h4>
+                <th colSpan={systems.length} className="th-system">
+                  <h4 >
                     {title}
                   </h4>
                 </th>
@@ -85,8 +81,6 @@ export default function CapesChart({ title, systems, isOps = false }) {
               </tr>
             </tbody>
           </table>
-        </div>
-      </div>
     </div>
   )
 }

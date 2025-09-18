@@ -18,16 +18,16 @@ export default function Dashboard() {
     []
   );
   const cols = useMemo(
-    () => ({ lg: 12, md: 10, sm: 8, xs: 6, xxs: 2 }),
+    () => ({ lg: 16, md: 10, sm: 8, xs: 6, xxs: 2 }),
     []
   );
 
   const defaultLayouts = useMemo(
     () => ({
       lg: [
-        { i: "tasklist", x: 0, y: 0, w: 11, h: 12, minW: 6, minH: 4 },
-        { i: "opscap", x: 0, y: 10, w: 5, h: 9, minW: 4, minH: 3 },
-        { i: "syscap", x: 0, y: 16, w: 5, h: 9, minW: 4, minH: 3 },
+        { i: "tasklist", x: 0, y: 1, w: 16, h: 10, minW: 6, minH: 4 },
+        { i: "opscap", x: 0, y: 0, w: 8, h: 9, minW: 4, minH: 3 },
+        { i: "syscap", x: 8, y: 0, w: 8, h: 9, minW: 4, minH: 3 },
       ],
       md: [
         { i: "tasklist", x: 0, y: 0, w: 9, h: 9, minW: 5, minH: 4 },
@@ -69,8 +69,8 @@ export default function Dashboard() {
         isDraggable
         isResizable
         draggableHandle=".widget-header"
-        margin={[10, 10]}
-        containerPadding={[0, 0]}
+        margin={[5, 2]}
+        containerPadding={[40, 40]}
         useCSSTransforms
         measureBeforeMount={false}
         onLayoutChange={handleLayoutChange}
@@ -79,18 +79,18 @@ export default function Dashboard() {
         preventCollision={false}
         compactType="vertical"
       >
-        <div key="tasklist" className="widget-content">
+        <div key="tasklist" className="task-widget-content">
           <div className="widget-header">
             <h3>Task Management</h3>
           </div>
-          <TaskListWidget isDashboard isCurrent />
+          <TaskListWidget isDashboard isCurrent  />
         </div>
 
         <div key="opscap" className="widget-content">
           <div className="widget-header">
             <h3>OPSCAP Analytics</h3> 
           </div>
-          <CapesChart title="OPSCAP" systems={systems} />
+          <CapesChart title="OPSCAP" systems={systems} isOps={true} />
         </div>
 
         <div key="syscap" className="widget-content">

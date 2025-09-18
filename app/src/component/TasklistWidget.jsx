@@ -34,7 +34,7 @@ export default function TaskListWidget({
   if (!taskListData.length) return <div>Loading</div>;
 
   return (
-    <div className="dashbaord">
+    <div>
           <div>
             {!isDashboard && (
               <button onClick={() => navigate("/taskslist/add")}>
