@@ -23,8 +23,8 @@ export default function NavBar() {
         </>
       ) : (
         <>
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
+          <Link to="/login" className="nav-btn">Login</Link>
+          <Link to="/register" className="nav-btn">Register</Link>
         </>
       )}
     </nav>
