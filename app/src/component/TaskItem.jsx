@@ -86,14 +86,14 @@ export default function TaskItem() {
   return (
     <div className="form component">
       <fieldset>
-        <div>
-          <button type="button" onClick={enableEdit}>
+        <div className="centered-div">
+          <button type="button" className="width-button" onClick={enableEdit}>
             Edit
           </button>
-          <button type="button" onClick={() => handleDelete(taskData)}>
+          <button type="button" className="width-button" onClick={() => handleDelete(taskData)}>
             Delete
           </button>
-          <button type="button" onClick={() => navigate(-1)}>
+          <button type="button" className="width-button" onClick={() => navigate(-1)}>
             Return
           </button>
         </div>

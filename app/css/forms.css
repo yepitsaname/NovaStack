@@ -37,6 +37,13 @@ form {
     font-weight: 600;
     text-transform: uppercase;
   }
+
+
+  .width-button {
+    width: 80px;
+    flex: 1;
+  }
+
 }
 
 .form {
@@ -162,7 +169,7 @@ form {
     opacity: 0.6;
   }
 
-  .tooltip:hover ~ .tooltip-text {
+  .tooltip:hover~.tooltip-text {
     visibility: visible;
   }
 }
@@ -271,7 +278,7 @@ form {
     opacity: 0.6;
   }
 
-  .tooltip:hover ~ .tooltip-text {
+  .tooltip:hover~.tooltip-text {
     visibility: visible;
   }
 }
@@ -290,7 +297,7 @@ form {
   display: none;
 }
 
-#toggle-form:checked ~ .collapsible {
+#toggle-form:checked~.collapsible {
   display: block;
 }
 
@@ -346,4 +353,9 @@ form {
   input {
     width: 450px;
   }
+}
+
+.centered-div {
+  display: flex;
+  justify-content: center;
 }
