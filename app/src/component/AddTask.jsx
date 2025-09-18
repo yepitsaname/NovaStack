@@ -162,9 +162,19 @@ export default function AddTasks() {
               </option>
             ))}
           </select>
-          <button type="submit">
-            Submit
-          </button>
+          <span>
+            <button type="submit">
+              Submit
+            </button>
+            <button
+              type="button"
+              onClick={(event) => {
+                navigate(-1);
+              }}
+            >
+              Return
+            </button>
+          </span>
         </fieldset>
       </form>
     </div>
