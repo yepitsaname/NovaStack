@@ -200,7 +200,7 @@ app.get("/tasks/:id", verifyToken, (req, res) => {
       "tasks.description",
       "tasks.mission_id",
       "mission.mission_name as mission",
-      "tasks.status",
+      "tasks.status as status_id",
       "status.status as status",
       "tasks.due_date",
       "tasks.assignee as assignee_id",
@@ -268,13 +268,13 @@ app.get("/mission/:id/tasks", verifyToken, (req, res) => {
 
 app.get("/mission/:id/systems", verifyToken, async (req, res) => {
   console.log('called mission systems by mission ID');
-  try{
+  try {
     let system_ids = (await knex("mission").select("systems").where("mission_id", "=", req.params.id))[0].systems
-    let systems = Object.values(system_ids).map(async id => await knex("mission_systems").select("*").where("system_id","=",id));
+    let systems = Object.values(system_ids).map(async id => await knex("mission_systems").select("*").where("system_id", "=", id));
     Promise.allSettled(systems).then(promises => {
       res.status(200).json(promises.map(promise => promise.value).map(value => value[0]))
     })
-  } catch(err) { res.status(400).json(err) }
+  } catch (err) { res.status(400).json(err) }
 
 });
 

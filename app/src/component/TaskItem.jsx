@@ -81,7 +81,7 @@ export default function TaskItem() {
   }
   if (!taskData[0]) return <div> Loading...</div>;
 
-  console.log(taskData);
+  console.log(taskData[0]);
 
   return (
     <div className="form component">
@@ -127,7 +127,7 @@ export default function TaskItem() {
             disabled={!edit}
           >
             {mission.map((elem) => (
-              <option key={elem.mission_id} value={elem.mission_id}>
+              <option key={elem.mission_id} value={elem.mission_id} defaultValue={taskData[0].mission_id}>
                 {elem.mission_name}
               </option>
             ))}
@@ -141,7 +141,7 @@ export default function TaskItem() {
             disabled={!edit}
           >
             {status.map((elem) => (
-              <option key={elem.status_id} value={elem.status_id}>
+              <option key={elem.status_id} value={elem.status_id} defaultValue={taskData[0].status_id}>
                 {elem.status}
               </option>
             ))}
@@ -168,7 +168,7 @@ export default function TaskItem() {
             disabled={!edit}
           >
             {userList.map((elem) => (
-              <option key={elem.user_id} value={elem.user_id}>
+              <option key={elem.user_id} value={elem.user_id} defaultValue={taskData[0].assignee_id}>
                 {elem.username}
               </option>
             ))}
@@ -179,6 +179,6 @@ export default function TaskItem() {
           </button>
         </fieldset>
       </form>
-    </div>
+    </div >
   );
 }

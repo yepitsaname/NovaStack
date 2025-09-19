@@ -10,20 +10,20 @@ export default function Report({ state = "create", report }) {
   const navigate = useNavigate();
   const [report_data, setReport_data] = useState(
     locationState?.report ||
-      report || {
-        classification: "",
-        title: "",
-        system: NaN,
-        syscap: "N/A",
-        opscap: "N/A",
-        short_description: "",
-        long_description: "",
-        start: "Z",
-        stop: "Z",
-        impact: "",
-        fix_action: "",
-        cause: "",
-      }
+    report || {
+      classification: "",
+      title: "",
+      system: NaN,
+      syscap: "N/A",
+      opscap: "N/A",
+      short_description: "",
+      long_description: "",
+      start: "Z",
+      stop: "Z",
+      impact: "",
+      fix_action: "",
+      cause: "",
+    }
   );
 
   const [originState, setOriginState] = useState(
@@ -109,11 +109,11 @@ export default function Report({ state = "create", report }) {
       setOriginState("view");
       submitResult?.report_id
         ? setReport_data(
-            Object.assign(report_data, {
-              ...payload,
-              report_id: submitResult.report_id[0].report_id,
-            })
-          )
+          Object.assign(report_data, {
+            ...payload,
+            report_id: submitResult.report_id[0].report_id,
+          })
+        )
         : setReport_data(Object.assign(report_data, { ...payload }));
     }
   };
